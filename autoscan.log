@@ -1,0 +1,13 @@
+autoscan: warning: missing AC_HEADER_STDBOOL wanted by: 
+	main.h:47
+autoscan: warning: missing AC_PREREQ wanted by: 
+	autoscan
+autoscan: warning: missing AC_PROG_CC wanted by: 
+	main.h
+autoscan: warning: missing AC_PROG_CXX wanted by: 
+	main.cpp
+	image.cpp
+	Makefile:1
+	Makefile:1
+autoscan: warning: missing AC_PROG_INSTALL wanted by: 
+	Makefile:12
