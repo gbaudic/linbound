@@ -26,7 +26,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_net.h>
 //Here please put the cURL easy header
-#include "update.h"
+#include "update.hpp"
 #include "md5.h"
 using namespace std;
 

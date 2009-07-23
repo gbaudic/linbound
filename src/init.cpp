@@ -28,7 +28,7 @@
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_mixer.h>
 //#include <ssl.h> -- using cURL will make this include unnecessary
-#include "init.h"
+#include "init.hpp"
 using namespace std;
 
 TTF_Font *font;

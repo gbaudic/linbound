@@ -25,7 +25,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include <SDL/SDL_gfxPrimitives.h>
-#include "gui_lb.h"
+#include "gui_lb.hpp"
 using namespace std;
 
 extern SDL_Surface *screen;
