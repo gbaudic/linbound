@@ -23,7 +23,7 @@
 #include <iostream>
 #include "strings.h"
 #include <SDL/SDL_image.h>
-#include "main.h"
+#include "main.hpp"
 using namespace std;
 
 
