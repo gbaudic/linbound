@@ -23,8 +23,8 @@
 class LB_UpdateObject
 {
 	public:
-		char LocalPath;
-		char RemotePath;
+		char LocalPath[];
+		char RemotePath[];
 		
 		Uint32 LocalVersion;
 		Uint32 RemoteVersion;
