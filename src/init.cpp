@@ -77,12 +77,17 @@ int LB_InitNetwork(Uint8 *imode)
 	//}
 }
 
-/*int LB_InitSound()
+/*int LB_InitSound(int channels)
 {
- 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+ 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
     cout << "Mix_OpenAudio: " << Mix_GetError() << endl;
     return -1;
-}
+	}
+		
+	if (Mix_AllocateChannels(channels) != channels){
+		cout << "All channels haven't been allocated, exiting" << endl;
+		return -1;
+	}
 
 }*/
 
@@ -100,7 +105,7 @@ void LB_Quit()
 	//	SDLNet_Quit();
 	//}
 	
-	//Mix_CloseAudio;
+	//Mix_CloseAudio();
 	
 	SDL_Quit();
 	
