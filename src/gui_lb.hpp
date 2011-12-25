@@ -24,7 +24,7 @@
 
 //Here we will define some constants for the error display function
 //These strange values are directly inspired from Micro$oft Visual Basic(tm)
-const int LB_MSG_CRITICAL = 16;
+/*const int LB_MSG_CRITICAL = 16;
 const int LB_MSG_QUESTION = 32;
 const int LB_MSG_WARNING = 48;
 const int LB_MSG_INFO = 64;
@@ -34,6 +34,6 @@ const int LB_MSG_OKONLY = 17;
 const int LB_MSG_OKCANCEL = 18;
 const int LB_MSG_YESNO = 19;
 const int LB_MSG_RETRYCANCEL = 20;
-const int LB_MSG_CANCEL = 21;
+const int LB_MSG_CANCEL = 21;*/
 
 #endif

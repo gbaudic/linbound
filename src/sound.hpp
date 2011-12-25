@@ -9,7 +9,9 @@
 #ifndef _H_SOUND_
 #define _H_SOUND_
 
-int LB_PlayMusic(Mix_Music *file1 = NULL, Mix_Music *file2 = NULL);
+Mix_Music* music;
+
+int LB_PlayMusic(const char* file);
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);
 
 #endif /* _H_SOUND_ */

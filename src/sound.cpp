@@ -40,15 +40,15 @@ using namespace std;
   * \return 0 if OK, -1 if something gets wrong
 */
 //TODO: test this function, even if it should really work
-int LB_PlayMusic(Mix_Music *file1, Mix_Music *file2)
+int LB_PlayMusic(const char* file)
 {
 	//We must first check if there's some music playin'
  	if (Mix_PlayingMusic() == 1) {
 		//If it is the case, we stop it: we are here to change it!
 		Mix_HaltMusic();
 		//And we just free the memory used
-		if (file1 != NULL) {
-			Mix_FreeMusic(file1);
+		if (music != NULL) {
+			Mix_FreeMusic(music);
 		} else {
 			//This should never happen but if it does, the app won't freeze
 			SDL_SetError("No input pointer given !");
@@ -56,8 +56,11 @@ int LB_PlayMusic(Mix_Music *file1, Mix_Music *file2)
 		}
 	}
 
+    //Load the new music
+    music = Mix_LoadMUS(file);
+
 	//Now it is time for some fun... enjoy the music ad infinitum
-	return Mix_PlayMusic(file2, -1);
+	return Mix_PlayMusic(music, -1);
 }
 
 //Another function to play some SFX (rather useless currently...)

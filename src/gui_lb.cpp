@@ -25,16 +25,17 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <guichan.hpp>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_gfxPrimitives.h>
+//#include <SDL/SDL_ttf.h>
+//#include <SDL/SDL_gfxPrimitives.h>
 #include "gui_lb.hpp"
 using namespace std;
 
 extern SDL_Surface *screen;
 extern int iscreenw, iscreenh;
-extern TTF_Font *font;
+//extern TTF_Font *font;
 SDL_Color white; /* Needs to be set somewhere */
 
 
@@ -51,7 +52,7 @@ SDL_Color white; /* Needs to be set somewhere */
  * \param buttons the number of buttons
  * \return 0 if success, -1 otherwise
  */
-int LB_GUI_DisplayMsgBox(Uint8 type, const char* title, const char* message, Uint8 buttons)
+/*int LB_GUI_DisplayMsgBox(Uint8 type, const char* title, const char* message, Uint8 buttons)
 {
 	//Drawing the box : two filled rectangles
 	boxColor(screen, iscreenw/4, iscreenh/4, iscreenw*3/4, iscreenh*3/4, 0x0066FF00);
@@ -65,4 +66,4 @@ int LB_GUI_DisplayMsgBox(Uint8 type, const char* title, const char* message, Uin
 
 
 	return 0;
-}
+}*/
