@@ -155,7 +155,13 @@ void MainLoop()
 			}
 		}
 
+        //Network events
 
+        //Update the model
+
+        //Update the graphics
+
+        //Change audio if needed
 
 
 	} //and finishes there

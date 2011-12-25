@@ -26,6 +26,11 @@
 #define _H_MAIN_
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <GL/gl.h>
+#include <GL/glx.h>
+
+#include "player.hpp"
 
 SDL_Surface *screen;
 SDL_Surface *old_screen;
@@ -38,60 +43,7 @@ SDL_Event LastMouseEvent;
 Uint8 iMode;
 //Uint8 *piMode = &iMode;
 
-/**
- * \class LB_Player
- * Abstracts a LB player
- */
-class LB_Player
-{
-	public:
-		char AllyID[13];
-		char TeamID[1];
-		Uint8 iPlayerPlaceAlly;
-		Uint8 iTotalInAlly;
-		
-		Uint16 iPlayerMobile1;
-		Uint16 iPlayerMobile2;
-		
-		Sint16 iPlayerDelay;
-		Uint16 iPlayerCnxDelay;
-		Sint16 iPlayerAward;
-		Sint8 iPlayerGp;
-		
-		bool bIsActivePlayer;
-		
-		Uint16 iPosx;
-		Uint16 iPosy;
-		
-		Sint8 iCurrentAngle;
-		Sint8 iLastAngle;
-		
-		Sint16 iLife;
-		
-		
-	protected:
-		Uint32 iGP;
-		Uint32 iPlayerGold;
-		Uint32 iPlayerCash;
-		
-		Uint16 iPlayerRankLocal;
-		Uint16 iPlayerRankGlobal;
-		Uint32 iPlayerLevelLocal;
-		Uint32 iPlayerLevelGlobal;
-		
-		Uint16 iPlayerTotalDamage;
-		Uint16 iPlayerLastDamage;
-		
-		Uint32 iWinningRate;
-		Uint16 iAverageHit;
-		
-		Uint32 iHeadAvatar;
-		Uint32 iBodyAvatar;
-		Uint32 iGlassesAvatar;
-		Uint32 iFlagAvatar;
-		Uint32 iExAvatar[3];
 
-};
 
 /**
  * \class LB_Room
@@ -100,18 +52,26 @@ class LB_Player
 class LB_Room
 {
 	public:
+	enum RoomMode {SOLO, SCORE, TAG, JEWEL};
+	enum RoomStatus {WAITING, FULL, PLAYING};
+
 		Uint16 iRoomNumber;
 		bool bRoomIsPowerUser;
-		unsigned int iRoomMode;
-		
+		bool bIsPasswordProtected;
+		std::string password;
+		RoomMode mode;
+		RoomStatus status;
+
 		Uint8 iSuddenDeathTurns;
 		Uint8 iSuddenDeathType;
-		
+
 		Uint8 iMapSide;
 		char MapName[];
-		
+
 		Uint8 iMaxPlayers;
 		Uint8 iCurrentPlayers;
+
+		LB_Player players[];
 };
 
 /**
@@ -124,7 +84,7 @@ struct LB_Mobile
 	char ImageW1[];
 	char ImageW2[];
 	char ImageWSS[];
-	
+
 };
 
 /**
@@ -135,7 +95,7 @@ struct LB_Jewel
 {
 	Uint16 iPosx;
 	Uint16 iPosy;
-	
+
 	Sint8 iValue;
 	char Image[];
 };
@@ -144,11 +104,14 @@ struct LB_Jewel
  * \class LB_Avatar
  * Abstracts an avatar item
  */
-struct LB_Avatar
+class LB_AvatarItem
 {
-	char StaticImage[];
-	char GameImage[];
-	
+	char staticImage[];
+	char gameImage[];
+	std::string name;
+
+    enum Type {HEAD, GLASSES, BODY, FLAG, EX};
+
 	Sint8 iType;
 	Sint8 iPopularity;
 	Sint8 iDefence;
@@ -158,11 +121,10 @@ struct LB_Avatar
 	Sint8 iBlueDelay;
 	Sint8 iOrangeDelay;
 	Sint8 iDelay;
-	
-	Uint32 iWeekPrice;
-	Uint32 iMonthPrice;
-	Uint32 iLimitlessPrice;
-	
+
+	Uint32 iGoldPrices[3];
+	Uint32 iCashPrices[3];
+
 };
 
 //Prototypes

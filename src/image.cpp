@@ -149,3 +149,12 @@ void LB_BlitCursor(SDL_Surface *screen, Uint8 CursorType, SDL_Event event)
 
 	return;
 }
+
+/*void LB_FreeImages(SDL_Surface* surfs[])
+{
+	for(int i = 0 ; i < size(surfs) ; i++)
+	{
+		SDL_FreeSurface(surfs[i]);
+	}
+}*/
+
