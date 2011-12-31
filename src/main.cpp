@@ -32,6 +32,7 @@
 #include "init.hpp"
 #include "event.hpp"
 #include "image.hpp"
+#include "sound.hpp"
 using namespace std;
 
 
@@ -119,6 +120,10 @@ int main(int argc, char *argv[])
 
 	//cur_dest.x = cur_dest.y = 0;
 
+    if(LB_PlayMusic("/home/podgy/workspace/Linbound/res/sound/stage7.mp3") != 0){
+        cout << "error with the music !" << endl;
+    }
+
 	//cout << "Entering main loop" << endl;
 	MainLoop();
 
@@ -126,7 +131,7 @@ int main(int argc, char *argv[])
 	//SDL_Delay(3000);
 
 	//Free the memory allocated to the images
-	//TODO : it would be cleverer to use an array to put the images and free them at once by making a function iterate through the whole table
+	//TODO : it would be more clever to use an array to put the images and free them at once by making a function iterate through the whole table
 	SDL_FreeSurface(refresh_test);
 	SDL_FreeSurface(old_screen);
 	SDL_FreeSurface(refresh_sample);

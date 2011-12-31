@@ -35,10 +35,10 @@ void LB_MessageChannel::flush()
 
     }
     //If not, check if some are supposed to die
-    for(int i=0 ; i < 100;i++) //Correct it once the channel has an appropriate data structure
+    /*for(int i=0 ; i < 100;i++) //TODO: Correct it to use a list instead of an array
     {
         channel[i].updateMessageStatus();
-    }
+    }*/
 
 }
 

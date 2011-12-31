@@ -1,6 +1,7 @@
 #ifndef _H_CHANNEL_
 #define _H_CHANNEL_
 
+#include <list>
 #include "message.hpp"
 
 class LB_MessageChannel
@@ -14,7 +15,7 @@ class LB_MessageChannel
 
 
     private:
-    LB_Message channel[];
+    std::list<LB_Message> channel();
     int displayedMessages;
 
     void flush();

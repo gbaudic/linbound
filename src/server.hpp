@@ -6,6 +6,9 @@
 #include "room.hpp"
 #include "channel.hpp"
 
+/**
+*
+*/
 struct LB_BasicServerInfo
 {
     LB_Player::Level minLevel;
@@ -18,10 +21,15 @@ struct LB_BasicServerInfo
     LB_BasicServerInfo(LB_Player::Level min, LB_Player::Level max, bool areAvatarEnabled, int bonus, int users, int maxUsers);
 };
 
+/**
+ * \class LB_Server
+ * Represents an abstract server object from the client point of view
+ */
 class LB_Server
 {
     public:
     static const int SERVER_PORT = 6545;
+    //IP address ?
 
     LB_BasicServerInfo getBasicServerInfo();
 
