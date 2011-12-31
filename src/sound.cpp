@@ -32,6 +32,7 @@ using namespace std;
 
 //As of 2009-08-17, all functions listed here need preallocated sound buffers
 //This will be completed in an hypothetical future
+Mix_Music* music;
 
 /**
   * One basic function to load the music

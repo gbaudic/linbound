@@ -3,6 +3,7 @@
 
 #include <SDL/SDL.h>
 #include "player.hpp"
+#include "channel.hpp"
 #include "map.hpp"
 
 /**
@@ -41,6 +42,20 @@ class LB_Room
     Uint8 iCurrentPlayers;
 
     LB_Player players[];
+
+    LB_MessageChannel channel;
+};
+
+struct LB_RoomBasicInfo
+{
+    Uint16 iRoomNumber;
+    std::string name;
+    LB_Room::RoomMode mode;
+    LB_Room::RoomStatus status;
+    bool bIsPasswordProtected;
+
+    LB_Map map;
+
 };
 
 #endif

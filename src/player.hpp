@@ -21,8 +21,8 @@ class LB_Player
         BronzeTrophy, SilverTrophy, GoldTrophy, Administrator};
 
 
-		char AllyID[13];
-		char TeamID[1];
+		std::string AllyName;
+		char TeamID;
 		Uint8 iPlayerPlaceAlly;
 		Uint8 iTotalInAlly;
 
@@ -62,6 +62,39 @@ class LB_Player
 		Uint16 iAverageHit;
 
 		//LB_AvatarItem items[];
+
+};
+
+/**
+ * \class LB_PlayerShortInfo
+ * Represents the smallest set of information that can be visible for a connected player
+*/
+struct LB_PlayerShortInfo
+{
+    LB_Player::Level level;
+    std::string allyName;
+    std::string gameID;
+};
+
+/**
+ * \class LB_PlayerBasicInfo
+ * A partial set of information, visible e.g. when sharing the same game room before playing
+ */
+struct LB_PlayerBasicInfo
+{
+    LB_PlayerShortInfo shortInfos;
+
+    char TeamID;
+    Uint8 iPlayerPlaceAlly;
+    Uint8 iTotalInAlly;
+
+    Uint16 iPlayerMobile1;
+    Uint16 iPlayerMobile2;
+
+    bool bIsRoomAdmin;
+    Uint8 iNextAdmin; //To know who is going to be the admin if current admin goes away
+
+    //LB_AvatarItem items[];
 
 };
 
