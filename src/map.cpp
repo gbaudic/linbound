@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <SDL/SDL.h>
+#include <SDL/SDL_gfxPrimitives.h>
 #include "map.hpp"
 using namespace std;
 

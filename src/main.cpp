@@ -120,8 +120,8 @@ int main(int argc, char *argv[])
 
 	//cur_dest.x = cur_dest.y = 0;
 
-    if(LB_PlayMusic("/home/podgy/workspace/Linbound/res/sound/stage7.mp3") != 0){
-        cout << "error with the music !" << endl;
+    if(LB_PlayMusic("/home/podgy/workspace/Linbound/res/sound/test.ogg") != 0){
+        cout << "error with the music ! : " << SDL_GetError() << endl;
     }
 
 	//cout << "Entering main loop" << endl;
@@ -139,7 +139,7 @@ int main(int argc, char *argv[])
 	SDL_FreeSurface(cursor);
 	SDL_FreeSurface(screen);
 	//and quit SDL nicely
-	SDL_Quit();
+	LB_Quit();
 
 	return 0;
 }

@@ -41,7 +41,7 @@ Mix_Music* music;
   * \return 0 if OK, -1 if something gets wrong
 */
 //TODO: test this function, even if it should really work
-int LB_PlayMusic(const char* file)
+int LB_PlayMusic(char* file)
 {
 	//We must first check if there's some music playin'
  	if (Mix_PlayingMusic() == 1) {
@@ -59,6 +59,10 @@ int LB_PlayMusic(const char* file)
 
     //Load the new music
     music = Mix_LoadMUS(file);
+    if(music == NULL){
+    	cout << "Music not loaded : " << Mix_GetError() << endl;
+    	return -1;
+    }
 
 	//Now it is time for some fun... enjoy the music ad infinitum
 	return Mix_PlayMusic(music, -1);

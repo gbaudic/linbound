@@ -25,7 +25,7 @@ class LB_Map
     void setASide(bool isASide);
     bool getASide() const;
 
-    void makeDamage();
+    void makeDamage(int x, int y, int radius); //For first versions we will express damages with circular areas
     void correctAfterDamage();
 };
 
