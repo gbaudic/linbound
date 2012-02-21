@@ -14,7 +14,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
 
-int LB_PlayMusic(const char* file);
+int LB_PlayMusic(char* file);
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);
 
 #endif /* _H_SOUND_ */

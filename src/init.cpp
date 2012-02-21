@@ -122,10 +122,19 @@ int LB_InitSound(int channels)
 		return -1;
 	}
 
+ 	int flags = MIX_INIT_OGG; //MP3 is unlikely to work everywhere...
+ 	int res = Mix_Init(flags);
+
+ 	if(res != flags){
+ 		cout << "Error loading audio decoding libraries : " << Mix_GetError() << endl;
+ 	}
+
 	if (Mix_AllocateChannels(channels) != channels){
 		cout << "All channels haven't been allocated, exiting" << endl;
 		return -1;
 	}
+
+	Mix_VolumeMusic(MIX_MAX_VOLUME/2); //Set the volume to 50% to begin
 
 	return 0;
 
