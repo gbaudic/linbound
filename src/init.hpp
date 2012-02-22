@@ -22,6 +22,18 @@
 #ifndef _H_INIT_
 #define _H_INIT_
 
+#include <libintl.h>
+#include <locale.h>
+
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_net.h>
+#include <SDL/SDL_ttf.h>
+#include <SDL/SDL_mixer.h>
+
 const int CHANNELS = 2;
 
 //Prototypes
