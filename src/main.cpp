@@ -52,41 +52,6 @@ int main(int argc, char *argv[])
 {
 	cout << "Initializing LinBound v0.1a..." << endl;
 
-	/* if (argc >= 3){
-		//Recognize and use resolution requested by the user
-		//If arguments are bad, use default to let the soft run and avoid hacking by buffer overflow.
-		if (strncmp(argv[1], "640\0",3) == 0 && strncmp(argv[2], "480\0", 3) == 0){
-			iscreenw = 640;
-			iscreenh = 480;
-			cout << "Using 640*480, user-defined" << endl;
-		}
-
-		if (strncmp(argv[1], "800\0",3) == 0 && strncmp(argv[2], "600\0", 3) == 0){
-			iscreenw = 800;
-			iscreenh = 600;
-			cout << "Using 800*600, user-defined" << endl;
-		}
-
-		if (strncmp(argv[1], "1024\0",4) == 0 && strncmp(argv[2], "768\0", 3) == 0){
-			iscreenw = 1024;
-			iscreenh = 768;
-			cout << "Using 1024*768, user-defined" << endl;
-		}
-
-		if (iscreenw == 0){
-			iscreenw = 800;
-			iscreenh = 600;
-			cout << "Bad arguments, using default 800*600" << endl;
-		}
-	}  else {
-		//Use default and tell the user if he put nothing
-		cout << "No resolution defined, using default 800*600." << endl;
-		iscreenw = 800;
-		iscreenh = 600;
-	} */
-
-
-
 	LB_Init();
 
 	//Set up the screen
@@ -96,8 +61,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	//Give a title to our window
-	SDL_WM_SetCaption("LinBound", "LinBound");
 	//The next commented function puts the cursor at the center of our screen
 	SDL_WarpMouse(iscreenw/2, iscreenh/2);
 

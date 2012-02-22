@@ -21,17 +21,7 @@
     License along with this library; if not, write to the Free Software
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA */
 
-#include <libintl.h>
-#include <locale.h>
 
-#include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_net.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
 //#include <ssl.h> -- using cURL will make this include unnecessary
 #include "init.hpp"
 using namespace std;
@@ -79,6 +69,9 @@ int LB_Init()
 	//Give an icon to the window
 	SDL_WM_SetIcon(IMG_Load("/home/podgy/workspace/Linbound/res/linbound.gif"), NULL);
 
+	//Give a title to our window
+	SDL_WM_SetCaption("LinBound", "LinBound");
+
 	return 0;
 }
 
@@ -90,6 +83,39 @@ int LB_Init()
  */
 int LB_ParseOptions(int argc, char *argv[])
 {
+	/* if (argc >= 3){
+		//Recognize and use resolution requested by the user
+		//If arguments are bad, use default to let the soft run and avoid hacking by buffer overflow.
+		if (strncmp(argv[1], "640\0",3) == 0 && strncmp(argv[2], "480\0", 3) == 0){
+			iscreenw = 640;
+			iscreenh = 480;
+			cout << "Using 640*480, user-defined" << endl;
+		}
+
+		if (strncmp(argv[1], "800\0",3) == 0 && strncmp(argv[2], "600\0", 3) == 0){
+			iscreenw = 800;
+			iscreenh = 600;
+			cout << "Using 800*600, user-defined" << endl;
+		}
+
+		if (strncmp(argv[1], "1024\0",4) == 0 && strncmp(argv[2], "768\0", 3) == 0){
+			iscreenw = 1024;
+			iscreenh = 768;
+			cout << "Using 1024*768, user-defined" << endl;
+		}
+
+		if (iscreenw == 0){
+			iscreenw = 800;
+			iscreenh = 600;
+			cout << "Bad arguments, using default 800*600" << endl;
+		}
+	}  else {
+		//Use default and tell the user if he put nothing
+		cout << "No resolution defined, using default 800*600." << endl;
+		iscreenw = 800;
+		iscreenh = 600;
+	} */
+
 	return 0;
 }
 
