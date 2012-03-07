@@ -67,6 +67,10 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 	this->dx = dx;
 	this->dy = dy;
 
+	surf = IMG_Load(file);
+
+	creationTime = SDL_GetTicks();
+
 }
 
 Sprite::~Sprite() {
@@ -79,7 +83,14 @@ Sprite::~Sprite() {
  * @param dest a pointer to the destination surface
  */
 void Sprite::draw(SDL_Surface *dest){
+	SDL_Rect destRec;
 
+	destRec.x = x;
+	destRec.y = y;
+	destRec.w = rArea.w;
+	destRec.h = rArea.h;
+
+	SDL_BlitSurface(surf, &rArea, dest, &destRec);
 }
 
 /**
@@ -91,9 +102,18 @@ void Sprite::move() {
 }
 
 
-void AnimatedSprite::draw(SDL_Surface *dest)
-{
+void AnimatedSprite::draw(SDL_Surface *dest) {
+		SDL_Rect destRec;
+		Uint32 currentTime = SDL_GetTicks();
 
+		rArea.x = src_x + src_w*(((currentTime - creationTime) / refreshRate) % nbAFrames);
+
+		destRec.x = x;
+		destRec.y = y;
+		destRec.w = rArea.w;
+		destRec.h = rArea.h;
+
+		SDL_BlitSurface(surf, &rArea, dest, &destRec);
 }
 
 /*

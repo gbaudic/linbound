@@ -53,6 +53,7 @@
 #define SPRITE_H_
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 
 //TODO: take some inspiration for this Sprite class from SDLSprite class (no copy&paste because it's GPLed)
 
@@ -62,8 +63,8 @@
 class Sprite {
 public:
 
-	Uint16 x; //Position coordinates
-	Uint16 y;
+	Sint16 x; //Position coordinates in world-space
+	Sint16 y;
 	Uint16 dx; //Motion vector coordinates
 	Uint16 dy;
 
@@ -80,9 +81,9 @@ public:
 	void move();
 
 
-private:
-	SDL_Surface* surf;
-	SDL_Rect rArea;
+protected:
+	SDL_Surface* surf; //the surface representing the image file
+	SDL_Rect rArea; //rectangle container for the sprite image
 };
 
 /**
