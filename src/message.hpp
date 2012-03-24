@@ -11,17 +11,17 @@ class LB_Message
 
     static const Uint32 TIME_TO_LIVE = 5000; //Maximum time to display in milliseconds
 
-    SDL_Surface *inGameText;
-    SDL_Surface *inChannelText;
+    SDL_Surface *inGameText; //Colored text with corresponding image, ready-to-blit
+    SDL_Surface *inChannelText; //White text without any image
 
     LB_Message(MessageType type, std::string message, std::string author = "", std::string guild = "");
-    //~LB_Message();
+    ~LB_Message();
 
     void hideMessage();
     void updateMessageStatus();
     void exitGame();
     bool isDisplayed() const;
-
+    void writeToChannel(SDL_Surface *channel, int x, int y);
 
     private:
     Uint32 creationTime;
@@ -31,7 +31,7 @@ class LB_Message
     std::string guild;
     std::string author;
     std::string message;
-
+    char* toChar(std::string src);
 };
 
 #endif
