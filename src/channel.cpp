@@ -18,7 +18,7 @@ void LB_MessageChannel::addMessage(LB_Message msg)
 
 void LB_MessageChannel::displayChannelInRoom()
 {
-    //Display only the messages that have to appear, with the appropriate logos
+    //Display only the messages that have to appear, with the appropriate logos and colors
     flush();
 }
 

@@ -15,7 +15,7 @@ class LB_MessageChannel
 
 
     private:
-    std::list<LB_Message> channel();
+    std::list<LB_Message> channel;
     int displayedMessages;
 
     void flush();
