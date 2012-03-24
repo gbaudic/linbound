@@ -34,6 +34,8 @@
 #include "image.hpp"
 #include "sound.hpp"
 
+#include "message.hpp"
+
 using namespace std;
 
 
@@ -88,6 +90,10 @@ int main(int argc, char *argv[])
         cout << "error with the music ! : " << SDL_GetError() << endl;
     }
 
+    LB_Message m(LB_Message::USER, "testText", "user");
+    m.writeToChannel(screen, 5, 5);
+    SDL_UpdateRect(screen,0,0,0,0);
+
 	//cout << "Entering main loop" << endl;
 	MainLoop();
 
@@ -124,7 +130,7 @@ void MainLoop()
 			}
 		}
 
-        //Network events
+        //Network events (send and receive)
 
         //Update the model
 

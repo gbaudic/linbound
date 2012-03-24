@@ -18,6 +18,11 @@ class LB_MessageChannel
     std::list<LB_Message> channel;
     int displayedMessages;
 
+    int x; //Coordinates of the channel on world-space coordinates
+    int y;
+
+    SDL_Surface* channelSurface;
+
     void flush();
     int getDisplayedMessages() const;
 };
