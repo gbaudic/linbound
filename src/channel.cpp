@@ -9,6 +9,8 @@
 void LB_MessageChannel::addMessage(LB_Message msg)
 {
     //Add the message to the data structure
+	channel.push_back(msg);
+
 
     this->displayedMessages++;
 
