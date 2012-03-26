@@ -1,6 +1,9 @@
 #ifndef _H_MESSAGE_
 #define _H_MESSAGE_
 
+#include <SDL/SDL.h>
+#include <SDL/SDL_ttf.h>
+
 class LB_Message
 {
     public:
@@ -14,14 +17,14 @@ class LB_Message
     SDL_Surface *inGameText; //Colored text
     SDL_Surface *inChannelText; //White text
 
-    LB_Message(MessageType type, std::string message, std::string author = "", std::string guild = "");
+    LB_Message(MessageType type, TTF_Font *f, std::string message, std::string author = "", std::string guild = "");
     ~LB_Message();
 
     void hideMessage();
-    void updateMessageStatus();
+    int updateMessageStatus();
     void exitGame();
     bool isDisplayed() const;
-    void writeToChannel(SDL_Surface *channel, int x, int y, bool inGame = false);
+    int writeToChannel(SDL_Surface *channel, Sint16 x, Sint16 y, bool inGame = false);
     MessageType getMessageType() const;
 
     private:

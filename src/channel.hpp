@@ -1,30 +1,39 @@
 #ifndef _H_CHANNEL_
 #define _H_CHANNEL_
 
-#include <list>
+#include <vector>
+#include <algorithm>
+#include <SDL/SDL_ttf.h>
 #include "message.hpp"
 
 class LB_MessageChannel
 {
     public:
-    static const int MAX_MSG_DISPLAYED = 7;
+    static const Uint8 MAX_MSG_DISPLAYED = 7;
 
-    void addMessage(LB_Message msg);
-    void displayChannelInRoom();
-    void displayFullChannel();
+    LB_MessageChannel(TTF_Font *f, Sint16 x, Sint16 y);
+    virtual ~LB_MessageChannel();
+    void addMessage(LB_Message msg, bool inGame = true);
+    void prepareChannelInGame();
+    void prepareFullChannel();
 
 
     private:
-    std::list<LB_Message> channel;
-    int displayedMessages;
+    std::vector<LB_Message> channel;
+    size_t displayedMessages;
 
-    int x; //Coordinates of the channel on world-space coordinates
-    int y;
+    Sint16 x; //Coordinates of the channel on world-space coordinates
+    Sint16 y;
+    Uint16 width;
+    Uint16 height;
 
-    SDL_Surface* channelSurface;
+    SDL_Surface* channelInGameSurface;
+    SDL_Surface* fullChannelSurface;
+    TTF_Font *font;
+    int lineStep;
 
     void flush();
-    int getDisplayedMessages() const;
+    size_t getDisplayedMessages() const;
 };
 
 #endif

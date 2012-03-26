@@ -1,16 +1,10 @@
-#include <cstdio>
 #include <cstdlib>
-#include <iostream>
-#include <cstring>
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
+#include <string>
 
 #include "message.hpp"
 using namespace std;
 
-extern TTF_Font *font;
-
-LB_Message::LB_Message(LB_Message::MessageType type, std::string message, std::string author, std::string guild)
+LB_Message::LB_Message(LB_Message::MessageType type, TTF_Font *font, std::string message, std::string author, std::string guild)
 {
     this->type = type;
     this->message = message;
@@ -82,16 +76,17 @@ void LB_Message::hideMessage()
     return;
 }
 
-void LB_Message::updateMessageStatus()
+int LB_Message::updateMessageStatus()
 {
     if(isDisplayedInChannel)
     {
         if(SDL_GetTicks() > LB_Message::TIME_TO_LIVE + creationTime)
         {
             isDisplayedInChannel = false;
+            return 1;
         }
     }
-    return;
+    return 0;
 }
 
 void LB_Message::exitGame()
@@ -109,15 +104,19 @@ LB_Message::MessageType LB_Message::getMessageType() const
 	return type;
 }
 
-void LB_Message::writeToChannel(SDL_Surface *channel, int x, int y, bool inGame){
+int LB_Message::writeToChannel(SDL_Surface *channel, Sint16 x, Sint16 y, bool inGame){
 	SDL_Rect r;
 	r.x = x ; r.y = y;
 
 	if(type >= USER && !inGame){
 		SDL_BlitSurface(inChannelText, NULL, channel, &r);
+		return 1;
 	}
 
 	if(inGame){
 		SDL_BlitSurface(inGameText, NULL, channel, &r);
+		return 1;
 	}
+
+	return 0;
 }
