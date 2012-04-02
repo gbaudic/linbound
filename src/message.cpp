@@ -1,3 +1,12 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
+ * If a copy of the MPL was not distributed with this file, 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ * 
+ * This Source Code Form is “Incompatible With Secondary Licenses”, 
+ * as defined by the Mozilla Public License, v. 2.0.
+ */
+
+
 #include <cstdlib>
 #include <string>
 
@@ -22,7 +31,7 @@ LB_Message::LB_Message(LB_Message::MessageType type, TTF_Font *font, std::string
     }
 
     switch(type){
-    //TODO: - complete POWER_USER
+    //TODO: - check color availability on channel 8-bit surface
     case SERVER:
     	col.b = 0; //yellow
     	inGameText = TTF_RenderUTF8_Solid(font, message.c_str(), col);
@@ -37,14 +46,16 @@ LB_Message::LB_Message(LB_Message::MessageType type, TTF_Font *font, std::string
     	inGameText = TTF_RenderUTF8_Solid(font, fullMsg.c_str(), col); //white
     	break;
     case POWER_USER:
-    	//not decided yet
+    	col.r = 0xff; col.g = 0xc0; col.b = 0xff;//light magenta
+    	fullMsg = guild + " " + author + "]" + message;
+    	inGameText = TTF_RenderUTF8_Solid(font, fullMsg.c_str(), col);
     	break;
     case ADMIN_USER:
     	col.r = 0xff; col.g = 0x80; col.b = 0; //orange
     	inGameText = TTF_RenderUTF8_Solid(font, fullMsg.c_str(), col);
     	break;
     case REWARD:
-    	col.r = 0; col.g = 0x66; col.b = 0xff; //light blue
+    	col.r = 0; col.g = 0xff; col.b = 0xff; //light blue
     	inGameText = TTF_RenderUTF8_Solid(font, fullMsg.c_str(), col);
     	break;
     case PENALTY:

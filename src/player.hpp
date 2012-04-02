@@ -3,6 +3,8 @@
 
 #include <SDL/SDL.h>
 
+#include "Sprite.hpp"
+
 /**
  * \class LB_Player
  * Abstracts a LB player
