@@ -1,7 +1,15 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
+ * If a copy of the MPL was not distributed with this file, 
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ * 
+ * This Source Code Form is “Incompatible With Secondary Licenses”, 
+ * as defined by the Mozilla Public License, v. 2.0.
+ */
+
+
 #include <cstdlib>
 #include <string>
 #include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
 
 #include "channel.hpp"
 
@@ -15,13 +23,14 @@ LB_MessageChannel::LB_MessageChannel(TTF_Font *font, Sint16 x, Sint16 y){
 	lineStep = TTF_FontHeight(font) + TTF_FontLineSkip(font);
 
 	//Initialize the SDL_Surfaces - 8-bit depth should suffice for the colors we are using
-	channelInGameSurface = SDL_CreateRGBSurface(SDL_HWSURFACE, 300, MAX_MSG_DISPLAYED*lineStep, 8, 0xc0, 0x30, 0xc, 0x3);
-	fullChannelSurface = SDL_CreateRGBSurface(SDL_HWSURFACE, 300, lineStep, 8, 0xc0, 0x30, 0xc, 0x3);
+	//channelInGameSurface = SDL_CreateRGBSurface(SDL_HWSURFACE, 300, MAX_MSG_DISPLAYED*lineStep, 8, 0xc0, 0x30, 0xc, 0x3);
+	//fullChannelSurface = SDL_CreateRGBSurface(SDL_HWSURFACE, 300, lineStep, 8, 0xc0, 0x30, 0xc, 0x3);
+	cursorPos = 0;
 }
 
 LB_MessageChannel::~LB_MessageChannel(){
-	SDL_FreeSurface(channelInGameSurface);
-	SDL_FreeSurface(fullChannelSurface);
+	//SDL_FreeSurface(channelInGameSurface);
+	//SDL_FreeSurface(fullChannelSurface);
 }
 
 void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
@@ -33,13 +42,9 @@ void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
 
     //Make some room for it (to display it)
     flush();
-
-    if(!inGame){
-    	//Regenerate the fullChannel to draw the last line we've just added
-    }
 }
 
-void LB_MessageChannel::prepareChannelInGame()
+void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest)
 {
 	Sint16 current_y = 0;
 	size_t zero(0);
@@ -49,15 +54,15 @@ void LB_MessageChannel::prepareChannelInGame()
 		if(channel[i].isDisplayed()){
 			if(channel[i].getMessageType() <= LB_Message::PENALTY){
 				//This message needs a logo, so we leave an offset in x
-				channel[i].writeToChannel(channelInGameSurface, 15, current_y, true);
+				channel[i].writeToChannel(dest, x + 15, y + current_y, true);
 
 				//TODO: logo writing...
 				//SDL_Rect r;
-				//r.x = 0; r.y = current_y;
-				//SDL_BlitSurface(logoSurface, NULL, channelInGameSurface, &r);
+				//r.x = x; r.y = y + current_y;
+				//SDL_BlitSurface(logoSurface, NULL, dest, &r);
 			} else {
 				//Simple message, no logo
-				channel[i].writeToChannel(channelInGameSurface, 0, current_y, true);
+				channel[i].writeToChannel(dest, x, y + current_y, true);
 			}
 
 			current_y += lineStep;
@@ -65,14 +70,14 @@ void LB_MessageChannel::prepareChannelInGame()
 	}
 }
 
-void LB_MessageChannel::prepareFullChannel()
+void LB_MessageChannel::displayFullChannel(SDL_Surface* dest)
 {
     //Display all the messages, but in plain white
 	Sint16 current_y = 0;
 
-	for(Uint8 i = 0 ; i < channel.size() ; i++){
+	for(size_t i = cursorPos ; i < min(channel.size(), cursorPos + MAX_MSG_DISPLAYED) ; i++){
 		if(channel[i].getMessageType() > LB_Message::PENALTY){
-			channel[i].writeToChannel(fullChannelSurface, 0, current_y);
+			channel[i].writeToChannel(dest, x, y + current_y);
 		}
 
 		current_y += lineStep;
