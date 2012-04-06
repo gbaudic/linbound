@@ -38,37 +38,6 @@ SDL_Event LastMouseEvent;
 Uint8 iMode;
 //Uint8 *piMode = &iMode;
 
-
-
-/**
- * \class LB_Room
- * Abstracts a room object with its properties
- */
-class LB_Room
-{
-	public:
-	enum RoomMode {SOLO, SCORE, TAG, JEWEL};
-	enum RoomStatus {WAITING, FULL, PLAYING};
-
-		Uint16 iRoomNumber;
-		bool bRoomIsPowerUser;
-		bool bIsPasswordProtected;
-		std::string password;
-		RoomMode mode;
-		RoomStatus status;
-
-		Uint8 iSuddenDeathTurns;
-		Uint8 iSuddenDeathType;
-
-		Uint8 iMapSide;
-		char MapName[];
-
-		Uint8 iMaxPlayers;
-		Uint8 iCurrentPlayers;
-
-		LB_Player players[];
-};
-
 /**
  * \class LB_Mobile
  * Abstracts a LinBound game mobile

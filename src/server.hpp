@@ -52,7 +52,7 @@ class LB_Server
     int maxUsers;
 
     LB_MessageChannel channels[8];
-    std::list<LB_Room> rooms();
+    std::list<LB_Room> rooms;
 
 };
 

@@ -66,7 +66,7 @@ public:
 	virtual ~Sprite();
 	virtual void draw(SDL_Surface* dest);
 	void move();
-
+	SDL_Rect* getRect();
 
 protected:
 	SDL_Surface* surf; //the surface representing the image file
