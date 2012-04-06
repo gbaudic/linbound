@@ -10,6 +10,8 @@
 #ifndef _H_MAP_
 #define _H_MAP_
 
+#include <string>
+#include <vector> //Verify if best structure for this
 #include "Sprite.hpp"
 
 class LB_MapBackground
@@ -25,17 +27,19 @@ private:
 	SDL_Surface* staticPart;
 	SDL_Surface* rendering;
 
-	Sprite animParts[2];
+	std::vector<Sprite> animParts;
 };
 
 class LB_Map
 {
     private:
-    SDL_Surface* background;
+    LB_MapBackground background;
     SDL_Surface* foregroundA;
     SDL_Surface* foregroundB;
 
-    SDL_Surface* previewA;
+    SDL_Surface* previewSmall; //in server view
+    SDL_Surface* previewMedium; //in room view before loading
+    SDL_Surface* previewA; //in room view while loading
     SDL_Surface* previewB;
 
     bool has2Sides;
@@ -48,14 +52,14 @@ class LB_Map
 
     //Methods
     public:
-    LB_Map(std::string name, std::string background, std::string foregroundA, std::string foregroundB = "");
+    LB_Map(std::string name, LB_MapBackground background, std::string foregroundA, std::string foregroundB = "");
     ~LB_Map();
 
     void setASide(bool isASide);
     bool getASide() const;
 
-    void makeDamage(int x, int y, int radius); //For first versions we will express damages with circular areas
-    void correctAfterDamage();
+    void makeDamage(Sint16 x, Sint16 y, Sint16 radius); //For first versions we will express damages with circular areas
+    void correctAfterDamage(Sint16 x, Sint16 y, Sint16 radius);
 };
 
 #endif //_H_MAP_

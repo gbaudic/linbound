@@ -17,8 +17,6 @@
 #include <libintl.h>
 #include <locale.h>
 
-#include <cstdio>
-#include <cstdlib>
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>

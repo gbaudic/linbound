@@ -10,6 +10,7 @@
 #ifndef _H_MESSAGE_
 #define _H_MESSAGE_
 
+#include <string>
 #include <SDL/SDL.h>
 #include <SDL/SDL_ttf.h>
 

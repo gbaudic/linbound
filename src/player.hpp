@@ -1,6 +1,7 @@
 #ifndef _H_PLAYER_
 #define _H_PLAYER_
 
+#include <string>
 #include <SDL/SDL.h>
 
 #include "Sprite.hpp"

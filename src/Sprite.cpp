@@ -62,7 +62,6 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 }
 
 Sprite::~Sprite() {
-	// TODO Auto-generated destructor stub
 	SDL_FreeSurface(surf);
 }
 
@@ -89,6 +88,9 @@ void Sprite::move() {
 	y += dy;
 }
 
+SDL_Rect* Sprite::getRect(){
+	return &rArea;
+}
 
 void AnimatedSprite::draw(SDL_Surface *dest) {
 		SDL_Rect destRec;

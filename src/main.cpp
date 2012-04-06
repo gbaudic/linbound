@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
 {
 	cout << "Initializing LinBound v0.1a..." << endl;
 
+	//LB_ParseOptions(argc, argv);
+
 	LB_Init();
 
 	//Set up the screen
@@ -127,6 +129,13 @@ void MainLoop()
         //Update the model
 
         //Update the graphics
+		//**Background
+
+		//**Foreground
+
+		//**GUI
+
+		//**Cursor
 
         //Change audio if needed
 
