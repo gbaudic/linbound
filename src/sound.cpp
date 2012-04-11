@@ -17,8 +17,6 @@
 #include <libintl.h>
 #include <locale.h>
 
-#include <cstdio>
-#include <cstdlib>
 #include <iostream>
 #include <SDL/SDL.h>
 #include <SDL/SDL_mixer.h>
@@ -55,7 +53,7 @@ int LB_PlayMusic(char* file)
     //Load the new music
     music = Mix_LoadMUS(file);
     if(music == NULL){
-    	cout << "Music not loaded : " << Mix_GetError() << endl;
+    	cout << gettext("Music not loaded : ") << Mix_GetError() << endl;
     	return -1;
     }
 

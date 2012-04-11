@@ -32,13 +32,13 @@ int LB_Init()
 {
 	//Initializing SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
-		cout << "FATAL : Cannot init SDL : " << SDL_GetError() << endl;
+		cout << gettext("FATAL : Cannot init SDL : ") << SDL_GetError() << endl;
 		return -1;
 	}
 
 	//Initializing SDL_ttf, needed for text display
 	if (TTF_Init() != 0){
-		cout << "FATAL : Cannot init SDL_ttf " << SDL_GetError() << endl;
+		cout << gettext("FATAL : Cannot init SDL_ttf ") << SDL_GetError() << endl;
 		bIsTTFEnabled = false;
 		return -1;
 	}
@@ -46,7 +46,7 @@ int LB_Init()
 	//TTF is initialized correctly, so let's load the font
 	font = TTF_OpenFont("/home/podgy/workspace/Linbound/res/LiberationSans-Regular.ttf", fontsize);
 	if (font == NULL){
-		cout << "Font opening failed!" << endl;
+		cout << gettext("Font opening failed!") << endl;
 	}
 
 	//Initialize the sound system
@@ -145,11 +145,11 @@ int LB_InitSound(int channels)
  	int res = Mix_Init(flags);
 
  	if(res != flags){
- 		cout << "Error loading audio decoding libraries : " << Mix_GetError() << endl;
+ 		cout << gettext("Error loading audio decoding libraries : ") << Mix_GetError() << endl;
  	}
 
 	if (Mix_AllocateChannels(channels) != channels){
-		cout << "All channels haven't been allocated, exiting" << endl;
+		cout << gettext("All channels haven't been allocated, exiting") << endl;
 		return -1;
 	}
 

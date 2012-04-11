@@ -1,0 +1,11 @@
+# List of source files which contain translatable strings.
+src/error.cpp
+src/event.cpp
+src/gui_lb.cpp
+src/image.cpp
+src/init.cpp
+src/main.cpp
+src/map.cpp
+src/server.cpp
+src/sound.cpp
+src/update.cpp

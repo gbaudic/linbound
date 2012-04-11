@@ -52,7 +52,7 @@ int LB_ShowPicture(SDL_Surface *screen, const char* picture)
 	image = IMG_Load(picture);
 	if (image == NULL) {
 		//If it didn't work, tell the user
-		cout << "ERROR : Cannot load the img: " << picture << endl;
+		cout << gettext("ERROR : Cannot load the img: ") << picture << endl;
 		return -1;
 	}
 
