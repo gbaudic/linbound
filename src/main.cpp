@@ -48,16 +48,21 @@ bool IsFirstRun = true;
  */
 int main(int argc, char *argv[])
 {
-	cout << "Initializing LinBound v0.1a..." << endl;
+	cout << gettext("Initializing LinBound v0.1a...") << endl;
 
 	//LB_ParseOptions(argc, argv);
+
+	//gettext support
+	setlocale(LC_ALL, "");
+	bindtextdomain("linbound", "./po");
+	textdomain("linbound");
 
 	LB_Init();
 
 	//Set up the screen
 	screen = SDL_SetVideoMode(iscreenw, iscreenh, 16, SDL_SWSURFACE);
 	if (screen == NULL) {
-		cout << "FATAL : Cannot set video mode : " << SDL_GetError() << endl;
+		cout << gettext("FATAL : Cannot set video mode : ") << SDL_GetError() << endl;
 		return 1;
 	}
 
@@ -84,7 +89,7 @@ int main(int argc, char *argv[])
 	//cur_dest.x = cur_dest.y = 0;
 
     if(LB_PlayMusic("/home/podgy/workspace/Linbound/res/sound/test.ogg") != 0){
-        cout << "error with the music ! : " << SDL_GetError() << endl;
+        cout << gettext("error with the music ! : ") << SDL_GetError() << endl;
     }
 
 

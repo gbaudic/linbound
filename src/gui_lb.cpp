@@ -19,24 +19,46 @@
 
 #include <iostream>
 #include <guichan.hpp>
+#include <guichan/sdl.hpp>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 //#include <SDL/SDL_ttf.h>
 //#include <SDL/SDL_gfxPrimitives.h>
 #include "gui_lb.hpp"
 using namespace std;
+using namespace gcn;
 
 extern SDL_Surface *screen;
 extern int iscreenw, iscreenh;
 //extern TTF_Font *font;
 SDL_Color white; /* Needs to be set somewhere */
 
+LB_GUI::LB_GUI(){
+	imageLoader = new SDLImageLoader();
+	Image::setImageLoader(imageLoader);
+	graphics = new SDLGraphics();
+	graphics->setTarget(screen);
+	input = new SDLInput();
 
-/* void LB_GUI_SetProgressBar(GUI_element *progressbar, Uint8 *percentage)
-{
-	return;
-} */
+	//font init...
 
+	gui = new Gui();
+	gui->setGraphics(graphics);
+	gui->setInput(input);
+
+	top = new Container();
+	top->setDimension(Rectangle(0,0,iscreenw,iscreenh));
+	gui->setTop(top);
+}
+
+LB_GUI::~LB_GUI(){
+	delete top;
+
+	delete gui;
+	delete input;
+	delete graphics;
+	delete imageLoader;
+}
 /**
  * Displays a message box
  * \param type the type wanted, see gui_lb.hpp for available types
