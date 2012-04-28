@@ -1,7 +1,7 @@
 #Generated 2008-07-30 by G. B. then completed with a lot of stuff from wormux configure.ac
 dnl *** NOT TESTED YET !!! *********
 
-AC_INIT(main.cpp)
+AC_INIT(src/main.cpp)
 AM_INIT_AUTOMAKE(linbound,0.1)
 
 dnl *** Check for gettext and friends ***************************************
@@ -128,4 +128,4 @@ if test \
 fi
 
 
-AC_OUTPUT(Makefile ./po/Makefile.in)
+AC_OUTPUT(Makefile po/Makefile.in src/Makefile)

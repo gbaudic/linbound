@@ -1,0 +1,17 @@
+Unless otherwise stated, linbound is covered by the Mozilla Public License v2.0.
+
+This software uses code from SDL_collide, released under the MIT license.
+This software embeds Tinyxml2 for XML parsing, released under the zlib license.
+This software uses gettext for string l10n.
+
+SDL_ttf, SDL_gfx, SDL_net SDL_mixer and SDL_image are distributed under the terms of the GNU LGPL license.
+http://www.gnu.org/copyleft/lesser.html
+
+The source is available from the libraries page at the SDL website:
+http://www.libsdl.org/
+
+libcURL...
+libogg
+libvorbis
+
+md5.cpp : 
