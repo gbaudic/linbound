@@ -50,7 +50,11 @@ int main(int argc, char *argv[])
 {
 	cout << gettext("Initializing LinBound v0.1a...") << endl;
 
-	//LB_ParseOptions(argc, argv);
+	//int result = LB_ParseOptions(argc, argv);
+	/* if(result == -1){
+	 * 	return 0;
+	 * }
+	 */
 
 	//gettext support
 	setlocale(LC_ALL, "");
@@ -66,7 +70,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	//The next commented function puts the cursor at the center of our screen
+	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouse(iscreenw/2, iscreenh/2);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)

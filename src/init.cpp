@@ -109,6 +109,15 @@ int LB_ParseOptions(int argc, char *argv[])
 		iscreenh = 600;
 	} */
 
+	if(argc >= 2){
+		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
+			cout << "LinBound v0.1a\n"
+					<< "(C) 2008-2012 G. B. aka podgy_piglet and contributors\n"
+					<< "This software is free software released under the Mozilla Public License 2.0\n";
+			return -1;
+		}
+	}
+
 	return 0;
 }
 
