@@ -21,7 +21,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "strings.h"
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL_image.h>
 
 #include "main.hpp"
 #include "init.hpp"
@@ -64,9 +64,14 @@ int main(int argc, char *argv[])
 	LB_Init();
 
 	//Set up the screen
-	screen = SDL_SetVideoMode(iscreenw, iscreenh, 16, SDL_SWSURFACE);
+	screen = SDL_CreateWindow("LinBound",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,iscreenw, iscreenh,SDL_WINDOW_SHOWN);
+	renderer = SDL_CreateRenderer(screen, -1, 0);
 	if (screen == NULL) {
-		cout << gettext("FATAL : Cannot set video mode : ") << SDL_GetError() << endl;
+		cout << gettext("FATAL : Cannot create window: ") << SDL_GetError() << endl;
+		return 1;
+	}
+	if (renderer == NULL) {
+		cout << gettext("FATAL : Cannot create renderer: ") << SDL_GetError() << endl;
 		return 1;
 	}
 
@@ -77,7 +82,7 @@ int main(int argc, char *argv[])
 
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
-		switch (LB_ShowPicture(screen, "/home/podgy/workspace/Linbound/res/menuLB.jpg")) {
+		switch (LB_ShowPicture(screen, "../res/menuLB.jpg")) {
 			case -1 :
 			SDL_FreeSurface(image);
 			SDL_Quit();
@@ -87,12 +92,12 @@ int main(int argc, char *argv[])
 			break;
 		}
 	//cout << "pic shown" << endl;
-	old_screen = IMG_Load("/home/podgy/workspace/Linbound/res/arrow.png");
+	old_screen = IMG_Load("../res/arrow.png");
 	//old_cursor.x = old_cursor.y = 0;
 
 	//cur_dest.x = cur_dest.y = 0;
 
-    if(LB_PlayMusic("/home/podgy/workspace/Linbound/res/sound/test.ogg") != 0){
+    if(LB_PlayMusic("../res/sound/test.ogg") != 0){
         cout << gettext("error with the music ! : ") << SDL_GetError() << endl;
     }
 
@@ -110,7 +115,8 @@ int main(int argc, char *argv[])
 	SDL_FreeSurface(refresh_sample);
 	SDL_FreeSurface(image);
 	SDL_FreeSurface(cursor);
-	SDL_FreeSurface(screen);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(screen);
 	//and quit SDL nicely
 	LB_Quit();
 

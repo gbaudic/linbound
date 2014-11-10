@@ -18,14 +18,14 @@
 #include <locale.h>
 
 #include <iostream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_gfxPrimitives.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include "image.hpp"
 using namespace std;
 
 
-extern SDL_Surface *screen;
+//extern SDL_Surface *screen;
 extern SDL_Surface *old_screen;
 extern SDL_Surface *refresh_sample;
 extern SDL_Surface *image;
@@ -92,7 +92,7 @@ void LB_BlitCursor(SDL_Surface *screen, Uint8 CursorType, SDL_Event event)
 
 	//Set the colorkey for transparency
 	//Could be moved to a better place to avoid repeating at each iteration
-	SDL_SetColorKey(cursor, SDL_SRCCOLORKEY | SDL_RLEACCEL, SDL_MapRGB(cursor->format, 255, 0, 255));
+	SDL_SetColorKey(cursor, SDL_TRUE | SDL_RLEACCEL, SDL_MapRGB(cursor->format, 255, 0, 255));
 
 	SDL_Rect cur_src, cur_dest;
 

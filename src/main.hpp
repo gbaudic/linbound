@@ -20,19 +20,20 @@
 #ifndef _H_MAIN_
 #define _H_MAIN_
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <GL/gl.h>
 #include <GL/glx.h>
 
 #include "player.hpp"
 
-SDL_Surface *screen;
+SDL_Window *screen;
+SDL_Renderer *renderer;
 SDL_Surface *old_screen;
 SDL_Surface *image;
-SDL_Surface *cursor = IMG_Load("/home/podgy/workspace/Linbound/res/arrow.png");
-SDL_Surface *refresh_test = IMG_Load("/home/podgy/workspace/Linbound/res/arrow.png");
-SDL_Surface *refresh_sample = IMG_Load("/home/podgy/workspace/Linbound/res/arrow.png");
+SDL_Surface *cursor = IMG_Load("../res/arrow.png");
+SDL_Surface *refresh_test = IMG_Load("../res/arrow.png");
+SDL_Surface *refresh_sample = IMG_Load("../res/arrow.png");
 SDL_Event event;
 SDL_Event LastMouseEvent;
 Uint8 iMode;

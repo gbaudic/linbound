@@ -2,7 +2,7 @@
 #define _H_PLAYER_
 
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #include "Sprite.hpp"
 
@@ -24,23 +24,21 @@ class LB_Player
         BronzeTrophy, SilverTrophy, GoldTrophy, Administrator};
 
 
-		std::string AllyName;
-		char TeamID;
-		Uint8 iPlayerPlaceAlly;
-		Uint8 iTotalInAlly;
+		std::string allianceName;
+		char teamID;
+		Uint8 rankInAlliance, sizeOfAlliance;
 
 		Uint16 iPlayerMobile1;
 		Uint16 iPlayerMobile2;
 
-		Sint16 iPlayerDelay;
-		Uint16 iPlayerCnxDelay;
-		Sint16 iPlayerAward;
-		Sint8 iPlayerGp;
+		Sint16 playerDelay;
+		Uint16 playerCnxDelay;
+		Sint16 playerAward;
+		Sint8 playerGp;
 
-		bool bIsActivePlayer;
+		bool isActivePlayer;
 
-		Uint16 iPosx;
-		Uint16 iPosy;
+		Uint16 x,y;
 
 		Sint8 iCurrentAngle;
 		Sint8 iLastAngle;
@@ -87,14 +85,14 @@ struct LB_PlayerBasicInfo
 {
     LB_PlayerShortInfo shortInfos;
 
-    char TeamID;
+    char teamID;
     Uint8 iPlayerPlaceAlly;
     Uint8 iTotalInAlly;
 
     Uint16 iPlayerMobile1;
     Uint16 iPlayerMobile2;
 
-    bool bIsRoomAdmin;
+    bool isRoomAdmin;
     Uint8 iNextAdmin; //To know who is going to be the admin if current admin goes away
 
     //LB_AvatarItem items[];

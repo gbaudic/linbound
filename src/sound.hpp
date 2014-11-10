@@ -16,8 +16,8 @@
 #ifndef _H_SOUND_
 #define _H_SOUND_
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 int LB_PlayMusic(char* file);
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);

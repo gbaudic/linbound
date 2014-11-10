@@ -18,8 +18,8 @@
 #include <locale.h>
 
 #include <iostream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include "sound.hpp"
 using namespace std;
 

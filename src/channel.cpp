@@ -9,7 +9,7 @@
 
 #include <cstdlib>
 #include <string>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #include "channel.hpp"
 

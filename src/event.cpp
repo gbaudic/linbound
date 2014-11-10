@@ -19,11 +19,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "event.hpp"
 using namespace std;
 
-extern SDL_Surface *screen;
+extern SDL_Window *screen;
 extern SDL_Surface *cursor;
 extern SDL_Surface *refresh_test;
 extern SDL_Surface *old_screen;
@@ -32,7 +32,7 @@ extern SDL_Event event;
 extern SDL_Event LastMouseEvent;
 
 
-void LB_BlitCursor(SDL_Surface *screen, Uint8 CursorType, SDL_Event event);
+void LB_BlitCursor(SDL_Window *screen, Uint8 CursorType, SDL_Event event);
 
 int LB_GetPressedButton(SDL_Event event)
 {
@@ -49,7 +49,7 @@ void LB_CheckEvent(SDL_Event event)
  * \return 1 if the screen has changed, 0 otherwise
  */
 //TODO: this function typically gives a boolean answer, so use a boolean!
-int LB_CheckCursorRedrawing()
+bool LB_CheckCursorRedrawing()
 {
 	//Creating the temporary rects for blitting
 	SDL_Rect src, dest;
@@ -66,13 +66,7 @@ int LB_CheckCursorRedrawing()
 	SDL_BlitSurface(screen, &src, refresh_test, &dest);
 
 	//and perform the desired check
-	if(refresh_test->pixels!=refresh_sample->pixels){
-		//Seems like the screen has been redrawn since last time
-		return 1;
-	} else {
-		//Seems like nothing has changed
-		return 0;
-	}
+	return (refresh_test->pixels!=refresh_sample->pixels);
 
 }
 
@@ -110,7 +104,7 @@ int LB_EventProcessor(SDL_Event event)
 	}
 
 	//This IF statement checks if display has been redrawn with no cursor move to redraw the cursor
-	if(event.type!=SDL_MOUSEMOTION && LB_CheckCursorRedrawing()==1){
+	if(event.type!=SDL_MOUSEMOTION && LB_CheckCursorRedrawing() ){
 		LB_BlitCursor(screen, LB_CURSOR_ARROW, LastMouseEvent);
 	}
 

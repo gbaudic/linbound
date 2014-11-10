@@ -44,7 +44,7 @@ int LB_Init()
 	}
 
 	//TTF is initialized correctly, so let's load the font
-	font = TTF_OpenFont("/home/podgy/workspace/Linbound/res/LiberationSans-Regular.ttf", fontsize);
+	font = TTF_OpenFont("../res/LiberationSans-Regular.ttf", fontsize);
 	if (font == NULL){
 		cout << gettext("Font opening failed!") << endl;
 	}
@@ -60,10 +60,10 @@ int LB_Init()
 	SDL_ShowCursor(0);
 
 	//Give an icon to the window
-	SDL_WM_SetIcon(IMG_Load("/home/podgy/workspace/Linbound/res/linbound.gif"), NULL);
+	SDL_WM_SetIcon(IMG_Load("../res/linbound.gif"), NULL);
 
 	//Give a title to our window
-	SDL_WM_SetCaption("LinBound", "LinBound");
+	//SDL_WM_SetCaption("LinBound", "LinBound");
 
 	return 0;
 }
