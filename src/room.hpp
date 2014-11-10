@@ -9,7 +9,7 @@
 #ifndef _H_ROOM_
 #define _H_ROOM_
 
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 #include "player.hpp"
 #include "channel.hpp"
 #include "map.hpp"
@@ -33,9 +33,8 @@ class LB_Room
     void changeRoomMode(RoomMode newMode);
 
     private:
-    Uint16 iRoomNumber;
-    bool bRoomIsPowerUser;
-    bool bIsPasswordProtected;
+    Uint16 roomNumber;
+    bool isPowerUserRoom, isPasswordProtectedRoom;
     std::string password;
     std::string name;
     RoomMode mode;
@@ -46,8 +45,7 @@ class LB_Room
 
     LB_Map map;
 
-    Uint8 iMaxPlayers;
-    Uint8 iCurrentPlayers;
+    Uint8 maxPlayers, currentPlayers;
 
     LB_Player players[];
 
@@ -60,7 +58,7 @@ struct LB_RoomBasicInfo
     std::string name;
     LB_Room::RoomMode mode;
     LB_Room::RoomStatus status;
-    bool bIsPasswordProtected;
+    bool isPasswordProtectedRoom;
 
     LB_Map map;
 

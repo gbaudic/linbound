@@ -39,8 +39,8 @@
 #ifndef SPRITE_H_
 #define SPRITE_H_
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 //TODO: take some inspiration for this Sprite class from SDLSprite class (no copy&paste because it's GPLed)
 

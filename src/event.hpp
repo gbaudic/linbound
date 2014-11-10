@@ -24,7 +24,7 @@ const int LB_CURSOR_WAIT = 1;
 //Prototypes
 int LB_GetPressedButton(SDL_Event event);
 void LB_CheckEvent(SDL_Event event);
-int LB_CheckCursorRedrawing();
+bool LB_CheckCursorRedrawing();
 int LB_EventProcessor(SDL_Event event);
 
 #endif

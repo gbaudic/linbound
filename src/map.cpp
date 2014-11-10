@@ -6,8 +6,8 @@
  * as defined by the Mozilla Public License, v. 2.0.
  */
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_gfxPrimitives.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 
 #include "map.hpp"
 using namespace std;

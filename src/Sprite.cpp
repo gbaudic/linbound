@@ -146,8 +146,10 @@ bool SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v)
 
 	if(SDL_MUSTLOCK(surface))
 		SDL_UnlockSurface(surface);
+	Uint32 colkey = 0;
+	SDL_GetColorKey(surface,&colkey);
 	/*test whether pixels color == color of transparent pixels for that surface*/
-	return (pixelcolor == surface->format->colorkey);
+	return (pixelcolor == colkey);
 }
 
 /*
