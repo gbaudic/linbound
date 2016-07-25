@@ -12,7 +12,7 @@
 
 #include <string>
 #include <vector> //Verify if best structure for this
-#include "Sprite.hpp"
+#include "sprite.hpp"
 
 class LB_MapBackground
 {
@@ -27,7 +27,7 @@ private:
 	SDL_Surface* staticPart;
 	SDL_Surface* rendering;
 
-	std::vector<Sprite> animParts;
+	std::vector<sprite> animParts;
 };
 
 class LB_Map
@@ -37,10 +37,10 @@ class LB_Map
     SDL_Surface* foregroundA;
     SDL_Surface* foregroundB;
 
-    SDL_Surface* previewSmall; //in server view
-    SDL_Surface* previewMedium; //in room view before loading
-    SDL_Surface* previewA; //in room view while loading
-    SDL_Surface* previewB;
+    SDL_Texture* previewSmall; //in server view
+    SDL_Texture* previewMedium; //in room view before loading
+    SDL_Texture* previewA; //in room view while loading
+    SDL_Texture* previewB;
 
     bool has2Sides;
     bool isASide;

@@ -1,5 +1,5 @@
 /**
- * Sprite.cpp
+ * sprite.cpp
  *
  *  @date 23/02/2012
  *  @author G. B.
@@ -35,9 +35,9 @@
     genjix@gmail.com
 
     Rob Loach
-    http://robloach.net*/
+    http://robloach.net */
 
-#include "Sprite.hpp"
+#include "sprite.hpp"
 
 /*returns maximum or minimum of number*/
 #define SDL_COLLIDE_MAX(a,b)	((a > b) ? a : b)
@@ -62,7 +62,7 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 }
 
 Sprite::~Sprite() {
-	SDL_FreeSurface(surf);
+	SDL_DestroyTexture(surf);
 }
 
 /**
@@ -92,6 +92,9 @@ SDL_Rect* Sprite::getRect(){
 	return &rArea;
 }
 
+/**
+ *  @param dest the SDL_Surface to blit to
+ */
 void AnimatedSprite::draw(SDL_Surface *dest) {
 		SDL_Rect destRec;
 		Uint32 currentTime = SDL_GetTicks();
@@ -106,7 +109,7 @@ void AnimatedSprite::draw(SDL_Surface *dest) {
 		SDL_BlitSurface(surf, &rArea, dest, &destRec);
 }
 
-/*
+/**
 	SDL surface test if offset (u,v) is a transparent pixel
 */
 bool SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v)
@@ -114,7 +117,7 @@ bool SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v)
 	if(SDL_MUSTLOCK(surface))
 		SDL_LockSurface(surface);
 	/*assert that (u,v) offsets lie within surface*/
-	//assert((u < surface->w) && (v < surface->h));
+	SDL_assert_release((u < surface->w) && (v < surface->h));
 
 	int bpp = surface->format->BytesPerPixel;
 	/*here p is the address to the pixel we want to retrieve*/
@@ -148,11 +151,11 @@ bool SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v)
 		SDL_UnlockSurface(surface);
 	Uint32 colkey = 0;
 	SDL_GetColorKey(surface,&colkey);
-	/*test whether pixels color == color of transparent pixels for that surface*/
+	/* test whether pixels color == color of transparent pixels for that surface */
 	return (pixelcolor == colkey);
 }
 
-/*
+/**
 	SDL pixel perfect collision test
 */
 bool SDL_CollidePixel(SDL_Surface *as , int ax , int ay ,

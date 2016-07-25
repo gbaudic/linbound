@@ -9,6 +9,14 @@
 
 #include "server.hpp"
 
+/**
+ *  \param min minimum level to join this server
+ *  \param max maximum level
+ *  \param areAvatarEnabled specifies if extra items are in effect
+ *  \param bonux percentage of bonus applied in this server, can be 0, 10, 20 or 50
+ *  \param users current number of users connected
+ *  \param maxUsers capacity of the current server
+ */
 LB_BasicServerInfo::LB_BasicServerInfo(LB_Player::Level min, LB_Player::Level max, bool areAvatarEnabled, int bonus, int users, int maxUsers)
 {
     if(min < max)

@@ -21,8 +21,8 @@ using namespace std;
 
 TTF_Font *font;
 int fontsize = 12;
-bool bIsTTFEnabled = true;
-bool bIsNETEnabled = true;
+bool isTTFEnabled = true;
+bool isNETEnabled = true;
 
 /**
  * Initializes the libraries and surfaces which will always be used, regardless of the game mode
@@ -39,12 +39,12 @@ int LB_Init()
 	//Initializing SDL_ttf, needed for text display
 	if (TTF_Init() != 0){
 		cout << gettext("FATAL : Cannot init SDL_ttf ") << SDL_GetError() << endl;
-		bIsTTFEnabled = false;
+		isTTFEnabled = false;
 		return -1;
 	}
 
 	//TTF is initialized correctly, so let's load the font
-	font = TTF_OpenFont("../res/LiberationSans-Regular.ttf", fontsize);
+	font = TTF_OpenFont("../res/fonts/LiberationSans-Regular.ttf", fontsize);
 	if (font == NULL){
 		cout << gettext("Font opening failed!") << endl;
 	}
@@ -56,14 +56,8 @@ int LB_Init()
 
 	//Set the keyboard repeating delay : after 700 ms, every 200 ms
 	SDL_EnableKeyRepeat(700, 200);
-	//Hide the black cursor to replace it with a colored one (an image, actually)
-	SDL_ShowCursor(0);
 
-	//Give an icon to the window
-	SDL_WM_SetIcon(IMG_Load("../res/linbound.gif"), NULL);
-
-	//Give a title to our window
-	//SDL_WM_SetCaption("LinBound", "LinBound");
+	SDL_DisableScreenSaver();
 
 	return 0;
 }
@@ -112,7 +106,7 @@ int LB_ParseOptions(int argc, char *argv[])
 	if(argc >= 2){
 		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
 			cout << "LinBound v0.1a\n"
-					<< "(C) 2008-2012 G. B. aka podgy_piglet and contributors\n"
+					<< "(C) 2008-2016 G. B. aka podgy_piglet and contributors\n"
 					<< "This software is free software released under the Mozilla Public License 2.0\n";
 			return -1;
 		}
@@ -130,7 +124,7 @@ int LB_InitNetwork(Uint8 *imode)
 {
 
 	if (SDLNet_Init() != 0){
-		bIsNETEnabled = false;
+		isNETEnabled = false;
 		return -1;
 	}
 
@@ -174,14 +168,12 @@ int LB_InitSound(int channels)
 void LB_Quit()
 {
 
-	SDL_ShowCursor(1);
-
-	if (bIsTTFEnabled == true){
+	if (isTTFEnabled){
 		TTF_CloseFont(font);
 		TTF_Quit();
 	}
 
-	if (bIsNETEnabled == true){
+	if (isNETEnabled){
 		SDLNet_Quit();
 	}
 

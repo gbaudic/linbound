@@ -1,5 +1,5 @@
 /**
- * Sprite.h
+ * sprite.h
  *
  *  	@date 23/02/2012
  *      @author G. B.
@@ -34,7 +34,7 @@
     genjix@gmail.com
 
     Rob Loach
-    http://robloach.net*/
+    http://robloach.net */
 
 #ifndef SPRITE_H_
 #define SPRITE_H_
@@ -69,7 +69,7 @@ public:
 	SDL_Rect* getRect();
 
 protected:
-	SDL_Surface* surf; //the surface representing the image file
+	SDL_Texture* surf; //the surface representing the image file
 	SDL_Rect rArea; //rectangle container for the sprite image
 };
 

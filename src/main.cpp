@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	LB_Init();
 
 	//Set up the screen
-	screen = SDL_CreateWindow("LinBound",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,iscreenw, iscreenh,SDL_WINDOW_SHOWN);
+	screen = SDL_CreateWindow("LinBound",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, iscreenw, iscreenh, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(screen, -1, 0);
 	if (screen == NULL) {
 		cout << gettext("FATAL : Cannot create window: ") << SDL_GetError() << endl;
@@ -74,15 +74,25 @@ int main(int argc, char *argv[])
 		cout << gettext("FATAL : Cannot create renderer: ") << SDL_GetError() << endl;
 		return 1;
 	}
+	
+	//Give an icon to the window
+	icon = IMG_Load("../res/linbound.gif")
+	SDL_SetWindowIcon(screen, icon);
 
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouse(iscreenw/2, iscreenh/2);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
+	mousePointer = SDL_CreateColorCursor(cursor, 0, 0);
+	if (mousePointer == NULL){
+		cout << gettext("FATAL : Cannot create cursor: ") << SDL_GetError() << endl;
+		return 1;
+	}
+	SDL_SetCursor(mousePointer);
 
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
-		switch (LB_ShowPicture(screen, "../res/menuLB.jpg")) {
+		switch (LB_ShowPicture(screen, "../res/menu/menuLB.jpg")) {
 			case -1 :
 			SDL_FreeSurface(image);
 			SDL_Quit();
@@ -98,7 +108,7 @@ int main(int argc, char *argv[])
 	//cur_dest.x = cur_dest.y = 0;
 
     if(LB_PlayMusic("../res/sound/test.ogg") != 0){
-        cout << gettext("error with the music ! : ") << SDL_GetError() << endl;
+        cout << gettext("error with the music! : ") << SDL_GetError() << endl;
     }
 
 
@@ -110,11 +120,13 @@ int main(int argc, char *argv[])
 
 	//Free the memory allocated to the images
 	//TODO : it would be more clever to use an array to put the images and free them at once by making a function iterate through the whole table
+	SDL_FreeCursor(mousePointer); 
 	SDL_FreeSurface(refresh_test);
 	SDL_FreeSurface(old_screen);
 	SDL_FreeSurface(refresh_sample);
 	SDL_FreeSurface(image);
 	SDL_FreeSurface(cursor);
+	SDL_FreeSurface(icon);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(screen);
 	//and quit SDL nicely
