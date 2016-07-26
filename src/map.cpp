@@ -75,6 +75,7 @@ bool LB_Map::getASide() const
  * Draws a magenta circle at the desired coordinates to create a hole
  */
 void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
+	//TODO: sdl_gfx now writes to a Renderer instead of a Surface
 	if(isASide){
 		filledCircleRGBA(foregroundA, x, y, radius, 0xff, 0, 0xff, 0);
 	} else {

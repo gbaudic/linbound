@@ -26,6 +26,12 @@ void LB_LoadMap(const char *filename){
 	XMLDocument doc;
 	doc.LoadFile(filename);
 
+	if(doc.ErrorID() == XML_NO_ERROR){
+		// No error, proceed
+		XMLElement* elem = doc.FirstChildElement( "resources" )->FirstChildElement( "surface" );
+		
+		//associate correct image with correct Map attribute
+	}
 
 }
 
