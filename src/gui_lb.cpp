@@ -20,10 +20,10 @@
 #include <iostream>
 #include <guichan.hpp>
 #include <guichan/sdl.hpp>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-//#include <SDL/SDL_ttf.h>
-//#include <SDL/SDL_gfxPrimitives.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+//#include <SDL2/SDL_ttf.h>
+//#include <SDL2/SDL_gfxPrimitives.h>
 #include "gui_lb.hpp"
 using namespace std;
 using namespace gcn;

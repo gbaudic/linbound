@@ -19,12 +19,11 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include "strings.h"
+#include <string>
 #include <SDL2/SDL.h>
-#include <SDL/SDL_net.h>
+#include <SDL2/SDL_net.h>
 //Here please put the cURL easy header
 #include "update.hpp"
-#include "md5.h"
 using namespace std;
 
 extern char *ErrorString;

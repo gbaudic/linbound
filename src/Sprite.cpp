@@ -37,7 +37,7 @@
     Rob Loach
     http://robloach.net */
 
-#include "sprite.hpp"
+#include "Sprite.hpp"
 
 /*returns maximum or minimum of number*/
 #define SDL_COLLIDE_MAX(a,b)	((a > b) ? a : b)

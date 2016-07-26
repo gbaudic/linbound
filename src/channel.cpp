@@ -33,6 +33,11 @@ LB_MessageChannel::~LB_MessageChannel(){
 	//SDL_FreeSurface(fullChannelSurface);
 }
 
+/**
+ * Appends a new message to the channel
+ * @param msg the LB_Message to add
+ * @param inGame ???
+ */
 void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
 {
     //Add the message to the data structure
@@ -44,6 +49,9 @@ void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
     flush();
 }
 
+/**
+ * @param dest the SDL_Surface on which to print the channel
+ */
 void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest)
 {
 	Sint16 current_y = 0;

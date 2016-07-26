@@ -20,7 +20,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
-#include "strings.h"
+#include <string>
 #include <SDL2/SDL_image.h>
 
 #include "main.hpp"
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	SDL_SetWindowIcon(screen, icon);
 
 	//The next function puts the cursor at the center of our screen
-	SDL_WarpMouse(iscreenw/2, iscreenh/2);
+	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
 	mousePointer = SDL_CreateColorCursor(cursor, 0, 0);

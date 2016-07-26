@@ -45,18 +45,22 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
 LB_Map::~LB_Map()
 {
     //Free the SDL_Surfaces properly
-	SDL_FreeSurface(previewSmall);
-	SDL_FreeSurface(previewMedium);
+	SDL_DestroyTexture(previewSmall);
+	SDL_DestroyTexture(previewMedium);
     SDL_FreeSurface(foregroundA);
-    SDL_FreeSurface(previewA);
+    SDL_DestroyTexture(previewA);
 
     if(has2Sides)
     {
         SDL_FreeSurface(foregroundB);
-        SDL_FreeSurface(previewB);
+        SDL_DestroyTexture(previewB);
     }
 }
 
+/**
+ * Change map side
+ * @param newSide true to choose A, false to choose B
+ */
 void LB_Map::setASide(bool newSide)
 {
     isASide = newSide;

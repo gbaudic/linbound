@@ -54,8 +54,6 @@ int LB_Init()
 		return -1;
 	}
 
-	//Set the keyboard repeating delay : after 700 ms, every 200 ms
-	SDL_EnableKeyRepeat(700, 200);
 
 	SDL_DisableScreenSaver();
 

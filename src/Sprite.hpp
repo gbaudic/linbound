@@ -40,6 +40,7 @@
 #define SPRITE_H_
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_assert.h>
 #include <SDL2/SDL_image.h>
 
 //TODO: take some inspiration for this Sprite class from SDLSprite class (no copy&paste because it's GPLed)

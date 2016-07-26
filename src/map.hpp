@@ -12,7 +12,7 @@
 
 #include <string>
 #include <vector> //Verify if best structure for this
-#include "sprite.hpp"
+#include "Sprite.hpp"
 
 class LB_MapBackground
 {
@@ -27,7 +27,7 @@ private:
 	SDL_Surface* staticPart;
 	SDL_Surface* rendering;
 
-	std::vector<sprite> animParts;
+	std::vector<Sprite> animParts;
 };
 
 class LB_Map
