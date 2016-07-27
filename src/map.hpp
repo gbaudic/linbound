@@ -20,6 +20,9 @@ public:
 	LB_MapBackground();
 	~LB_MapBackground();
 
+	int LB_MapBackground::getWidth() const;
+	int LB_MapBackground::getHeight() const;
+	
 	void refresh();
 	SDL_Surface* getView();
 
@@ -49,6 +52,9 @@ class LB_Map
 
     int viewportX; //2D coordinates of the viewport
     int viewportY;
+	
+	double parallaxX; //Factors for parallax between fore- and background
+	double parallaxY;
 
     //Methods
     public:

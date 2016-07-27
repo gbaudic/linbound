@@ -32,6 +32,14 @@ void LB_MapBackground::refresh(){
 	}
 }
 
+int LB_MapBackground::getWidth() const{
+	return this->rendering.w;
+}
+
+int LB_MapBackground::getHeight() const{
+	return this->rendering.h;
+}
+
 SDL_Surface* LB_MapBackground::getView(){
 	return rendering;
 }
@@ -40,6 +48,13 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
 {
     //Fill the SDL_Surfaces with the images associated with the paths given as arguments
     this->name = name;
+	
+	this->foregroundA = IMG_Load(foregroundA);
+	this->foregroundB = IMG_Load(foregroundB);
+	
+	//Compute parallax ratios
+	parallaxX = background.getWidth()/(this->foregroundA.w);
+	parallaxY = background.getHeight()/(this->foregroundA.h);
 }
 
 LB_Map::~LB_Map()
