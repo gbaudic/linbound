@@ -12,8 +12,13 @@
 #include "map.hpp"
 using namespace std;
 
-LB_MapBackground::LB_MapBackground(){
-	//TODO: to be written
+LB_MapBackground::LB_MapBackground(std::string staticPartPath, std::vector<std::string> animPartsPaths){
+	//TODO: to be written, add place for bck description and sprite coordinates
+	this->staticPart = IMG_Load(staticPartPath.c_str());
+
+	for (std::vector<std::string>::iterator it = animPartsPaths.begin() ; it != animPartsPaths.end(); ++it){
+		animParts.push_back(Sprite(it->c_str(), 0, 0, 0, 0));
+	}
 }
 
 LB_MapBackground::~LB_MapBackground(){
@@ -33,11 +38,11 @@ void LB_MapBackground::refresh(){
 }
 
 int LB_MapBackground::getWidth() const{
-	return this->rendering.w;
+	return this->rendering->w;
 }
 
 int LB_MapBackground::getHeight() const{
-	return this->rendering.h;
+	return this->rendering->h;
 }
 
 SDL_Surface* LB_MapBackground::getView(){
@@ -49,12 +54,14 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
     //Fill the SDL_Surfaces with the images associated with the paths given as arguments
     this->name = name;
 	
-	this->foregroundA = IMG_Load(foregroundA);
-	this->foregroundB = IMG_Load(foregroundB);
+	this->foregroundA = IMG_Load(foregroundA.c_str());
+	this->foregroundB = IMG_Load(foregroundB.c_str());
 	
+	this->background = background;
+
 	//Compute parallax ratios
-	parallaxX = background.getWidth()/(this->foregroundA.w);
-	parallaxY = background.getHeight()/(this->foregroundA.h);
+	parallaxX = background.getWidth()/(this->foregroundA->w);
+	parallaxY = background.getHeight()/(this->foregroundA->h);
 }
 
 LB_Map::~LB_Map()

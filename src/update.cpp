@@ -50,7 +50,7 @@ int LB_Update_FileIsSafe(char *filename, char *MD5sum)
 {
 
 	//If the algorithm failed, notify the user and terminate the function
-	if (MD5File(filename) != NULL){
+/*	if (MD5File(filename) != NULL){
 		char *MD5FileSum = MD5File(filename);
 	} else {
 		//StringCat("MD5 check for file ", filename, " failed.");
@@ -64,7 +64,7 @@ int LB_Update_FileIsSafe(char *filename, char *MD5sum)
 		//stricmp??
 		//Return 0 and no error code if the files are the same
 		return 0;
-	}
+	}*/
 
 	//Return -1 by default ; this shows that the file is different and has to be downloaded again
 	return -1;

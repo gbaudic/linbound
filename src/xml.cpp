@@ -15,6 +15,8 @@
  */
 
 #include "tinyxml2.h"
+#include <string>
+#include <map>
 
 using namespace tinyxml2;
 using namespace std;
@@ -24,7 +26,9 @@ using namespace std;
  */
 void LB_LoadMap(const char *filename){
 	XMLDocument doc;
+	map<string, string> files;
 	doc.LoadFile(filename);
+
 
 	if(doc.ErrorID() == XML_NO_ERROR){
 		// No error, proceed

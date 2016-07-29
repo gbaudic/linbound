@@ -68,8 +68,7 @@ int LB_EventProcessor(SDL_Event event)
 	}
 
 	if(event.type==SDL_MOUSEMOTION) {
-		//LB_CheckEvent(event);
-		LB_BlitCursor(screen, LB_CURSOR_ARROW, event);
+		//used to blit cursor
 	}
 
 	return 0;

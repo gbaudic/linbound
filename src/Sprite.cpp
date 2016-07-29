@@ -39,7 +39,7 @@
 
 #include "Sprite.hpp"
 
-/*returns maximum or minimum of number*/
+/* returns maximum or minimum of number */
 #define SDL_COLLIDE_MAX(a,b)	((a > b) ? a : b)
 #define SDL_COLLIDE_MIN(a,b)	((a < b) ? a : b)
 
@@ -62,7 +62,7 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 }
 
 Sprite::~Sprite() {
-	SDL_DestroyTexture(surf);
+	SDL_FreeSurface(surf);
 }
 
 /**

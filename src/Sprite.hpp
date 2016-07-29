@@ -70,7 +70,7 @@ public:
 	SDL_Rect* getRect();
 
 protected:
-	SDL_Texture* surf; //the surface representing the image file
+	SDL_Surface* surf; //the surface representing the image file
 	SDL_Rect rArea; //rectangle container for the sprite image
 };
 

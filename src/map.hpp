@@ -17,7 +17,7 @@
 class LB_MapBackground
 {
 public:
-	LB_MapBackground();
+	LB_MapBackground(std::string staticPartPath, std::vector<std::string> animPartsPaths);
 	~LB_MapBackground();
 
 	int LB_MapBackground::getWidth() const;

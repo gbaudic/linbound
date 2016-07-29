@@ -8,9 +8,11 @@
   </author>
 
   <surface name="sky" file="background.jpg" />
-  <surface name="map" file="foreground.png" />
-  <surface name="preview" file="preview.jpg" />
+  <surface name="mapA" file="foreground.png" />
+  <surface name="preview" file="preview.jpg" /><surface name="mapB"
+  	file="">
+</surface>
 
-  <name>Abyss</name>
+	<name>Abyss</name>
 
 </resources>

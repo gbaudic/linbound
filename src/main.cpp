@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 	}
 	
 	//Give an icon to the window
-	icon = IMG_Load("../res/linbound.gif")
+	icon = IMG_Load("../res/linbound.gif");
 	SDL_SetWindowIcon(screen, icon);
 
 	//The next function puts the cursor at the center of our screen
@@ -92,15 +92,15 @@ int main(int argc, char *argv[])
 
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
-		switch (LB_ShowPicture(screen, "../res/menu/menuLB.jpg")) {
-			case -1 :
-			SDL_FreeSurface(image);
-			SDL_Quit();
-			return 1;
-			case 0 :
-			SDL_UpdateRect(screen, 0, 0, 0, 0);
-			break;
-		}
+	switch (LB_ShowPicture(screen, "../res/menu/menuLB.jpg")) {
+	case -1 :
+		SDL_FreeSurface(image);
+		SDL_Quit();
+		return 1;
+	case 0 :
+		SDL_RenderPresent(renderer);
+		break;
+	}
 	//cout << "pic shown" << endl;
 	old_screen = IMG_Load("../res/arrow.png");
 	//old_cursor.x = old_cursor.y = 0;
