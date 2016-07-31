@@ -32,9 +32,26 @@ void LB_LoadMap(const char *filename){
 
 	if(doc.ErrorID() == XML_NO_ERROR){
 		// No error, proceed
-		XMLElement* elem = doc.FirstChildElement( "resources" )->FirstChildElement( "surface" );
+		bool hasBside = false;
+		XMLElement* elem = doc.FirstChildElement( "resources" )->FirstChildElement( "hasBside" );
+		elem->QueryBoolText(&hasBside);
 		
-		//associate correct image with correct Map attribute
+		elem = doc.FirstChildElement( "resources" )->FirstChildElement( "surface" );
+		while(elem != NULL){
+			const char* name = elem->Attribute( "name" ); 
+			const char* file = elem->Attribute( "file" );
+			
+			//associate correct image with correct Map attribute
+			files.insert(make_pair(string(name), string(file));
+			//go to next one
+			elem = doc.FirstChildElement( "resources" )->NextSiblingElement( "surface" );
+		}
+		
+		elem = doc.FirstChildElement( "resources" )->FirstChildElement( "name" );
+		string mapName;
+		if(elem != NULL)
+			const char* str = elem->GetText();
+		mapName.assign(str);
 	}
 
 }

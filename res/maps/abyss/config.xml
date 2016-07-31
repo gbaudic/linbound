@@ -9,10 +9,12 @@
 
   <surface name="sky" file="background.jpg" />
   <surface name="mapA" file="foreground.png" />
-  <surface name="preview" file="preview.jpg" /><surface name="mapB"
-  	file="">
-</surface>
+  <surface name="previewA" file="preview.jpg" />
+  <surface name="mapB" file="" />
+  <surface name="previewB" file="" />
+  <surface name="preview" file="" />
 
 	<name>Abyss</name>
+	<hasBside>false</hasBside>
 
 </resources>
