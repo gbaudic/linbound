@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 	LB_Init();
 
 	//Set up the screen
-	screen = SDL_CreateWindow("LinBound",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, iscreenw, iscreenh, SDL_WINDOW_SHOWN);
+	screen = SDL_CreateWindow("LinBound", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, iscreenw, iscreenh, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(screen, -1, 0);
 	if (screen == NULL) {
 		cout << gettext("FATAL : Cannot create window: ") << SDL_GetError() << endl;
@@ -93,14 +93,14 @@ int main(int argc, char *argv[])
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
 	switch (LB_ShowPicture(screen, "../res/menu/menuLB.jpg")) {
-	case -1 :
-		SDL_FreeSurface(image);
-		SDL_Quit();
-		return 1;
-	case 0 :
-		SDL_RenderPresent(renderer);
-		break;
-	}
+		case -1 :
+			SDL_FreeSurface(image);
+			SDL_Quit();
+			return 1;
+		case 0 :
+			SDL_RenderPresent(renderer);
+			break;
+		}
 	//cout << "pic shown" << endl;
 	old_screen = IMG_Load("../res/arrow.png");
 	//old_cursor.x = old_cursor.y = 0;
@@ -156,13 +156,14 @@ void MainLoop()
         //Update the model
 
         //Update the graphics
+		SDL_RenderClear(renderer);
 		//**Background
 
 		//**Foreground
 
 		//**GUI
 
-		//**Cursor
+		SDL_RenderPresent(renderer);
 
         //Change audio if needed
 
