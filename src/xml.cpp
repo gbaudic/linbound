@@ -42,18 +42,25 @@ void LB_LoadMap(const char *filename){
 			const char* file = elem->Attribute( "file" );
 			
 			//associate correct image with correct Map attribute
-			files.insert(make_pair(string(name), string(file));
+			files.insert(make_pair(string(name), string(file)));
 			//go to next one
 			elem = doc.FirstChildElement( "resources" )->NextSiblingElement( "surface" );
 		}
 		
 		elem = doc.FirstChildElement( "resources" )->FirstChildElement( "name" );
 		string mapName;
-		if(elem != NULL)
+		if(elem != NULL){
 			const char* str = elem->GetText();
-		mapName.assign(str);
+			mapName.assign(str);
+		}
 	}
+
+	return;
 
 }
 
+void LB_LoadItemsList(const char* filename){
+
+
+}
 

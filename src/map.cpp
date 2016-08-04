@@ -107,6 +107,14 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
 }
 
 /**
+ * Effectively load the biggest surfaces in memory when requested
+ * The aim of this is to save memory with maps when they are not being played
+ */
+void LB_Map::activate() {
+
+}
+
+/**
  * Completes the black border which has been eaten by makeDamage
  */
 void LB_Map::correctAfterDamage(Sint16 x, Sint16 y, Sint16 radius){

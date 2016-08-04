@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
+	SDL_SetColorKey(cursor, SDL_TRUE, 0xFF00FF00);
 	mousePointer = SDL_CreateColorCursor(cursor, 0, 0);
 	if (mousePointer == NULL){
 		cout << gettext("FATAL : Cannot create cursor: ") << SDL_GetError() << endl;

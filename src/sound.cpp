@@ -17,7 +17,8 @@
 #include <libintl.h>
 #include <locale.h>
 
-#include <iostream>
+#include <map>
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "sound.hpp"
@@ -26,11 +27,11 @@ using namespace std;
 //As of 2009-08-17, all functions listed here need preallocated sound buffers
 //This will be completed in an hypothetical future
 Mix_Music* music;
+map<string, Mix_Chunk*> effects;
 
 /**
   * One basic function to load the music
-  * \param file1 the first music file
-  * \param file2 the new music we want to play
+  * \param file the new music we want to play
   * \return 0 if OK, -1 if something gets wrong
 */
 //TODO: test this function, even if it should really work
@@ -45,7 +46,7 @@ int LB_PlayMusic(char* file)
 			Mix_FreeMusic(music);
 		} else {
 			//This should never happen but if it does, the app won't freeze
-			SDL_SetError("No input pointer given !");
+			SDL_SetError("No input pointer given! ");
 			return -1;
 		}
 	}
@@ -53,12 +54,19 @@ int LB_PlayMusic(char* file)
     //Load the new music
     music = Mix_LoadMUS(file);
     if(music == NULL){
-    	cout << gettext("Music not loaded : ") << Mix_GetError() << endl;
+    	cout << gettext("Music not loaded: ") << Mix_GetError() << endl;
     	return -1;
     }
 
 	//Now it is time for some fun... enjoy the music ad infinitum
 	return Mix_PlayMusic(music, -1);
+}
+
+/**
+ * Idea: load all possible FX in a Map and fetch them afterwards with their name
+ */
+int LB_LoadSFX(){
+	return 0;
 }
 
 //Another function to play some SFX (rather useless currently...)
@@ -74,4 +82,11 @@ int LB_PlayMusic(char* file)
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops)
 {
  	return Mix_PlayChannel(channel, filename, loops);
+}
+
+/**
+ * Free all allocated FXs
+ */
+int LB_FreeSFX(){
+	return 0;
 }
