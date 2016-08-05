@@ -98,11 +98,29 @@ bool LB_Map::getASide() const
  */
 void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
 	//TODO: sdl_gfx now writes to a Renderer instead of a Surface
-	if(isASide){
+	SDL_Surface* srf = NULL;
+	if(isAside){
+		srf = foregroundA;
+	} else {
+		srf = foregroundB;
+	}
+	
+	SDL_LockSurface(srf);
+	for(int xi = x - radius; xi < x + radius ; x++){
+		for(int yi = y - radius ; yi < y + radius ; y++){
+			if(xi*xi + yi*yi <= radius*radius && xi >= 0 && xi < srf->w && yi >= 0 && yi < srf->h){
+				(Uint32 *)srf->pixels[yi*srf->pitch/4 + xi] = SDL_MapRGBA(srf->format, 0xff, 0, 0xff, 0);
+				//this assumes a 32-bit surface...
+			}
+		}
+	}	
+	SDL_UnlockSurface(srf);
+	
+	/*if(isASide){
 		filledCircleRGBA(foregroundA, x, y, radius, 0xff, 0, 0xff, 0);
 	} else {
 		filledCircleRGBA(foregroundB, x, y, radius, 0xff, 0, 0xff, 0);
-	}
+	}*/
 
 }
 
