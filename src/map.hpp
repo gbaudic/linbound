@@ -65,6 +65,7 @@ class LB_Map
     bool getASide() const;
 	
 	void activate();
+	void deactivate();
 
     void makeDamage(Sint16 x, Sint16 y, Sint16 radius); //For first versions we will express damages with circular areas
     void correctAfterDamage(Sint16 x, Sint16 y, Sint16 radius);

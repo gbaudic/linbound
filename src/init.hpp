@@ -36,6 +36,8 @@
 
 const int CHANNELS = 2;
 
+enum Mode {MENU, SETTINGS, SERVER, SERVER_LIST, LOBBY, ROOM};
+
 //Prototypes
 int LB_Init();
 int LB_ParseOptions(int argc, char *argv[]);

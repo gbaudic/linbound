@@ -1,3 +1,6 @@
+/**
+ *  
+ */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -11,6 +14,7 @@
 
 #include "map.hpp"
 using namespace std;
+
 
 LB_MapBackground::LB_MapBackground(std::string staticPartPath, std::vector<std::string> animPartsPaths){
 	//TODO: to be written, add place for bck description and sprite coordinates
@@ -62,6 +66,12 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
 	//Compute parallax ratios
 	parallaxX = background.getWidth()/(this->foregroundA->w);
 	parallaxY = background.getHeight()/(this->foregroundA->h);
+	
+	//Use RLE acceleration and set colorkey on foregrounds
+	SDL_SetColorKey(foregroundA, SDL_TRUE, SDL_MapRGB(foregroundA->format, 0xFF, 0, 0xFF));
+	SDL_SetColorKey(foregroundB, SDL_TRUE, SDL_MapRGB(foregroundB->format, 0xFF, 0, 0xFF));
+	SDL_SetSurfaceRLE(foregroundA, 1);
+	SDL_SetSurfaceRLE(foregroundB, 1);
 }
 
 LB_Map::~LB_Map()
@@ -105,16 +115,21 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
 		srf = foregroundB;
 	}
 	
-	SDL_LockSurface(srf);
+	if(srf == NULL)
+		return;
+	
+	if(SDL_MUSTLOCK(srf))
+		SDL_LockSurface(srf);
 	for(int xi = x - radius; xi < x + radius ; x++){
 		for(int yi = y - radius ; yi < y + radius ; y++){
 			if(xi*xi + yi*yi <= radius*radius && xi >= 0 && xi < srf->w && yi >= 0 && yi < srf->h){
-				(Uint32 *)srf->pixels[yi*srf->pitch/4 + xi] = SDL_MapRGBA(srf->format, 0xff, 0, 0xff, 0);
+				(Uint32 *)srf->pixels[yi*srf->w + xi] = SDL_MapRGBA(srf->format, 0xff, 0, 0xff, 0);
 				//this assumes a 32-bit surface...
 			}
 		}
 	}	
-	SDL_UnlockSurface(srf);
+	if(SDL_MUSTLOCK(srf))
+		SDL_UnlockSurface(srf);
 	
 	/*if(isASide){
 		filledCircleRGBA(foregroundA, x, y, radius, 0xff, 0, 0xff, 0);
@@ -130,6 +145,10 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
  */
 void LB_Map::activate() {
 
+}
+
+void LB_Map::deactivate() {
+	
 }
 
 /**

@@ -6,6 +6,8 @@
 
 #include "Sprite.hpp"
 
+enum Weapon {SHOT1, SHOT2, SUPER_SHOT};
+
 /**
  * \class LB_Player
  * Abstracts a LB player
