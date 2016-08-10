@@ -40,7 +40,7 @@ class LB_Room
     RoomMode mode;
     RoomStatus status;
 
-    Uint8 iSuddenDeathTurns;
+    Uint8 suddenDeathTurns; // 40, 56 or 72 in the original game
     SuddenDeathType sdType;
 
     LB_Map map;
@@ -52,6 +52,9 @@ class LB_Room
     LB_MessageChannel channel;
 };
 
+/**
+ *  Summary of infos, returned by the server in the Channel view
+ */
 struct LB_RoomBasicInfo
 {
     Uint16 iRoomNumber;
@@ -63,5 +66,27 @@ struct LB_RoomBasicInfo
     LB_Map map;
 
 };
+
+/**
+ *  Special weather effects appearing in-game
+ *  Wind is somewhere else
+ */
+class LB_Weather {
+	public:
+	enum WeatherType {TORNADO, MIRROR, FORCE};
+	
+	const int DURATION = 10; //in turns
+	
+	LB_Weather(WeatherType type, Sint16 x);
+	void draw(SDL_Surface* dest);
+	bool hasExpired();
+	void updateCounter(); 
+	
+	private:
+	int TTL; //nb of turns before disappearance
+	Sint16 x; //coordinate
+	WeatherType type;
+	SDL_Surface* element; //TODO: change to Sprite to support Tornado animation
+};	
 
 #endif
