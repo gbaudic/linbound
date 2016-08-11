@@ -10,6 +10,7 @@
 #define _H_ROOM_
 
 #include <SDL2/SDL.h>
+#include <string>
 #include "player.hpp"
 #include "channel.hpp"
 #include "map.hpp"
@@ -31,6 +32,13 @@ class LB_Room
     LB_Room(std::string name, Uint16 roomNumber, Uint8 maxPlayers, RoomMode mode, std::string password = "");
     void changeRoomStatus(RoomStatus newStatus);
     void changeRoomMode(RoomMode newMode);
+	void changeMap(LB_Map newMap);
+	void changeSuddenDeath(SuddenDeathType type, Uint8 turns);
+	void addPlayer(LB_Player player); //parameter to be decided
+	void removePlayer(LB_Player player); //same as above
+	void triggerSuddenDeath();
+	LB_RoomBasicInfo getInfo();
+	void reset(); //reset after a finished game
 
     private:
     Uint16 roomNumber;
@@ -42,12 +50,14 @@ class LB_Room
 
     Uint8 suddenDeathTurns; // 40, 56 or 72 in the original game
     SuddenDeathType sdType;
+	Uint16 turns; 
 
     LB_Map map;
 
     Uint8 maxPlayers, currentPlayers;
 
     LB_Player players[];
+	LB_Weather weather[];
 
     LB_MessageChannel channel;
 };
@@ -78,15 +88,25 @@ class LB_Weather {
 	const int DURATION = 10; //in turns
 	
 	LB_Weather(WeatherType type, Sint16 x);
-	void draw(SDL_Surface* dest);
-	bool hasExpired();
+	~LB_Weather(); 
+	void draw(SDL_Surface* dest, Sint16 xOffset);
+	bool hasExpired() const;
 	void updateCounter(); 
 	
 	private:
-	int TTL; //nb of turns before disappearance
+	int turnsLeft; //nb of turns before disappearance
 	Sint16 x; //coordinate
 	WeatherType type;
 	SDL_Surface* element; //TODO: change to Sprite to support Tornado animation
 };	
+
+class LB_GameItem {
+	
+	private:
+	Uint8 size; //1 or 2 slots out of 6
+	SDL_Surface* surf;
+	std::string name;
+	std::string description;
+};
 
 #endif

@@ -6,7 +6,7 @@
 
 #include "Sprite.hpp"
 
-enum Weapon {SHOT1, SHOT2, SUPER_SHOT};
+enum Weapon {SHOT1 = 1, SHOT2 = 2, SUPER_SHOT = 55};
 
 /**
  * \class LB_Player
@@ -45,7 +45,7 @@ class LB_Player
 		Sint8 iCurrentAngle;
 		Sint8 iLastAngle;
 
-		Sint16 iLife;
+		Sint16 iLife; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
 
 
 	protected:
