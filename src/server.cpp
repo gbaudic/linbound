@@ -6,7 +6,12 @@
  * as defined by the Mozilla Public License, v. 2.0.
  */
 
-
+#include <list>
+#include "player.hpp"
+#include "room.hpp"
+#include "channel.hpp"
+#include "protocol.hpp"
+ 
 #include "server.hpp"
 
 /**

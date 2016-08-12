@@ -48,7 +48,7 @@ Sprite::Sprite() {
 
 }
 
-Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
+Sprite::Sprite(const char *file, int x, int y, int dx, int dy, SDL_Renderer* rend) {
 	//TODO: do some value-checking for consistency
 	this->x = x;
 	this->y = y;
@@ -56,13 +56,23 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 	this->dy = dy;
 
 	surf = IMG_Load(file);
+	if(surf != NULL){
+		text = SDL_CreateTextureFromSurface(rend, surf);
+	}
+	this->rend = rend;
+	isVisible = true;
 
 	creationTime = SDL_GetTicks();
+	timeToLive = 0;
+	
+	rArea.x = 0; rArea.y = 0;
+	rArea.w = surf->w; rArea.h = surf->h;
 
 }
 
 Sprite::~Sprite() {
 	SDL_FreeSurface(surf);
+	SDL_DestroyTexture(text);
 }
 
 /**
@@ -78,6 +88,17 @@ void Sprite::draw(SDL_Surface *dest){
 	destRec.h = rArea.h;
 
 	SDL_BlitSurface(surf, &rArea, dest, &destRec);
+}
+
+void Sprite::draw(Sint16 xOffset, Sint16 yOffset){
+	SDL_Rect destRec;
+
+	destRec.x = x - xOffset;
+	destRec.y = y - yOffset;
+	destRec.w = rArea.w;
+	destRec.h = rArea.h;
+	
+	SDL_RenderCopy(rend, text, &rArea, &destRec);
 }
 
 /**

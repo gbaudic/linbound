@@ -9,10 +9,7 @@
 #ifndef _H_SERVER_
 #define _H_SERVER_
 
-#include <list>
-#include "player.hpp"
-#include "room.hpp"
-#include "channel.hpp"
+
 
 /**
 *
