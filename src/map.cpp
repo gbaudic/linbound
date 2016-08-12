@@ -64,8 +64,8 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
 	this->background = background;
 
 	//Compute parallax ratios
-	parallaxX = background.getWidth()/(this->foregroundA->w);
-	parallaxY = background.getHeight()/(this->foregroundA->h);
+	parallaxX = (double)background.getWidth()/(this->foregroundA->w);
+	parallaxY = (double)background.getHeight()/(this->foregroundA->h);
 	
 	//Use RLE acceleration and set colorkey on foregrounds
 	SDL_SetColorKey(foregroundA, SDL_TRUE, SDL_MapRGB(foregroundA->format, 0xFF, 0, 0xFF));
@@ -149,15 +149,4 @@ void LB_Map::activate() {
 
 void LB_Map::deactivate() {
 	
-}
-
-/**
- * Completes the black border which has been eaten by makeDamage
- */
-void LB_Map::correctAfterDamage(Sint16 x, Sint16 y, Sint16 radius){
-	if(isASide){
-
-	} else {
-
-	}
 }

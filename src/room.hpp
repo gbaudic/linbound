@@ -1,3 +1,10 @@
+/**
+ * \file room.cpp
+ * \brief Description for Room objects and associated structs
+ * \author G. B.
+ * \version 0.1a
+ * \date 2016
+ */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
  * If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -8,12 +15,6 @@
 
 #ifndef _H_ROOM_
 #define _H_ROOM_
-
-#include <SDL2/SDL.h>
-#include <string>
-#include "player.hpp"
-#include "channel.hpp"
-#include "map.hpp"
 
 /**
  * \class LB_Room
@@ -34,6 +35,8 @@ class LB_Room
     void changeRoomMode(RoomMode newMode);
 	void changeMap(LB_Map newMap);
 	void changeSuddenDeath(SuddenDeathType type, Uint8 turns);
+	void changeWind(LB_WindData newWind);
+	void changeName(std::string newName);
 	void addPlayer(LB_Player player); //parameter to be decided
 	void removePlayer(LB_Player player); //same as above
 	void triggerSuddenDeath();
@@ -50,7 +53,9 @@ class LB_Room
 
     Uint8 suddenDeathTurns; // 40, 56 or 72 in the original game
     SuddenDeathType sdType;
-	Uint16 turns; 
+	bool isSDActive; //flag: some actions may be possible in SD mode only
+	Uint16 turnsPlayed; 
+	LB_WindData wind;
 
     LB_Map map;
 
@@ -67,7 +72,7 @@ class LB_Room
  */
 struct LB_RoomBasicInfo
 {
-    Uint16 iRoomNumber;
+    Uint16 roomNumber;
     std::string name;
     LB_Room::RoomMode mode;
     LB_Room::RoomStatus status;
@@ -75,6 +80,11 @@ struct LB_RoomBasicInfo
 
     LB_Map map;
 
+};
+
+struct LB_WindData {
+	Uint8 power;
+	int direction; //angle in degrees, trigonometric: 0=east/right, 90=north/up...
 };
 
 /**
@@ -101,6 +111,12 @@ class LB_Weather {
 };	
 
 class LB_GameItem {
+	public:
+	
+	virtual void use();
+	std::string getName() const;
+	std::string getDescription() const;
+	Uint8 getSize() const;
 	
 	private:
 	Uint8 size; //1 or 2 slots out of 6
