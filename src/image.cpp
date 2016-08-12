@@ -34,11 +34,11 @@ SDL_Event *p_LastMouseEvent = &LastMouseEvent;
 
 /**
  * Blits a whole picture on a given surface
- * @param screen the screen surface
+ * @param screen the screen as a Renderer
  * @param picture the picture to show
  * @return 0 if success, -1 otherwise
  */
-int LB_ShowPicture(SDL_Surface *screen, const char* picture)
+int LB_ShowPicture(SDL_Renderer *screen, const char* picture)
 {
 	SDL_Rect src, dest;
 
@@ -49,6 +49,8 @@ int LB_ShowPicture(SDL_Surface *screen, const char* picture)
 		cout << gettext("ERROR : Cannot load the img: ") << picture << endl;
 		return -1;
 	}
+	
+	SDL_Texture* text = SDL_CreateTextureFromSurface(screen, image);
 
 	//Setting coordinates
 	src.x = src.y = dest.x = dest.y = 0;
@@ -56,9 +58,12 @@ int LB_ShowPicture(SDL_Surface *screen, const char* picture)
 	src.h = dest.h = image->h;
 
 	//Blit the black screen and our image together...
-	SDL_BlitSurface(image, &src, screen, &dest);
+	SDL_RenderCopy(screen, text, &src, &dest);
 	//and update the screen to make it appear in our window
 
+	//Needed for the moment, will be deleted later once this whole function is redundant
+	SDL_DestroyTexture(text);
+	
 	//cout << "picture shown" << endl;
 	return 0;
 }

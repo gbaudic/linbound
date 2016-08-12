@@ -93,7 +93,7 @@ int main(int argc, char *argv[])
 
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
-	switch (LB_ShowPicture(screen, "../res/menu/menuLB.jpg")) {
+	switch (LB_ShowPicture(renderer, "../res/menu/menuLB.jpg")) {
 		case -1 :
 			SDL_FreeSurface(image);
 			SDL_Quit();

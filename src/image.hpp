@@ -17,7 +17,7 @@
 #ifndef _H_IMAGE_
 #define _H_IMAGE_
 
-int LB_ShowPicture(SDL_Surface *screen, const char* picture);
-void LB_BlitCursor(SDL_Surface *screen, Uint8 CursorType, SDL_Event event);
+int LB_ShowPicture(SDL_Renderer *screen, const char* picture);
+//void LB_BlitCursor(SDL_Surface *screen, Uint8 CursorType, SDL_Event event);
 
 #endif /* _H_IMAGE_ */
