@@ -7,14 +7,12 @@
     <country>USA</country>
   </author>
 
-  <surface name="sky" file="background.jpg" />
+  <surface name="background" file="background.jpg" />
   <surface name="mapA" file="foreground.png" />
-  <surface name="previewA" file="preview.jpg" />
-  <surface name="mapB" file="" />
-  <surface name="previewB" file="" />
-  <surface name="preview" file="" />
+  <surface name="preview" file="preview.jpg" />
+  <background_color>#2dbefc</background_color>
 
 	<name>Abyss</name>
-	<hasBside>false</hasBside>
+	<sides>1</sides>
 
 </resources>

@@ -7,10 +7,12 @@
     <country>Amerika</country>
   </author>
 
-  <surface name="sky" file="island_bg.jpg" />
-  <surface name="map" file="island.png" />
+  <surface name="background" file="island_bg.jpg" />
+  <surface name="mapA" file="island.png" />
   <surface name="preview" file="preview.jpg" />
 
   <name>FunkyIsland</name>
+  <sides>1</sides>
+  <background_color>#bffbfc</background_color>
   
 </resources>

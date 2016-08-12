@@ -7,10 +7,12 @@
     <country>France</country>
   </author>
 
-  <surface name="sky" file="sky.jpg" />
-  <surface name="map" file="emmental.png" />
+  <surface name="background" file="sky.jpg" />
+  <surface name="mapA" file="emmental.png" />
   <surface name="preview" file="preview.jpg" />
 
   <name>Cheese</name>
+  <sides>1</sides>
+  <background_color>#cadd1a</background_color>
 
 </resources>

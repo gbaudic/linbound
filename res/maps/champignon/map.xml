@@ -7,10 +7,12 @@
 		<country>France</country>
 	</author>
 
-	<surface name="sky" file="sky.jpg" />
-	<surface name="map" file="background.png" />
+	<surface name="background" file="sky.jpg" />
+	<surface name="mapA" file="background.png" />
 	<surface name="preview" file="preview.jpg" />
 
 	<name>Champignon</name>
+	<sides>1</sides>
+	<background_color>#2dbefc</background_color>
 
 </resources>
