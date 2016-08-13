@@ -38,8 +38,7 @@ LB_MessageChannel::~LB_MessageChannel(){
  * @param msg the LB_Message to add
  * @param inGame ???
  */
-void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
-{
+void LB_MessageChannel::addMessage(LB_Message msg, bool inGame){
     //Add the message to the data structure
 	channel.push_back(msg);
 
@@ -52,8 +51,7 @@ void LB_MessageChannel::addMessage(LB_Message msg, bool inGame)
 /**
  * @param dest the SDL_Surface on which to print the channel
  */
-void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest)
-{
+void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest){
 	Sint16 current_y = 0;
 	size_t zero(0);
 
@@ -78,8 +76,7 @@ void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest)
 	}
 }
 
-void LB_MessageChannel::displayFullChannel(SDL_Surface* dest)
-{
+void LB_MessageChannel::displayFullChannel(SDL_Surface* dest) {
     //Display all the messages, but in plain white
 	Sint16 current_y = 0;
 
@@ -92,8 +89,7 @@ void LB_MessageChannel::displayFullChannel(SDL_Surface* dest)
 	}
 }
 
-void LB_MessageChannel::flush()
-{
+void LB_MessageChannel::flush() {
     //If there are too many messages to be displayed, hide the first one
 	size_t zero(0);
 
@@ -110,7 +106,6 @@ void LB_MessageChannel::flush()
     }
 }
 
-size_t LB_MessageChannel::getDisplayedMessages() const
-{
+size_t LB_MessageChannel::getDisplayedMessages() const {
     return this->displayedMessages;
 }

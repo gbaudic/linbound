@@ -19,7 +19,7 @@
 #include "init.hpp"
 using namespace std;
 
-TTF_Font *font;
+TTF_Font *font = NULL;
 int fontsize = 12;
 bool isTTFEnabled = true;
 bool isNETEnabled = true;

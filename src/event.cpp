@@ -16,8 +16,8 @@
 #include <libintl.h>
 #include <locale.h>
 
-#include <cstdio>
-#include <cstdlib>
+/*#include <cstdio>
+#include <cstdlib>*/
 #include <iostream>
 #include <SDL2/SDL.h>
 

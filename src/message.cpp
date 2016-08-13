@@ -97,18 +97,15 @@ int LB_Message::updateMessageStatus()
     return 0;
 }
 
-void LB_Message::exitGame()
-{
+void LB_Message::exitGame() {
     SDL_FreeSurface(inGameText);
 }
 
-bool LB_Message::isDisplayed() const
-{
+bool LB_Message::isDisplayed() const {
     return isDisplayedInChannel;
 }
 
-LB_Message::MessageType LB_Message::getMessageType() const
-{
+LB_Message::MessageType LB_Message::getMessageType() const {
 	return type;
 }
 

@@ -36,7 +36,7 @@
 
 const int CHANNELS = 2;
 
-enum Mode {MENU, SETTINGS, SERVER, SERVER_LIST, LOBBY, ROOM};
+enum GameMode {MENU, SETTINGS, SERVER, SERVER_LIST, LOBBY, ROOM};
 
 //Prototypes
 int LB_Init();
