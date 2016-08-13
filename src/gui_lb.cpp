@@ -18,23 +18,21 @@
 #include <locale.h>
 
 #include <iostream>
-#include <guichan.hpp>
-#include <guichan/sdl.hpp>
+//#include <guichan.hpp>
+//#include <guichan/sdl.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 //#include <SDL2/SDL_ttf.h>
 //#include <SDL2/SDL_gfxPrimitives.h>
 #include "gui_lb.hpp"
 using namespace std;
-using namespace gcn;
 
-extern SDL_Surface *screen;
 extern int iscreenw, iscreenh;
 //extern TTF_Font *font;
 SDL_Color white; /* Needs to be set somewhere */
 
 LB_GUI::LB_GUI(){
-	imageLoader = new SDLImageLoader();
+	/*imageLoader = new SDLImageLoader();
 	Image::setImageLoader(imageLoader);
 	graphics = new SDLGraphics();
 	graphics->setTarget(screen);
@@ -48,16 +46,16 @@ LB_GUI::LB_GUI(){
 
 	top = new Container();
 	top->setDimension(Rectangle(0,0,iscreenw,iscreenh));
-	gui->setTop(top);
+	gui->setTop(top);*/
 }
 
 LB_GUI::~LB_GUI(){
-	delete top;
+	/*delete top;
 
 	delete gui;
 	delete input;
 	delete graphics;
-	delete imageLoader;
+	delete imageLoader;*/
 }
 /**
  * Displays a message box

@@ -38,11 +38,11 @@ void LB_Room::reset(){
 	//weather
 }
 
-LB_Room::RoomMode LB_Room::getMode() const {
+RoomMode LB_Room::getMode() const {
 	return mode;
 }
 
-LB_Room::RoomStatus LB_Room::getStatus() const {
+RoomStatus LB_Room::getStatus() const {
 	return status;
 }
 
@@ -51,12 +51,12 @@ bool LB_Room::testPassword(std::string attempt) {
 	//TODO: should ask the server instead
 }
 
-void LB_Room::changeRoomStatus(LB_Room::RoomStatus newStatus) {
-	mode = newMode;
+void LB_Room::changeRoomStatus(RoomStatus newStatus) {
+	status = newStatus;
 }
 
-void LB_Room::changeRoomMode(LB_Room::RoomMode newMode) {
-	status = newStatus;
+void LB_Room::changeRoomMode(RoomMode newMode) {
+	mode = newMode;
 }
 
 void LB_Room::changeSuddenDeath(SuddenDeathType type, Uint8 turns) {
@@ -71,7 +71,7 @@ void LB_Room::changeWind(LB_WindData newWind) {
 	//TODO: play a sound effect to warn player
 }
 
-void LB_Room::addPlayer(LB_Player player) {
+void LB_Room::addPlayer(LB_Player* player) {
 	if(status == WAITING && currentPlayers < maxPlayers) {
 		players[currentPlayers] = player;
 		currentPlayers++;
@@ -87,7 +87,7 @@ LB_RoomBasicInfo LB_Room::getInfo() {
 	info.mode = mode;
 	info.status = status;
 	info.isPasswordProtectedRoom = isPasswordProtectedRoom;
-	info.map = map; //simplify, use only the name?
+	info.mapName = map->getName(); //simplify, use only the name?
 	
 	return info;
 }
@@ -112,13 +112,13 @@ LB_Weather::LB_Weather(LB_Weather::WeatherType type, Sint16 x) {
 	//TODO: switch to load the correct image depending on type
 	switch(type){
 		case TORNADO:
-			surf = IMG_Load("../res/tornado.png");
+			element = IMG_Load("../res/tornado.png");
 			break;
 		case MIRROR:
-			surf = IMG_Load("../res/mirror.png");
+			element = IMG_Load("../res/mirror.png");
 			break;
 		case FORCE:
-			surf = IMG_Load("../res/force.png");
+			element = IMG_Load("../res/force.png");
 			break;
 	}
 }
@@ -133,12 +133,12 @@ LB_Weather::~LB_Weather() {
  *  \param xOffset position of the x=0 of the destination surface (viewport) on the original map foreground surface
  */
 void LB_Weather::draw(SDL_Surface* dest, Sint16 xOffset) {
-	if(dest != NULL && surf != NULL && x >= xOffset){
+	if(dest != NULL && element != NULL && x >= xOffset){
 		SDL_Rect dstrect;
 		dstrect.x = x - xOffset;
-		for(int y = 0 ; y < dest->h ; y += surf->h){
+		for(int y = 0 ; y < dest->h ; y += element->h){
 			dstrect.y = y;
-			SDL_BlitSurface(surf, NULL, dest, dstrect);
+			SDL_BlitSurface(element, NULL, dest, &dstrect);
 		}
 	}
 }

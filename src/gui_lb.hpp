@@ -24,11 +24,11 @@ public:
 	virtual ~LB_GUI();
 
 private:
-	gcn::Gui* gui;
+	/*gcn::Gui* gui;
 	gcn::Container* top;
 	gcn::SDLInput* input;
 	gcn::SDLGraphics* graphics;
-	gcn::SDLImageLoader* imageLoader;
+	gcn::SDLImageLoader* imageLoader;*/
 };
 
 #endif

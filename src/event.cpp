@@ -24,9 +24,6 @@
 #include "event.hpp"
 using namespace std;
 
-extern SDL_Window *screen;
-extern SDL_Surface *cursor;
-
 
 int LB_GetPressedButton(SDL_Event event)
 {

@@ -8,9 +8,9 @@
 
 #include <list>
 #include "player.hpp"
-#include "room.hpp"
 #include "channel.hpp"
 #include "protocol.hpp"
+#include "room.hpp"
  
 #include "server.hpp"
 

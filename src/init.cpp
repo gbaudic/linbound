@@ -44,9 +44,9 @@ int LB_Init()
 	}
 
 	//TTF is initialized correctly, so let's load the font
-	font = TTF_OpenFont("../res/fonts/LiberationSans-Regular.ttf", fontsize);
+	font = TTF_OpenFont("./res/fonts/LiberationSans-Regular.ttf", fontsize);
 	if (font == NULL){
-		cout << gettext("Font opening failed!") << endl;
+		cout << gettext("Font opening failed!" ) << TTF_GetError() << endl;
 	}
 
 	//Initialize the sound system

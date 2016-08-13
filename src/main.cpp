@@ -36,7 +36,6 @@ using namespace std;
 
 Uint16 iscreenw = 800;
 Uint16 iscreenh = 600;
-extern SDL_Rect old_cursor, cur_dest;
 
 bool IsFirstRun = true;
 
@@ -93,7 +92,7 @@ int main(int argc, char *argv[])
 
 	//Call a function which displays an image
 	//If it crashed, don't let the user see a black window: he might be scared.
-	switch (LB_ShowPicture(renderer, "../res/menu/menuLB.jpg")) {
+	switch (LB_ShowPicture(renderer, "./res/menu/menuLB.jpg")) {
 		case -1 :
 			SDL_FreeSurface(image);
 			SDL_Quit();
@@ -103,12 +102,12 @@ int main(int argc, char *argv[])
 			break;
 		}
 	//cout << "pic shown" << endl;
-	old_screen = IMG_Load("../res/arrow.png");
+	old_screen = IMG_Load("./res/arrow.png");
 	//old_cursor.x = old_cursor.y = 0;
 
 	//cur_dest.x = cur_dest.y = 0;
 
-    if(LB_PlayMusic("../res/sound/test.ogg") != 0){
+    if(LB_PlayMusic("./res/sound/test.ogg") != 0){
         cout << gettext("error with the music! : ") << SDL_GetError() << endl;
     }
 

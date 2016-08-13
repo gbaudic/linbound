@@ -63,10 +63,10 @@ public:
 	Uint32 timeToLive;
 
 	Sprite();
-	Sprite(const char* file, int x, int y, int dx, int dy, SDL_Renderer* rend);
+	Sprite(const char* file, int x, int y, int dx, int dy);
 	virtual ~Sprite();
 	virtual void draw(SDL_Surface* dest);
-	virtual void draw(Sint16 xOffset, Sint16 yOffset);
+	virtual void draw(SDL_Renderer* rend, Sint16 xOffset, Sint16 yOffset);
 	void move();
 	SDL_Rect* getRect();
 

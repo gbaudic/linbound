@@ -19,6 +19,7 @@
 
 #include <map>
 #include <string>
+#include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "sound.hpp"
@@ -46,7 +47,7 @@ int LB_PlayMusic(char* file)
 			Mix_FreeMusic(music);
 		} else {
 			//This should never happen but if it does, the app won't freeze
-			SDL_SetError("No input pointer given! ");
+			SDL_SetError("LB_PlayMusic: No input pointer given! ");
 			return -1;
 		}
 	}

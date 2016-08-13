@@ -12,6 +12,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 
+#include <string>
+#include <vector> //Verify if best structure for this
+#include "Sprite.hpp"
+
 #include "map.hpp"
 using namespace std;
 
@@ -53,7 +57,7 @@ SDL_Surface* LB_MapBackground::getView(){
 	return rendering;
 }
 
-LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregroundA, std::string foregroundB)
+LB_Map::LB_Map(std::string name, LB_MapBackground* background, std::string foregroundA, std::string foregroundB)
 {
     //Fill the SDL_Surfaces with the images associated with the paths given as arguments
     this->name = name;
@@ -64,14 +68,14 @@ LB_Map::LB_Map(std::string name, LB_MapBackground background, std::string foregr
 	this->background = background;
 
 	//Compute parallax ratios
-	parallaxX = (double)background.getWidth()/(this->foregroundA->w);
-	parallaxY = (double)background.getHeight()/(this->foregroundA->h);
+	parallaxX = (double)background->getWidth()/(this->foregroundA->w);
+	parallaxY = (double)background->getHeight()/(this->foregroundA->h);
 	
 	//Use RLE acceleration and set colorkey on foregrounds
-	SDL_SetColorKey(foregroundA, SDL_TRUE, SDL_MapRGB(foregroundA->format, 0xFF, 0, 0xFF));
-	SDL_SetColorKey(foregroundB, SDL_TRUE, SDL_MapRGB(foregroundB->format, 0xFF, 0, 0xFF));
-	SDL_SetSurfaceRLE(foregroundA, 1);
-	SDL_SetSurfaceRLE(foregroundB, 1);
+	SDL_SetColorKey(this->foregroundA, SDL_TRUE, SDL_MapRGB(this->foregroundA->format, 0xFF, 0, 0xFF));
+	SDL_SetColorKey(this->foregroundB, SDL_TRUE, SDL_MapRGB(this->foregroundB->format, 0xFF, 0, 0xFF));
+	SDL_SetSurfaceRLE(this->foregroundA, 1);
+	SDL_SetSurfaceRLE(this->foregroundB, 1);
 }
 
 LB_Map::~LB_Map()
@@ -82,8 +86,7 @@ LB_Map::~LB_Map()
     SDL_FreeSurface(foregroundA);
     SDL_DestroyTexture(previewA);
 
-    if(has2Sides)
-    {
+    if(has2Sides){
         SDL_FreeSurface(foregroundB);
         SDL_DestroyTexture(previewB);
     }
@@ -103,13 +106,17 @@ bool LB_Map::getASide() const
     return isASide;
 }
 
+std::string LB_Map::getName() const {
+	return name;
+}
+
 /**
  * Draws a magenta circle at the desired coordinates to create a hole
  */
 void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
 	//TODO: sdl_gfx now writes to a Renderer instead of a Surface
 	SDL_Surface* srf = NULL;
-	if(isAside){
+	if(isASide){
 		srf = foregroundA;
 	} else {
 		srf = foregroundB;
@@ -123,7 +130,8 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
 	for(int xi = x - radius; xi < x + radius ; x++){
 		for(int yi = y - radius ; yi < y + radius ; y++){
 			if(xi*xi + yi*yi <= radius*radius && xi >= 0 && xi < srf->w && yi >= 0 && yi < srf->h){
-				(Uint32 *)srf->pixels[yi*srf->w + xi] = SDL_MapRGBA(srf->format, 0xff, 0, 0xff, 0);
+				Uint32 *p = (Uint32 *)srf->pixels + yi * srf->w + xi;
+				*p = SDL_MapRGBA(srf->format, 0xff, 0, 0xff, 0);
 				//this assumes a 32-bit surface...
 			}
 		}
@@ -150,3 +158,4 @@ void LB_Map::activate() {
 void LB_Map::deactivate() {
 	
 }
+

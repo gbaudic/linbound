@@ -10,18 +10,14 @@
 #ifndef _H_MAP_
 #define _H_MAP_
 
-#include <string>
-#include <vector> //Verify if best structure for this
-#include "Sprite.hpp"
-
 class LB_MapBackground
 {
 public:
 	LB_MapBackground(std::string staticPartPath, std::vector<std::string> animPartsPaths);
 	~LB_MapBackground();
 
-	int LB_MapBackground::getWidth() const;
-	int LB_MapBackground::getHeight() const;
+	int getWidth() const;
+	int getHeight() const;
 	
 	void refresh();
 	SDL_Surface* getView();
@@ -36,7 +32,7 @@ private:
 class LB_Map
 {
     private:
-    LB_MapBackground background;
+    LB_MapBackground* background;
     SDL_Surface* foregroundA;
     SDL_Surface* foregroundB;
 
@@ -58,11 +54,12 @@ class LB_Map
 
     //Methods
     public:
-    LB_Map(std::string name, LB_MapBackground background, std::string foregroundA, std::string foregroundB = "");
+    LB_Map(std::string name, LB_MapBackground* background, std::string foregroundA, std::string foregroundB = "");
     ~LB_Map();
 
     void setASide(bool isASide);
     bool getASide() const;
+    std::string getName() const;
 	
 	void activate();
 	void deactivate();
