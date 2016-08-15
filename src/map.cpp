@@ -45,20 +45,19 @@ void LB_MapBackground::refresh(){
 	}
 }
 
-int LB_MapBackground::getWidth() const{
+int LB_MapBackground::getWidth() const {
 	return this->rendering->w;
 }
 
-int LB_MapBackground::getHeight() const{
+int LB_MapBackground::getHeight() const {
 	return this->rendering->h;
 }
 
-SDL_Surface* LB_MapBackground::getView(){
+SDL_Surface* LB_MapBackground::getView() {
 	return rendering;
 }
 
-LB_Map::LB_Map(std::string name, LB_MapBackground* background, std::string foregroundA, std::string foregroundB)
-{
+LB_Map::LB_Map(std::string name, LB_MapBackground* background, std::string foregroundA, std::string foregroundB) {
     //Fill the SDL_Surfaces with the images associated with the paths given as arguments
     this->name = name;
 	
@@ -73,22 +72,22 @@ LB_Map::LB_Map(std::string name, LB_MapBackground* background, std::string foreg
 	
 	//Use RLE acceleration and set colorkey on foregrounds
 	SDL_SetColorKey(this->foregroundA, SDL_TRUE, SDL_MapRGB(this->foregroundA->format, 0xFF, 0, 0xFF));
-	SDL_SetColorKey(this->foregroundB, SDL_TRUE, SDL_MapRGB(this->foregroundB->format, 0xFF, 0, 0xFF));
 	SDL_SetSurfaceRLE(this->foregroundA, 1);
-	SDL_SetSurfaceRLE(this->foregroundB, 1);
+	if(this->foregroundB != NULL) {
+		SDL_SetColorKey(this->foregroundB, SDL_TRUE, SDL_MapRGB(this->foregroundB->format, 0xFF, 0, 0xFF));	
+		SDL_SetSurfaceRLE(this->foregroundB, 1);
+	}
 }
 
-LB_Map::~LB_Map()
-{
+LB_Map::~LB_Map() {
     //Free the SDL_Surfaces properly
 	SDL_DestroyTexture(previewSmall);
 	SDL_DestroyTexture(previewMedium);
     SDL_FreeSurface(foregroundA);
-    SDL_DestroyTexture(previewA);
+    SDL_DestroyTexture(preview);
 
     if(has2Sides){
         SDL_FreeSurface(foregroundB);
-        SDL_DestroyTexture(previewB);
     }
 }
 
@@ -96,13 +95,12 @@ LB_Map::~LB_Map()
  * Change map side
  * @param newSide true to choose A, false to choose B
  */
-void LB_Map::setASide(bool newSide)
-{
-    isASide = newSide;
+void LB_Map::setASide(bool newSide) {
+	if(has2Sides)
+		isASide = newSide;
 }
 
-bool LB_Map::getASide() const
-{
+bool LB_Map::getASide() const {
     return isASide;
 }
 
@@ -113,7 +111,7 @@ std::string LB_Map::getName() const {
 /**
  * Draws a magenta circle at the desired coordinates to create a hole
  */
-void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
+void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius) {
 	//TODO: sdl_gfx now writes to a Renderer instead of a Surface
 	SDL_Surface* srf = NULL;
 	if(isASide){
@@ -152,10 +150,10 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius){
  * The aim of this is to save memory with maps when they are not being played
  */
 void LB_Map::activate() {
-
+	//Reload background and fresh foreground
 }
 
 void LB_Map::deactivate() {
-	
+	//Free background and used foreground
 }
 

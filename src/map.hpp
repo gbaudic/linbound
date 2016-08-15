@@ -38,16 +38,15 @@ class LB_Map
 
     SDL_Texture* previewSmall; //in server view
     SDL_Texture* previewMedium; //in room view before loading
-    SDL_Texture* previewA; //in room view while loading
-    SDL_Texture* previewB;
+    SDL_Texture* preview; //in room view while loading
 
     bool has2Sides;
     bool isASide;
+	Uint32 backColor; //to be used if background loading fails
 
     std::string name;
 
-    int viewportX; //2D coordinates of the viewport
-    int viewportY;
+    SDL_Rect viewport; //2D coordinates of the viewport
 	
 	double parallaxX; //Factors for parallax between fore- and background
 	double parallaxY;
@@ -60,6 +59,11 @@ class LB_Map
     void setASide(bool isASide);
     bool getASide() const;
     std::string getName() const;
+	
+	void setViewport(int x, int y);
+	void setViewportSize(int w, int h);
+	void drawBackground(SDL_Renderer* rend);
+	void drawForeground(SDL_Renderer* rend);
 	
 	void activate();
 	void deactivate();

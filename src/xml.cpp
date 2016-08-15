@@ -32,9 +32,9 @@ void LB_LoadMap(const char *filename){
 
 	if(doc.ErrorID() == XML_NO_ERROR){
 		// No error, proceed
-		bool hasBside = false;
-		XMLElement* elem = doc.FirstChildElement( "resources" )->FirstChildElement( "hasBside" );
-		elem->QueryBoolText(&hasBside);
+		int sides = 1;
+		XMLElement* elem = doc.FirstChildElement( "resources" )->FirstChildElement( "sides" );
+		elem->QueryIntText(&sides);
 		
 		elem = doc.FirstChildElement( "resources" )->FirstChildElement( "surface" );
 		while(elem != NULL){
@@ -59,6 +59,9 @@ void LB_LoadMap(const char *filename){
 
 }
 
+/**
+ *  Load the list of avatar items in the program
+ */
 void LB_LoadItemsList(const char* filename){
 
 
