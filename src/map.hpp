@@ -1,3 +1,6 @@
+/**
+ *  
+ */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -35,6 +38,7 @@ class LB_Map
     LB_MapBackground* background;
     SDL_Surface* foregroundA;
     SDL_Surface* foregroundB;
+	SDL_Texture* foreground;
 
     SDL_Texture* previewSmall; //in server view
     SDL_Texture* previewMedium; //in room view before loading
@@ -42,6 +46,7 @@ class LB_Map
 
     bool has2Sides;
     bool isASide;
+	bool refreshForeground;
 	Uint32 backColor; //to be used if background loading fails
 
     std::string name;

@@ -70,7 +70,7 @@ LB_Map::LB_Map(std::string name, LB_MapBackground* background, std::string foreg
 	parallaxX = (double)background->getWidth()/(this->foregroundA->w);
 	parallaxY = (double)background->getHeight()/(this->foregroundA->h);
 	
-	//Use RLE acceleration and set colorkey on foregrounds
+	//Use RLE acceleration and set magenta colorkey on foregrounds
 	SDL_SetColorKey(this->foregroundA, SDL_TRUE, SDL_MapRGB(this->foregroundA->format, 0xFF, 0, 0xFF));
 	SDL_SetSurfaceRLE(this->foregroundA, 1);
 	if(this->foregroundB != NULL) {
@@ -89,6 +89,8 @@ LB_Map::~LB_Map() {
     if(has2Sides){
         SDL_FreeSurface(foregroundB);
     }
+	
+	SDL_DestroyTexture(foreground);
 }
 
 /**
@@ -106,6 +108,35 @@ bool LB_Map::getASide() const {
 
 std::string LB_Map::getName() const {
 	return name;
+}
+
+void setViewport(int x, int y) {
+	viewport.x = x;
+	viewport.y = y;
+}
+
+void setViewportSize(int w, int h) {
+	viewport.w = w;
+	viewport.h = h;
+	//TODO: recompute parallax ratios
+}
+
+void drawBackground(SDL_Renderer* rend) {
+	
+}
+
+/**
+ *  Draws the (possibly destroyed) foreground to a renderer
+ *  \param rend a SDL_Renderer pointer
+ */
+void drawForeground(SDL_Renderer* rend) {
+	if(refreshForeground){
+		//This trick lets us refresh the texture only when needed
+		SDL_DestroyTexture(foreground); //avoid memory leaks
+		foreground = SDL_CreateTextureFromSurface(rend, isASide ? foregroundA : foregroundB);
+		refreshForeground = false;
+	}
+	SDL_RenderCopy(rend, foreground, NULL, &viewport);
 }
 
 /**
@@ -142,6 +173,7 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius) {
 	} else {
 		filledCircleRGBA(foregroundB, x, y, radius, 0xff, 0, 0xff, 0);
 	}*/
+	refreshForeground = true;
 
 }
 
@@ -151,6 +183,8 @@ void LB_Map::makeDamage(Sint16 x, Sint16 y, Sint16 radius) {
  */
 void LB_Map::activate() {
 	//Reload background and fresh foreground
+	
+	refreshForeground = true;
 }
 
 void LB_Map::deactivate() {
