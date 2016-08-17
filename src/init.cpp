@@ -16,6 +16,16 @@
  */
 
 //#include <ssl.h> -- using cURL will make this include unnecessary
+#include <libintl.h>
+#include <locale.h>
+
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_net.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+
 #include "init.hpp"
 using namespace std;
 
@@ -28,8 +38,7 @@ bool isNETEnabled = true;
  * Initializes the libraries and surfaces which will always be used, regardless of the game mode
  * @return 0 if OK, -1 if an error occurs
  */
-int LB_Init()
-{
+int LB_Init() {
 	//Initializing SDL
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0) {
 		cout << gettext("FATAL : Cannot init SDL : ") << SDL_GetError() << endl;
@@ -46,7 +55,7 @@ int LB_Init()
 	//TTF is initialized correctly, so let's load the font
 	font = TTF_OpenFont("./res/fonts/LiberationSans-Regular.ttf", fontsize);
 	if (font == NULL){
-		cout << gettext("Font opening failed!" ) << TTF_GetError() << endl;
+		cout << gettext("Font opening failed! " ) << TTF_GetError() << endl;
 	}
 
 	//Initialize the sound system
@@ -66,8 +75,7 @@ int LB_Init()
  * @param argv the array containing those arguments
  * @return 0 if OK, -1 if there's an error
  */
-int LB_ParseOptions(int argc, char *argv[])
-{
+int LB_ParseOptions(int argc, char *argv[]) {
 	/* if (argc >= 3){
 		//Recognize and use resolution requested by the user
 		//If arguments are bad, use default to let the soft run and avoid hacking by buffer overflow.
@@ -118,8 +126,7 @@ int LB_ParseOptions(int argc, char *argv[])
  * @param imode the game mode
  * @return 0 if OK, -1 otherwise
  */
-int LB_InitNetwork(Uint8 *imode)
-{
+int LB_InitNetwork(Uint8 *imode) {
 
 	if (SDLNet_Init() != 0){
 		isNETEnabled = false;
@@ -135,8 +142,7 @@ int LB_InitNetwork(Uint8 *imode)
  * @param channels the number of channels you want to open (eg 2 for SFX and music)
  * @return 0 if no error, -1 otherwise
  */
-int LB_InitSound(int channels)
-{
+int LB_InitSound(int channels) {
  	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
 		cout << "Mix_OpenAudio: " << Mix_GetError() << endl;
 		return -1;
@@ -163,8 +169,7 @@ int LB_InitSound(int channels)
 /**
  * The function in charge of exiting everything and calling quit functions for the called libraries
  */
-void LB_Quit()
-{
+void LB_Quit() {
 
 	if (isTTFEnabled){
 		TTF_CloseFont(font);

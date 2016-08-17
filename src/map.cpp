@@ -110,12 +110,12 @@ std::string LB_Map::getName() const {
 	return name;
 }
 
-void setViewport(int x, int y) {
+void LB_Map::setViewport(int x, int y) {
 	viewport.x = x;
 	viewport.y = y;
 }
 
-void setViewportSize(int w, int h) {
+void LB_Map::setViewportSize(int w, int h) {
 	viewport.w = w;
 	viewport.h = h;
 	//TODO: recompute parallax ratios
@@ -129,7 +129,7 @@ void drawBackground(SDL_Renderer* rend) {
  *  Draws the (possibly destroyed) foreground to a renderer
  *  \param rend a SDL_Renderer pointer
  */
-void drawForeground(SDL_Renderer* rend) {
+void LB_Map::drawForeground(SDL_Renderer* rend) {
 	if(refreshForeground){
 		//This trick lets us refresh the texture only when needed
 		SDL_DestroyTexture(foreground); //avoid memory leaks

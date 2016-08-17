@@ -24,10 +24,8 @@
 #include "image.hpp"
 using namespace std;
 
-extern SDL_Surface *refresh_sample;
 extern SDL_Surface *image;
 extern SDL_Event LastMouseEvent;
-extern bool IsFirstRun;
 
 //Set SDL_Rects used for blitting cursors
 SDL_Event *p_LastMouseEvent = &LastMouseEvent;

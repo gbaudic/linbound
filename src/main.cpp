@@ -75,14 +75,14 @@ int main(int argc, char *argv[])
 	}
 	
 	//Give an icon to the window
-	icon = IMG_Load("../res/linbound.gif");
+	icon = IMG_Load("./res/linbound.gif");
 	SDL_SetWindowIcon(screen, icon);
 
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
-	SDL_SetColorKey(cursor, SDL_TRUE, 0xFF00FF00);
+	SDL_SetColorKey(cursor, SDL_TRUE, SDL_MapRGB(cursor->format, 0xff, 0, 0xff));
 	mousePointer = SDL_CreateColorCursor(cursor, 0, 0);
 	if (mousePointer == NULL){
 		cout << gettext("FATAL : Cannot create cursor: ") << SDL_GetError() << endl;

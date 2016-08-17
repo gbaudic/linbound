@@ -5,36 +5,18 @@
  * \version 0.1a
  * \date 24/10/2010
  */
-/*        This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA */
+/* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This Source Code Form is “Incompatible With Secondary Licenses”,
+ * as defined by the Mozilla Public License, v. 2.0.
+ */
 
 #ifndef _H_INIT_
 #define _H_INIT_
 
-#include <libintl.h>
-#include <locale.h>
-
-#include <cstdio>
-#include <cstdlib>
-#include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_net.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
-
-const int CHANNELS = 2;
+const int CHANNELS = 2; //stereo audio
 
 enum GameMode {MENU, SETTINGS, SERVER, SERVER_LIST, LOBBY, ROOM};
 
