@@ -22,6 +22,7 @@
 #include <iostream>
 #include <string>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL2_framerate.h>
 
 #include "main.hpp"
 #include "init.hpp"
@@ -38,6 +39,8 @@ Uint16 iscreenw = 800;
 Uint16 iscreenh = 600;
 
 bool IsFirstRun = true;
+
+FPSmanager mgr;
 
 /**
  * The holy Main Function
@@ -110,7 +113,9 @@ int main(int argc, char *argv[])
     if(LB_PlayMusic("./res/sound/test.ogg") != 0){
         cout << gettext("error with the music! : ") << SDL_GetError() << endl;
     }
-
+    
+    //Initialize framerate limiter (default is 30, we keep it)
+    SDL_InitFramerate(&mgr);
 
 	//cout << "Entering main loop" << endl;
 	MainLoop();
@@ -167,6 +172,7 @@ void MainLoop()
 
         //Change audio if needed
 
-
+        SDL_framerateDelay(&mgr);
 	} //and finishes there
 }
+
