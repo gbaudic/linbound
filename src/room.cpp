@@ -105,20 +105,20 @@ void LB_Weather::updateCounter() {
  *  \param x left coordinate of this weather evenet, expressed in map foreground coordinates. Y is not necessary because these events take the whole height. 
  */
 LB_Weather::LB_Weather(LB_Weather::WeatherType type, Sint16 x) {
-	turnsLeft = DURATION;
+	turnsLeft = DURATION + 5; //we announce it 5 turns before appearance
 	this->x = x;
 	this->type = type;
 	
-	//TODO: switch to load the correct image depending on type
+	//TODO: support of sprite for tornado
 	switch(type){
 		case TORNADO:
-			element = IMG_Load("../res/tornado.png");
+			element = IMG_Load("./res/tornado.png");
 			break;
 		case MIRROR:
-			element = IMG_Load("../res/mirror.png");
+			element = IMG_Load("./res/mirror.png");
 			break;
 		case FORCE:
-			element = IMG_Load("../res/force.png");
+			element = IMG_Load("./res/force.png");
 			break;
 	}
 }
@@ -133,12 +133,17 @@ LB_Weather::~LB_Weather() {
  *  \param xOffset position of the x=0 of the destination surface (viewport) on the original map foreground surface
  */
 void LB_Weather::draw(SDL_Surface* dest, Sint16 xOffset) {
-	if(dest != NULL && element != NULL && x >= xOffset){
-		SDL_Rect dstrect;
-		dstrect.x = x - xOffset;
-		for(int y = 0 ; y < dest->h ; y += element->h){
-			dstrect.y = y;
-			SDL_BlitSurface(element, NULL, dest, &dstrect);
+	if(dest != NULL && element != NULL && x >= xOffset && !hasExpired()){
+		if(turnsLeft <= DURATION){
+			//draw the weather phenomenon
+			SDL_Rect dstrect;
+			dstrect.x = x - xOffset;
+			for(int y = 0 ; y < dest->h ; y += element->h){
+				dstrect.y = y;
+				SDL_BlitSurface(element, NULL, dest, &dstrect);
+			}
+		} else {
+			//draw a small marker to warn players
 		}
 	}
 }

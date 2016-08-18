@@ -23,6 +23,8 @@ enum RoomMode {SOLO, DUO, MULTI, POINTS};
 enum RoomStatus {WAITING, FULL, PLAYING};
 enum SuddenDeathType {BIGBOMB, DOUBLE, SS};
 
+const int MAX_PLAYERS = 8;
+
 /**
  *  Summary of infos, returned by the server in the Channel view
  */
@@ -108,7 +110,7 @@ class LB_Room
 
     Uint8 maxPlayers, currentPlayers;
 
-    LB_Player* players[8];
+    LB_Player* players[MAX_PLAYERS];
 	LB_Weather weather[10];
 
     LB_MessageChannel* channel;
