@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     }
     
     //Initialize framerate limiter (default is 30, we keep it)
-    SDL_InitFramerate(&mgr);
+    SDL_initFramerate(&mgr);
 
 	//cout << "Entering main loop" << endl;
 	MainLoop();
@@ -152,6 +152,7 @@ void MainLoop()
 		//Here we poll the user events
 		if (SDL_PollEvent(&event) == 1) {
 			if (LB_EventProcessor(event) == -1) {
+				//cout << "break" << endl;
 				return;
 			}
 		}
