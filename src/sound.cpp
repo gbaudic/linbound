@@ -67,6 +67,8 @@ int LB_PlayMusic(char* file)
  * Idea: load all possible FX in a Map and fetch them afterwards with their name
  */
 int LB_LoadSFX(){
+	string effectNames[] = {"wind", "turn", "win", "lose", "money"};
+	
 	return 0;
 }
 
