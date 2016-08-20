@@ -25,7 +25,15 @@ class LB_Context {
 
 //Start menu
 class LB_Menu : public LB_Context {
+	public:
+	LB_Menu();
+	~LB_Menu();
+	void drawBackground();
+	void drawMiddleground();
+	void drawGUI();
 	
+	private:
+	SDL_Texture* background;
 };
 
 //Settings view
@@ -39,4 +47,16 @@ class LB_Menu : public LB_Context {
 //Room game view
 
 //Avatar item shop
- 
+
+
+LB_Menu::~LB_Menu() {
+	SDL_DestroyTexture(background);
+}
+
+LB_Menu::drawBackground() {
+	SDL_RenderCopy(renderer, background, NULL, NULL);
+}
+
+LB_Menu::drawMiddleground() {
+	return; //Nothing to draw
+}

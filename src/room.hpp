@@ -41,9 +41,11 @@ struct LB_RoomBasicInfo
 };
 
 struct LB_WindData {
-	Uint8 power;
-	int direction; //angle in degrees, trigonometric: 0=east/right, 90=north/up...
+	Uint8 power; /*!< between 0 and 24*/
+	int direction; /*!< angle in degrees, trigonometric: 0=east/right, 90=north/up...*/
 };
+
+LB_WindData generateWind();
 
 /**
  *  Special weather effects appearing in-game

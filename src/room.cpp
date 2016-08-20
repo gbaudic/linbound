@@ -16,6 +16,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include <cstdlib>
 
 #include "player.hpp"
 #include "sound.hpp"
@@ -146,4 +147,13 @@ void LB_Weather::draw(SDL_Surface* dest, Sint16 xOffset) {
 			//draw a small marker to warn players
 		}
 	}
+}
+
+LB_WindData generateWind() {
+	LB_WindData result;
+	
+	result.power = rand() % 25;
+	result.direction = rand() % 360; 
+	
+	return result;
 }
