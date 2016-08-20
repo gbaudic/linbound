@@ -37,11 +37,15 @@
     Rob Loach
     http://robloach.net */
 
+#include <cmath>
+
 #include "Sprite.hpp"
 
 /* returns maximum or minimum of number */
 #define SDL_COLLIDE_MAX(a,b)	((a > b) ? a : b)
 #define SDL_COLLIDE_MIN(a,b)	((a < b) ? a : b)
+
+#define PI 3.14159265
 
 Sprite::Sprite() {
 	// TODO Auto-generated constructor stub
@@ -58,6 +62,7 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 	surf = IMG_Load(file);
 
 	text = NULL;
+	rotated = NULL;
 	this->rend = NULL;
 	isVisible = true;
 
@@ -71,6 +76,7 @@ Sprite::Sprite(const char *file, int x, int y, int dx, int dy) {
 
 Sprite::~Sprite() {
 	SDL_FreeSurface(surf);
+	SDL_FreeSurface(rotated);
 	SDL_DestroyTexture(text);
 }
 
@@ -115,6 +121,31 @@ void Sprite::move() {
 
 SDL_Rect* Sprite::getRect(){
 	return &rArea;
+}
+
+Sint16 Sprite::getCenterX() {
+	return x + rArea.w;
+}
+
+Sint16 Sprite::getCenterY() {
+	return y + rArea.h;
+}
+
+/**
+ * Returns the angle needed to align with the speed vector, in degrees
+ * Reference is the horizontal line, this function ignores any previous rotations
+ */
+Sint16 Sprite::getAngle() {
+	if(dx == 0){
+		if(dy == 0){
+			return 0;
+		} else {
+			return (dy < 0 ? 90 : -90);
+		}
+	} else {
+		double angleRad = atan2(-dy,dx);
+		return angleRad * 180 / PI;
+	}
 }
 
 /**

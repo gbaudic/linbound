@@ -69,9 +69,13 @@ public:
 	virtual void draw(SDL_Renderer* rend, Sint16 xOffset, Sint16 yOffset);
 	void move();
 	SDL_Rect* getRect();
+	Sint16 getAngle();
+	Sint16 getCenterX();
+	Sint16 getCenterY();
 
 protected:
 	SDL_Surface* surf; //the surface representing the image file
+	SDL_Surface* rotated; //rotated version if needed
 	SDL_Texture* text; //texture: optimization for SDL2
 	SDL_Renderer* rend; 
 	SDL_Rect rArea; //rectangle container for the sprite image

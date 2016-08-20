@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
 	icon = IMG_Load("./res/linbound.gif");
 	SDL_SetWindowIcon(screen, icon);
 
+	cursor = IMG_Load("./res/arrow.png");
+
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
@@ -105,10 +107,7 @@ int main(int argc, char *argv[])
 			break;
 		}
 	//cout << "pic shown" << endl;
-	old_screen = IMG_Load("./res/arrow.png");
-	//old_cursor.x = old_cursor.y = 0;
 
-	//cur_dest.x = cur_dest.y = 0;
 
     if(LB_PlayMusic("./res/sound/test.ogg") != 0){
         cout << gettext("error with the music! : ") << SDL_GetError() << endl;
@@ -126,9 +125,7 @@ int main(int argc, char *argv[])
 	//Free the memory allocated to the images
 	//TODO : it would be more clever to use an array to put the images and free them at once by making a function iterate through the whole table
 	SDL_FreeCursor(mousePointer); 
-	SDL_FreeSurface(refresh_test);
-	SDL_FreeSurface(old_screen);
-	SDL_FreeSurface(refresh_sample);
+	//SDL_FreeSurface(refresh_test);
 	SDL_FreeSurface(image);
 	SDL_FreeSurface(cursor);
 	SDL_FreeSurface(icon);

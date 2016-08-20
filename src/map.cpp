@@ -121,7 +121,7 @@ void LB_Map::setViewportSize(int w, int h) {
 	//TODO: recompute parallax ratios
 }
 
-void drawBackground(SDL_Renderer* rend) {
+void LB_Map::drawBackground(SDL_Renderer* rend) {
 	
 }
 

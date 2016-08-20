@@ -29,11 +29,10 @@
 
 SDL_Window *screen = NULL;
 SDL_Renderer *renderer = NULL;
-SDL_Surface *old_screen;
+//SDL_Surface *old_screen;
 SDL_Surface *image;
-SDL_Surface *cursor = IMG_Load("./res/arrow.png");
-SDL_Surface *refresh_test = IMG_Load("./res/arrow.png");
-SDL_Surface *refresh_sample = IMG_Load("./res/arrow.png");
+SDL_Surface *cursor = NULL;
+//SDL_Surface *refresh_test = IMG_Load("./res/arrow.png");
 SDL_Surface *icon = NULL;
 SDL_Cursor *mousePointer = NULL;
 SDL_Event event;
