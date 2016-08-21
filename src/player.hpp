@@ -1,3 +1,8 @@
+/**
+ *  \file player.hpp
+ *  \brief Class definitions for players
+ *  \author G. B.
+ */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -15,6 +20,9 @@
 #include "Sprite.hpp"
 
 enum Weapon {SHOT1 = 1, SHOT2 = 2, SUPER_SHOT = 55};
+enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
+				DIAMOND, ROCK, TANK, ICEBERG, PLANE, TRASH_CAN, RESISTOR, 
+				SHEEP, GOAT, PIG, COW, UNICORN, DOLPHIN, DUCK};
 
 /**
  * \class LB_Player

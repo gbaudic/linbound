@@ -69,7 +69,7 @@ public:
 	virtual void draw(SDL_Renderer* rend, Sint16 xOffset, Sint16 yOffset);
 	void move();
 	SDL_Rect* getRect();
-	Sint16 getAngle();
+	Sint16 getSpeedAngle();
 	Sint16 getCenterX();
 	Sint16 getCenterY();
 

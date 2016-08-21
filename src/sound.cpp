@@ -20,6 +20,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <cstdlib>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "sound.hpp"
@@ -36,8 +37,7 @@ map<string, Mix_Chunk*> effects;
   * \return 0 if OK, -1 if something gets wrong
 */
 //TODO: test this function, even if it should really work
-int LB_PlayMusic(char* file)
-{
+int LB_PlayMusic(char* file) {
 	//We must first check if there's some music playin'
  	if (Mix_PlayingMusic() == 1) {
 		//If it is the case, we stop it: we are here to change it!
@@ -82,14 +82,31 @@ int LB_LoadSFX(){
  * @return 0 if OK, -1 if something went wrong
  */
 //TODO: test this function, even if it should really work
-int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops)
-{
+int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops) {
  	return Mix_PlayChannel(channel, filename, loops);
 }
 
 /**
  * Free all allocated FXs
  */
-int LB_FreeSFX(){
+int LB_FreeSFX() {
 	return 0;
+}
+
+/**
+ *  Determine how many times we have to repeat the sound
+ */
+int LB_CountGoldRepeat(Sint16 value) {
+	int repeats = 1;
+	int absolute = abs(value);
+	if(absolute > 50)
+		repeats++;
+	if(absolute > 100)
+		repeats++;
+	if(absolute > 200)
+		repeats++;
+	if(absolute > 500)
+		repeats++;
+	
+	return repeats;
 }

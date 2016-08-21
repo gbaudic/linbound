@@ -135,7 +135,7 @@ Sint16 Sprite::getCenterY() {
  * Returns the angle needed to align with the speed vector, in degrees
  * Reference is the horizontal line, this function ignores any previous rotations
  */
-Sint16 Sprite::getAngle() {
+Sint16 Sprite::getSpeedAngle() {
 	if(dx == 0){
 		if(dy == 0){
 			return 0;

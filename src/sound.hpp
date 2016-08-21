@@ -21,5 +21,6 @@
 
 int LB_PlayMusic(char* file);
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);
+int LB_CountGoldRepeat(Sint16 value);
 
 #endif /* _H_SOUND_ */
