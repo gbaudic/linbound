@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
         cout << gettext("error with the music! : ") << SDL_GetError() << endl;
     }
 	
-	//Initialize random generator (will be used for wind generation)
+	//Initialize random generator (will be used for wind generation and weather effect placement)
 	srand(1854973);
     
     //Initialize framerate limiter (default is 30, we keep it)

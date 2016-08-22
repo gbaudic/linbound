@@ -22,6 +22,8 @@
 enum RoomMode {SOLO, DUO, MULTI, POINTS};
 enum RoomStatus {WAITING, FULL, PLAYING};
 enum SuddenDeathType {BIGBOMB, DOUBLE, SS};
+enum PlayerStatus {IDLE, READY, LOADING, OK}; //used when waiting/pre-game
+enum WeatherType {TORNADO, MIRROR, FORCE};
 
 const int MAX_PLAYERS = 8;
 
@@ -53,7 +55,6 @@ LB_WindData generateWind();
  */
 class LB_Weather {
 	public:
-	enum WeatherType {TORNADO, MIRROR, FORCE};
 
 	const static int DURATION = 10; //in turns
 
@@ -69,6 +70,8 @@ class LB_Weather {
 	WeatherType type;
 	SDL_Surface* element; //TODO: change to Sprite to support Tornado animation
 };
+
+LB_Weather generateWeather(Sint16 mapWidth);
 
 /**
  * \class LB_Room

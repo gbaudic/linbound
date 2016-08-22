@@ -105,7 +105,7 @@ void LB_Weather::updateCounter() {
  *  \param type the weather event type
  *  \param x left coordinate of this weather evenet, expressed in map foreground coordinates. Y is not necessary because these events take the whole height. 
  */
-LB_Weather::LB_Weather(LB_Weather::WeatherType type, Sint16 x) {
+LB_Weather::LB_Weather(WeatherType type, Sint16 x) {
 	turnsLeft = DURATION + 5; //we announce it 5 turns before appearance
 	this->x = x;
 	this->type = type;
@@ -149,6 +149,10 @@ void LB_Weather::draw(SDL_Surface* dest, Sint16 xOffset) {
 	}
 }
 
+/**
+ * Generate a new WindData struct
+ * Should be called only on the server side
+ */
 LB_WindData generateWind() {
 	LB_WindData result;
 	
@@ -156,4 +160,14 @@ LB_WindData generateWind() {
 	result.direction = rand() % 360; 
 	
 	return result;
+}
+
+/**
+ * Generate a new weather effect 
+ */
+LB_Weather generateWeather(Sint16 mapWidth) {
+    Sint16 position = rand() % mapWidth;
+    int type = rand() % 3; //Magic number = nb of values in WeatherType
+    
+    return LB_Weather(type, position);
 }

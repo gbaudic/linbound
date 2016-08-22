@@ -124,11 +124,19 @@ SDL_Rect* Sprite::getRect(){
 }
 
 Sint16 Sprite::getCenterX() {
-	return x + rArea.w;
+    if(rotated == NULL) {
+        return x + rArea.w;
+    } else {
+        return x + rotated->w;
+    }
 }
 
 Sint16 Sprite::getCenterY() {
-	return y + rArea.h;
+    if(rotated == NULL) {
+	    return y + rArea.h;
+	} else {
+	    return y + rotated->h;
+	}
 }
 
 /**

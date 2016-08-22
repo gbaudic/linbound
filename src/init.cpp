@@ -133,6 +133,8 @@ int LB_InitNetwork(Uint8 *imode) {
 		return -1;
 	}
 
+	//TODO: create UDP sockets
+
 	return 0;
 
 }
@@ -177,6 +179,7 @@ void LB_Quit() {
 	}
 
 	if (isNETEnabled){
+		//close sockets if needed
 		SDLNet_Quit();
 	}
 
