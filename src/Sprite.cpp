@@ -38,6 +38,8 @@
     http://robloach.net */
 
 #include <cmath>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL2_rotozoom.h>
 
 #include "Sprite.hpp"
 
@@ -151,9 +153,18 @@ Sint16 Sprite::getSpeedAngle() {
 			return (dy < 0 ? 90 : -90);
 		}
 	} else {
-		double angleRad = atan2(-dy,dx);
+		double angleRad = atan2(-dy, dx);
 		return angleRad * 180 / PI;
 	}
+}
+
+void Sprite::rotate(Sint16 angle) {
+	Sint16 normalizedAngle = angle % 360;
+	bool flip = abs(normalizedAngle) > 90;
+	
+	SDL_FreeSurface(rotated);
+	rotated = rotozoomSurfaceXY(surf, normalizedAngle, -1.0, 1.0, SMOOTHING_ON);
+	//TODO: correct this
 }
 
 /**

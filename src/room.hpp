@@ -23,6 +23,7 @@ enum RoomMode {SOLO, DUO, MULTI, POINTS};
 enum RoomStatus {WAITING, FULL, PLAYING};
 enum SuddenDeathType {BIGBOMB, DOUBLE, SS};
 enum PlayerStatus {IDLE, READY, LOADING, OK}; //used when waiting/pre-game
+enum MobileStatus {IDLE, FALLING, FLYING, SHOOTING, DEAD, DYING};
 enum WeatherType {TORNADO, MIRROR, FORCE};
 
 const int MAX_PLAYERS = 8;
@@ -93,6 +94,7 @@ class LB_Room
 	void changeName(std::string newName);
 	void addPlayer(LB_Player* player); //parameter to be decided
 	void removePlayer(LB_Player* player); //same as above
+	LB_Player[] getPlayersFromTeam(char team);
 	void triggerSuddenDeath();
 	LB_RoomBasicInfo getInfo();
 	void reset(); //reset after a finished game

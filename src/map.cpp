@@ -118,7 +118,11 @@ void LB_Map::setViewport(int x, int y) {
 void LB_Map::setViewportSize(int w, int h) {
 	viewport.w = w;
 	viewport.h = h;
-	//TODO: recompute parallax ratios
+	
+	//Recompute parallax ratios
+	SDL_Surface* srf = getASide() ? foregroundA : foregroundB;
+	parallaxX = (double)(background->getWidth() - w)/(srf->w - w);
+	parallaxY = (double)(background->getHeight() - h)/(srf->h - h);
 }
 
 void LB_Map::drawBackground(SDL_Renderer* rend) {

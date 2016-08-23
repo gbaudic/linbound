@@ -55,6 +55,8 @@ public:
 	Sint16 y;
 	Uint16 dx; //Motion vector coordinates
 	Uint16 dy;
+	
+	Sint16 angle;
 
 	//Uint8 orderZ; //may be useful to sort blitting operations in a suitable order
 	bool isVisible;
@@ -72,6 +74,7 @@ public:
 	Sint16 getSpeedAngle();
 	Sint16 getCenterX();
 	Sint16 getCenterY();
+	void rotate(Sint16 angle);
 
 protected:
 	SDL_Surface* surf; //the surface representing the image file
