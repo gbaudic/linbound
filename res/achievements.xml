@@ -1,0 +1,35 @@
+<achievements>
+	<ach>
+	<type>PENALTY</type>
+	<name>Suicide penalty</name>
+	<gold>-50</gold>
+	<xp>-2</xp>
+	</ach>
+	<ach>
+	<type>PENALTY</type>
+	<name>Teammate shoot penalty</name>
+	<gold>-25</gold>
+	<xp>-1</xp>
+	</ach>
+	<ach>
+	<type>REWARD</type>
+	<name>1000 damage points inflicted</name>
+	<gold>100</gold>
+	<xp>1</xp>
+	</ach>
+	<type>REWARD</type>
+	<name>Opponent killed</name>
+	<gold>100</gold>
+	<xp>1</xp>
+	</ach>
+	<type>REWARD</type>
+	<name>Shot >150 damage</name>
+	<gold>20</gold>
+	<xp>0</xp>
+	</ach>
+	<type>REWARD</type>
+	<name>Climate resilience bonus</name>
+	<gold>30</gold>
+	<xp>0</xp>
+	</ach>
+</achievements>

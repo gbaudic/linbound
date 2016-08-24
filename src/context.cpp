@@ -13,7 +13,7 @@
 class LB_Context {
 	public:
 	LB_Context();
-	virtual ~LB_Context();
+	virtual ~LB_Context() = 0;
 	virtual void drawBackground();
 	virtual void drawMiddleground();
 	virtual void drawGUI(); 
@@ -50,6 +50,7 @@ class LB_Menu : public LB_Context {
 //Avatar item shop
 
 
+LB_Context::~LB_Context() {};
 
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);

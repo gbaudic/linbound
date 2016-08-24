@@ -18,8 +18,9 @@
 #include <SDL2/SDL.h>
 
 #include "Sprite.hpp"
+#include "message.hpp" //for Achievement
 
-enum Weapon {SHOT1 = 1, SHOT2 = 2, SUPER_SHOT = 55};
+enum Weapon {WEAPON_SHOT1 = 1, WEAPON_SHOT2 = 2, WEAPON_SUPER_SHOT = 55};
 enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
 				DIAMOND, ROCK, TANK, ICEBERG, PLANE, TRASH_CAN, RESISTOR, 
 				SHEEP, GOAT, PIG, COW, UNICORN, DOLPHIN, DUCK};
@@ -46,8 +47,8 @@ class LB_Player
 		char teamID;
 		Uint8 rankInAlliance, sizeOfAlliance;
 
-		Uint16 iPlayerMobile1;
-		Uint16 iPlayerMobile2;
+		Uint16 playerMobile1;
+		Uint16 playerMobile2;
 
 		Sint16 playerDelay;
 		Uint16 playerCnxDelay;
@@ -58,27 +59,28 @@ class LB_Player
 
 		Uint16 x,y;
 
-		Sint8 iCurrentAngle;
-		Sint8 iLastAngle;
+		Sint16 currentAngle;
+		Sint16 lastAngle;
 
-		Sint16 iLife; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
-
+		Sint16 life; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
+		
+		Achievement getPersonalizedValue(Achievement base, bool avatarOn); //compute values considering items worn
 
 	protected:
-		Uint32 iGP;
-		Uint32 iPlayerGold;
-		Uint32 iPlayerCash;
+		Uint32 xp;
+		Uint32 playerGold;
+		Uint32 playerCash;
 
-		Uint16 iPlayerRankLocal;
-		Uint16 iPlayerRankGlobal;
+		Uint16 playerRankLocal;
+		Uint16 playerRankGlobal;
 		Level playerLevelLocal;
 		Level playerLevelGlobal;
 
-		Uint16 iPlayerTotalDamage;
-		Uint16 iPlayerLastDamage;
+		Uint16 playerTotalDamage;
+		Uint16 playerLastDamage;
 
-		Uint32 iWinningRate;
-		Uint16 iAverageHit;
+		Uint32 winningRate;
+		Uint16 averageHit;
 
 		//LB_AvatarItem items[];
 
@@ -88,8 +90,7 @@ class LB_Player
  * \class LB_PlayerShortInfo
  * Represents the smallest set of information that can be visible for a connected player
 */
-struct LB_PlayerShortInfo
-{
+struct LB_PlayerShortInfo {
     LB_Player::Level level;
     std::string allyName;
     std::string gameID;
@@ -99,19 +100,18 @@ struct LB_PlayerShortInfo
  * \class LB_PlayerBasicInfo
  * A partial set of information, visible e.g. when sharing the same game room before playing
  */
-struct LB_PlayerBasicInfo
-{
+struct LB_PlayerBasicInfo {
     LB_PlayerShortInfo shortInfos;
 
     char teamID;
-    Uint8 iPlayerPlaceAlly;
-    Uint8 iTotalInAlly;
+    Uint8 playerPlaceAlly;
+    Uint8 totalInAlly;
 
-    Uint16 iPlayerMobile1;
-    Uint16 iPlayerMobile2;
+    Uint16 playerMobile1;
+    Uint16 playerMobile2;
 
     bool isRoomAdmin;
-    Uint8 iNextAdmin; //To know who is going to be the admin if current admin goes away
+    Uint8 nextAdmin; //To know who is going to be the admin if current admin goes away
 
     //LB_AvatarItem items[];
 
