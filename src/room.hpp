@@ -20,10 +20,10 @@
 #include "map.hpp"
 
 enum RoomMode {SOLO, DUO, MULTI, POINTS};
-enum RoomStatus {WAITING, FULL, PLAYING};
+enum RoomStatus {ROOM_WAITING, ROOM_FULL, ROOM_PLAYING};
 enum SuddenDeathType {BIGBOMB, DOUBLE, SS};
 enum PlayerStatus {IDLE, READY, LOADING, OK}; //used when waiting/pre-game
-enum MobileStatus {IDLE, FALLING, FLYING, SHOOTING, DEAD, DYING};
+enum MobileStatus {WAITING, FALLING, FLYING, SHOOTING, DEAD, DYING}; //used in-game
 enum WeatherType {TORNADO, MIRROR, FORCE};
 
 const int MAX_PLAYERS = 8;
@@ -57,7 +57,7 @@ LB_WindData generateWind();
 class LB_Weather {
 	public:
 
-	const static int DURATION = 10; //in turns
+	static const int DURATION = 10; //in turns
 
 	LB_Weather(WeatherType type, Sint16 x);
 	~LB_Weather();
@@ -67,7 +67,7 @@ class LB_Weather {
 
 	private:
 	int turnsLeft; //nb of turns before disappearance
-	Sint16 x; //coordinate
+	Sint16 x; //coordinate, using map foreground as reference
 	WeatherType type;
 	SDL_Surface* element; //TODO: change to Sprite to support Tornado animation
 };
@@ -94,7 +94,7 @@ class LB_Room
 	void changeName(std::string newName);
 	void addPlayer(LB_Player* player); //parameter to be decided
 	void removePlayer(LB_Player* player); //same as above
-	LB_Player[] getPlayersFromTeam(char team);
+	//LB_Player[] getPlayersFromTeam(char team);
 	void triggerSuddenDeath();
 	LB_RoomBasicInfo getInfo();
 	void reset(); //reset after a finished game

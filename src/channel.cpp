@@ -58,7 +58,7 @@ void LB_MessageChannel::displayChannelInGame(SDL_Surface* dest){
     //Display only the messages that have to appear, with the appropriate logos and colors
 	for(Uint8 i = max(zero, channel.size() - displayedMessages) ; i < channel.size() ; i++){
 		if(channel[i].isDisplayed()){
-			if(channel[i].getMessageType() <= LB_Message::PENALTY){
+			if(channel[i].getMessageType() <= PENALTY_MSG){
 				//This message needs a logo, so we leave an offset in x
 				channel[i].writeToChannel(dest, x + 15, y + current_y, true);
 
@@ -81,7 +81,7 @@ void LB_MessageChannel::displayFullChannel(SDL_Surface* dest) {
 	Sint16 current_y = 0;
 
 	for(size_t i = cursorPos ; i < min(channel.size(), cursorPos + MAX_MSG_DISPLAYED) ; i++){
-		if(channel[i].getMessageType() > LB_Message::PENALTY){
+		if(channel[i].getMessageType() > PENALTY_MSG){
 			channel[i].writeToChannel(dest, x, y + current_y);
 		}
 

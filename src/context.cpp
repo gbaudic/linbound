@@ -4,7 +4,7 @@
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
  * 
- * This Source Code Form is “Incompatible With Secondary Licenses”, 
+ * This Source Code Form is ï¿½Incompatible With Secondary Licensesï¿½, 
  * as defined by the Mozilla Public License, v. 2.0.
  */
  
@@ -13,12 +13,13 @@
 class LB_Context {
 	public:
 	LB_Context();
+	virtual ~LB_Context();
 	virtual void drawBackground();
 	virtual void drawMiddleground();
 	virtual void drawGUI(); 
 	void processEvent(SDL_Event event);
 	
-	private:
+	protected:
 	SDL_Renderer* renderer; //reference, this object is created and managed outside the class
 	
 };
@@ -49,14 +50,19 @@ class LB_Menu : public LB_Context {
 //Avatar item shop
 
 
+
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);
 }
 
-LB_Menu::drawBackground() {
+void LB_Menu::drawBackground() {
 	SDL_RenderCopy(renderer, background, NULL, NULL);
 }
 
-LB_Menu::drawMiddleground() {
+void LB_Menu::drawMiddleground() {
 	return; //Nothing to draw
+}
+
+void LB_Menu::drawGUI() {
+	return; //TBD
 }

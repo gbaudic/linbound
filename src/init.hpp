@@ -18,7 +18,7 @@
 
 const int CHANNELS = 2; //stereo audio
 
-enum GameMode {MENU, SETTINGS, SERVER, SERVER_LIST, LOBBY, ROOM};
+enum GameMode {MENU_MODE, SETTINGS_MODE, SERVER_VIEW_MODE, SERVER_LIST_MODE, ITEM_SHOP_MODE, LOBBY_MODE, ROOM_MODE};
 
 //Prototypes
 int LB_Init();

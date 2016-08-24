@@ -31,9 +31,9 @@ void LB_Room::reset(){
 	turnsPlayed = 0;
 	
 	if(currentPlayers == maxPlayers){
-		status = FULL;
+		status = ROOM_FULL;
 	} else {
-		status = WAITING;
+		status = ROOM_WAITING;
 	}
 	
 	//weather
@@ -73,7 +73,7 @@ void LB_Room::changeWind(LB_WindData newWind) {
 }
 
 void LB_Room::addPlayer(LB_Player* player) {
-	if(status == WAITING && currentPlayers < maxPlayers) {
+	if(status == ROOM_WAITING && currentPlayers < maxPlayers) {
 		players[currentPlayers] = player;
 		currentPlayers++;
 	} else {
@@ -169,5 +169,5 @@ LB_Weather generateWeather(Sint16 mapWidth) {
     Sint16 position = rand() % mapWidth;
     int type = rand() % 3; //Magic number = nb of values in WeatherType
     
-    return LB_Weather(type, position);
+    return LB_Weather((WeatherType)type, position);
 }

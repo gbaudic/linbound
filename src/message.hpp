@@ -14,13 +14,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-class LB_Message
-{
+enum MessageType { SERVER_MSG, BUGLE_MSG, REWARD_MSG, PENALTY_MSG, USER_MSG, POWER_USER_MSG, ADMIN_USER_MSG };
+
+struct Achievement {
+    std::string name;
+    Sint16 gold; //base value
+    Sint8 xp; //base value
+    MessageType type; //typically only REWARD or PENALTY
+};
+
+class LB_Message {
     public:
-    enum MessageType
-    {
-        SERVER, BUGLE, REWARD, PENALTY, USER, POWER_USER, ADMIN_USER
-    };
 
     static const Uint32 TIME_TO_LIVE = 5000; //Maximum time to display in milliseconds
 
