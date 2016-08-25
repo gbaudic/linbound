@@ -1,4 +1,10 @@
-
+/**
+ * \file context.cpp
+ * \brief Context definition, used to represent various views in game
+ * \version 0.1a
+ * \author G. B.
+ * \date 25/08/2016
+ */
 
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
@@ -14,9 +20,9 @@ class LB_Context {
 	public:
 	LB_Context();
 	virtual ~LB_Context() = 0;
-	virtual void drawBackground();
-	virtual void drawMiddleground();
-	virtual void drawGUI(); 
+	virtual void drawBackground() = 0;
+	virtual void drawMiddleground() = 0;
+	virtual void drawGUI() = 0;
 	void processEvent(SDL_Event event);
 	
 	protected:
@@ -51,6 +57,10 @@ class LB_Menu : public LB_Context {
 
 
 LB_Context::~LB_Context() {};
+
+void LB_Context::processEvent(SDL_Event event) {
+
+}
 
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);
