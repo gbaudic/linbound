@@ -18,6 +18,8 @@
 #include <string>
 #include <map>
 
+#include "xml.hpp"
+
 using namespace tinyxml2;
 using namespace std;
 
@@ -65,5 +67,10 @@ void LB_LoadMap(const char *filename){
 void LB_LoadItemsList(const char* filename){
 
 
+}
+
+
+void LB_LoadAchievementList(const char* filename) {
+    
 }
 
