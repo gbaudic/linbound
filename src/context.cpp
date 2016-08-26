@@ -10,7 +10,7 @@
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
  * 
- * This Source Code Form is �Incompatible With Secondary Licenses�, 
+ * This Source Code Form is "Incompatible With Secondary Licenses", 
  * as defined by the Mozilla Public License, v. 2.0.
  */
  
@@ -23,7 +23,7 @@ class LB_Context {
 	virtual void drawBackground() = 0;
 	virtual void drawMiddleground() = 0;
 	virtual void drawGUI() = 0;
-	void processEvent(SDL_Event event);
+	virtual void processEvent(SDL_Event event) = 0;
 	
 	protected:
 	SDL_Renderer* renderer; //reference, this object is created and managed outside the class
@@ -38,6 +38,7 @@ class LB_Menu : public LB_Context {
 	void drawBackground();
 	void drawMiddleground();
 	void drawGUI();
+	void processEvent(SDL_Event event);
 	
 	private:
 	SDL_Texture* background;
@@ -58,8 +59,13 @@ class LB_Menu : public LB_Context {
 
 LB_Context::~LB_Context() {};
 
-void LB_Context::processEvent(SDL_Event event) {
-
+void LB_Menu::processEvent(SDL_Event event) {
+	switch(event.type){
+		case SDL_MOUSEBUTTONDOWN:
+		case SDL_MOUSEBUTTONUP: 
+			break; //check if there is a click on a button
+		default: break;
+	}
 }
 
 LB_Menu::~LB_Menu() {

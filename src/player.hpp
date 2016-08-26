@@ -25,65 +25,17 @@ enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
 				DIAMOND, ROCK, TANK, ICEBERG, PLANE, TRASH_CAN, RESISTOR, 
 				SHEEP, GOAT, PIG, COW, UNICORN, DOLPHIN, DUCK};
 
-/**
- * \class LB_Player
- * Abstracts a LB player
- */
-class LB_Player
-{
-	public:
 
-        enum Level {Chick, WoodHammer, DoubleWoodHammer, StoneAxe, DoubleStoneAxe,
-        MetalAxe, DoubleMetalAxe, SilverAxe, DoubleSilverAxe, GoldAxe, DoubleGoldAxe,
-        MetalDoubleSidedAxe, MetalDoubleSidedAxePlus, SilverDoubleSidedAxe, SilverDoubleSidedAxePlus,
-        GoldDoubleSidedAxe, GoldDoubleSidedAxePlus, BronzeStar, SilverStar, GoldStar, DoubleStars,
-        TripleStars, VioletHole, SapphireHole, RedRubyHole, DiamondHole, BlueDragon, RedDragon, SilverDragon,
-        BlueKnight, RedKnight, SilverKnight, BluePhoenix, RedPhoenix, SilverPhoenix,
-        BronzeMedal, SilverMedal, GoldMedal, BronzeCrown, SilverCrown, GoldCrown, VIP,
-        BronzeTrophy, SilverTrophy, GoldTrophy, Administrator};
-
-
-		std::string allianceName;
-		char teamID;
-		Uint8 rankInAlliance, sizeOfAlliance;
-
-		Uint16 playerMobile1;
-		Uint16 playerMobile2;
-
-		Sint16 playerDelay;
-		Uint16 playerCnxDelay;
-		Sint16 playerAward;
-		Sint8 playerGp;
-
-		bool isActivePlayer;
-
-		Uint16 x,y;
-
-		Sint16 currentAngle;
-		Sint16 lastAngle;
-
-		Sint16 life; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
-		
-		Achievement getPersonalizedValue(Achievement base, bool avatarOn); //compute values considering items worn
-
-	protected:
-		Uint32 xp;
-		Uint32 playerGold;
-		Uint32 playerCash;
-
-		Uint16 playerRankLocal;
-		Uint16 playerRankGlobal;
-		Level playerLevelLocal;
-		Level playerLevelGlobal;
-
-		Uint16 playerTotalDamage;
-		Uint16 playerLastDamage;
-
-		Uint32 winningRate;
-		Uint16 averageHit;
-
-		//LB_AvatarItem items[];
-
+struct LB_Shot {
+	Weapon weapon;
+	Sint16 angle;
+	Sint16 startX;
+	Sint16 maxX;
+	Sint16 maxY;
+	std::string author;
+	bool crossedWeather;
+	Sint16 damage;
+	Uint32 time;
 };
 
 /**
@@ -116,5 +68,71 @@ struct LB_PlayerBasicInfo {
     //LB_AvatarItem items[];
 
 };
+
+/**
+ * \class LB_Player
+ * Abstracts a LB player
+ */
+class LB_Player
+{
+	public:
+
+        enum Level {Chick, WoodHammer, DoubleWoodHammer, StoneAxe, DoubleStoneAxe,
+        MetalAxe, DoubleMetalAxe, SilverAxe, DoubleSilverAxe, GoldAxe, DoubleGoldAxe,
+        MetalDoubleSidedAxe, MetalDoubleSidedAxePlus, SilverDoubleSidedAxe, SilverDoubleSidedAxePlus,
+        GoldDoubleSidedAxe, GoldDoubleSidedAxePlus, BronzeStar, SilverStar, GoldStar, DoubleStars,
+        TripleStars, VioletHole, SapphireHole, RedRubyHole, DiamondHole, BlueDragon, RedDragon, SilverDragon,
+        BlueKnight, RedKnight, SilverKnight, BluePhoenix, RedPhoenix, SilverPhoenix,
+        BronzeMedal, SilverMedal, GoldMedal, BronzeCrown, SilverCrown, GoldCrown, VIP,
+        BronzeTrophy, SilverTrophy, GoldTrophy, Administrator};
+
+
+		std::string allianceName;
+		char teamID;
+		Uint8 rankInAlliance, sizeOfAlliance;
+
+		Uint16 playerMobile1;
+		Uint16 playerMobile2;
+
+		Sint16 playerDelay;
+		Uint16 playerCnxDelay;
+		Sint16 playerAward; //for this game
+		Sint8 playerXp; //for this game
+
+		bool isActivePlayer;
+
+		Uint16 x,y;
+
+		Sint16 currentAngle;
+		Sint16 lastAngle;
+		bool usesMobile1;
+
+		Sint16 life1; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
+		Sint16 life2; //used only in Duo mode
+		
+		Achievement getPersonalizedValue(Achievement base, Sint16 popularity, bool itemsOn); //compute values considering items worn
+		void reset();
+
+	protected:
+		Uint32 xp;
+		Uint32 playerGold;
+		Uint32 playerCash;
+
+		Uint16 playerRankLocal;
+		Uint16 playerRankGlobal;
+		Level playerLevelLocal;
+		Level playerLevelGlobal;
+
+		Uint16 playerTotalDamage;
+		Uint16 playerLastDamage;
+
+		Uint32 winningRate;
+		Uint16 averageHit;
+
+		//LB_AvatarItem items[];
+
+};
+
+
 
 #endif

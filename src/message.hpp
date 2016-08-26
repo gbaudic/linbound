@@ -1,3 +1,6 @@
+/**
+ *  
+ */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -16,6 +19,10 @@
 
 enum MessageType { SERVER_MSG, BUGLE_MSG, REWARD_MSG, PENALTY_MSG, USER_MSG, POWER_USER_MSG, ADMIN_USER_MSG };
 
+/**
+ *  \struct Achievement
+ *  Represents a particular event with some gold and xp to win or lose
+ */
 struct Achievement {
     std::string name;
     Sint16 gold; //base value
