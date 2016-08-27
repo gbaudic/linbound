@@ -38,36 +38,7 @@ struct LB_Shot {
 	Uint32 time;
 };
 
-/**
- * \class LB_PlayerShortInfo
- * Represents the smallest set of information that can be visible for a connected player
-*/
-struct LB_PlayerShortInfo {
-    LB_Player::Level level;
-    std::string allyName;
-    std::string gameID;
-};
 
-/**
- * \class LB_PlayerBasicInfo
- * A partial set of information, visible e.g. when sharing the same game room before playing
- */
-struct LB_PlayerBasicInfo {
-    LB_PlayerShortInfo shortInfos;
-
-    char teamID;
-    Uint8 playerPlaceAlly;
-    Uint8 totalInAlly;
-
-    Uint16 playerMobile1;
-    Uint16 playerMobile2;
-
-    bool isRoomAdmin;
-    Uint8 nextAdmin; //To know who is going to be the admin if current admin goes away
-
-    //LB_AvatarItem items[];
-
-};
 
 /**
  * \class LB_Player
@@ -110,7 +81,7 @@ class LB_Player
 		Sint16 life1; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
 		Sint16 life2; //used only in Duo mode
 		
-		Achievement getPersonalizedValue(Achievement base, Sint16 popularity, bool itemsOn); //compute values considering items worn
+		Achievement getPersonalizedValue(Achievement base, Sint8 popularity, bool itemsOn); //compute values considering items worn
 		void reset();
 
 	protected:
@@ -133,6 +104,35 @@ class LB_Player
 
 };
 
+/**
+ * \class LB_PlayerShortInfo
+ * Represents the smallest set of information that can be visible for a connected player
+*/
+struct LB_PlayerShortInfo {
+    LB_Player::Level level;
+    std::string allyName;
+    std::string gameID;
+};
 
+/**
+ * \class LB_PlayerBasicInfo
+ * A partial set of information, visible e.g. when sharing the same game room before playing
+ */
+struct LB_PlayerBasicInfo {
+    LB_PlayerShortInfo shortInfos;
+
+    char teamID;
+    Uint8 playerPlaceAlly;
+    Uint8 totalInAlly;
+
+    Uint16 playerMobile1;
+    Uint16 playerMobile2;
+
+    bool isRoomAdmin;
+    Uint8 nextAdmin; //To know who is going to be the admin if current admin goes away
+
+    //LB_AvatarItem items[];
+
+};
 
 #endif

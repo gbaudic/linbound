@@ -7,7 +7,7 @@
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
  * 
- * This Source Code Form is “Incompatible With Secondary Licenses”, 
+ * This Source Code Form is ï¿½Incompatible With Secondary Licensesï¿½, 
  * as defined by the Mozilla Public License, v. 2.0.
  */
  
@@ -42,5 +42,7 @@ void LB_Player::reset() {
 	xp += playerXp;
 	playerGold += playerAward;
 	playerXp = 0; playerAward = 0;
-]
+}
+
+
  
