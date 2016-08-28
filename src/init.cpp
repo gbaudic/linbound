@@ -33,6 +33,8 @@ TTF_Font *font = NULL;
 int fontsize = 12;
 bool isTTFEnabled = true;
 bool isNETEnabled = true;
+extern UDPsocket serverSocket;
+extern UDPsocket clientSocket;
 
 /**
  * Initializes the libraries and surfaces which will always be used, regardless of the game mode
@@ -129,11 +131,18 @@ int LB_ParseOptions(int argc, char *argv[]) {
 int LB_InitNetwork(Uint8 *imode) {
 
 	if (SDLNet_Init() != 0){
+		cout << gettext("SDL_net init error: ") << SDLNet_GetError() << endl;
 		isNETEnabled = false;
 		return -1;
 	}
 
 	//TODO: create UDP sockets
+	serverSocket = SDLNet_UDP_Open(6545);
+	if(serverSocket == NULL){
+		cout << gettext("Server socket creation error: ") << SDLNet_GetError() << endl;
+		return -1;
+	}
+	//client socket
 
 	return 0;
 

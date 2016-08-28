@@ -55,7 +55,7 @@ struct LB_Mobile
 
 /**
  * \class LB_Jewel
- * Abstracts a jewel object used in Jewel game mode
+ * Abstracts a jewel object used in Points game mode
  */
 struct LB_Jewel
 {
@@ -66,32 +66,6 @@ struct LB_Jewel
 	char Image[];
 };
 
-/**
- * \class LB_Avatar
- * Abstracts an avatar item
- */
-class LB_AvatarItem
-{
-	char staticImage[];
-	char gameImage[];
-	std::string name;
-
-    enum Type {HEAD, GLASSES, BODY, FLAG, EX};
-
-	Sint8 iType;
-	Sint8 iPopularity;
-	Sint8 iDefence;
-	Sint8 iAttack;
-	Sint8 iBunge;
-	Sint8 iHeart;
-	Sint8 iBlueDelay;
-	Sint8 iOrangeDelay;
-	Sint8 iDelay;
-
-	Uint32 iGoldPrices[3];
-	Uint32 iCashPrices[3];
-
-};
 
 //Prototypes
 int main(int argc, char* argv[]);

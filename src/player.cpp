@@ -44,5 +44,32 @@ void LB_Player::reset() {
 	playerXp = 0; playerAward = 0;
 }
 
-
+/**
+ *  Populate avatar item stats for the player
+ */
+void LB_Player::computeStats() {
+	//reset
+	popularity = 0; defence = 0; attack = 0; bunge = 0;
+	heart = 0; blueDelay = 0; orangeDelay = 0; delay = 0;
+	//refill
+	for(int i = 0 ; i < 5 ; i++){
+		popularity += items[i].popularity;
+		defence += items[i].defence;
+		attack += items[i].attack;
+		bunge += items[i].bunge;
+		heart += items[i].heart;
+		blueDelay += items[i].blueDelay;
+		orangeDelay += items[i].orangeDelay;
+		delay += items[i].delay;
+	}
+}
  
+ 
+Uint16 getBaseDamage(Weapon weapon) {
+	switch(weapon){
+		case WEAPON_SHOT1: return 200;
+		case WEAPON_SHOT2: return 300;
+		case WEAPON_SUPER_SHOT: return 500;
+		default: return 0;
+	}
+}

@@ -26,19 +26,54 @@ enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
 				SHEEP, GOAT, PIG, COW, UNICORN, DOLPHIN, DUCK};
 
 
+				
+
+Unit16 getBaseDamage(Weapon weapon);
+
+/**
+ *  Representation of a shot
+ */
 struct LB_Shot {
 	Weapon weapon;
 	Sint16 angle;
 	Sint16 startX;
+	Sint16 minX;
 	Sint16 maxX;
-	Sint16 maxY;
+	Sint16 endX;
+	Sint16 endY;
 	std::string author;
+	char team;
 	bool crossedWeather;
-	Sint16 damage;
+	Uint16 damage;
 	Uint32 time;
 };
 
+/**
+ * \class LB_Avatar
+ * Abstracts an avatar item
+ */
+class LB_AvatarItem
+{
+	char staticImage[];
+	char gameImage[];
+	std::string name;
 
+    enum Type {HEAD, GLASSES, BODY, FLAG, EX};
+
+	Type type;
+	Sint8 popularity;
+	Sint8 defence;
+	Sint8 attack;
+	Sint8 bunge;
+	Sint8 heart;
+	Sint8 blueDelay;
+	Sint8 orangeDelay;
+	Sint8 delay;
+
+	Uint32 goldPrices[3];
+	Uint32 cashPrices[3];
+
+};
 
 /**
  * \class LB_Player
@@ -76,6 +111,7 @@ class LB_Player
 
 		Sint16 currentAngle;
 		Sint16 lastAngle;
+		bool hasMobile2; //depends on game mode
 		bool usesMobile1;
 
 		Sint16 life1; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
@@ -83,6 +119,7 @@ class LB_Player
 		
 		Achievement getPersonalizedValue(Achievement base, Sint8 popularity, bool itemsOn); //compute values considering items worn
 		void reset();
+		void computeStats();
 
 	protected:
 		Uint32 xp;
@@ -100,9 +137,20 @@ class LB_Player
 		Uint32 winningRate;
 		Uint16 averageHit;
 
-		//LB_AvatarItem items[];
+		LB_AvatarItem items[5];
+		
+		Sint8 popularity;
+		Sint8 defence;
+		Sint8 attack;
+		Sint8 bunge;
+		Sint8 heart;
+		Sint8 blueDelay;
+		Sint8 orangeDelay;
+		Sint8 delay;
 
 };
+
+Uint16 computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
 
 /**
  * \class LB_PlayerShortInfo
@@ -131,7 +179,7 @@ struct LB_PlayerBasicInfo {
     bool isRoomAdmin;
     Uint8 nextAdmin; //To know who is going to be the admin if current admin goes away
 
-    //LB_AvatarItem items[];
+    //LB_AvatarItem items[5];
 
 };
 

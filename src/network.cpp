@@ -21,6 +21,9 @@
 
 #include "protocol.hpp"
 
+UDPsocket serverSocket;
+UDPsocket clientSocket;
+
 void doNothing() {
 
 }
