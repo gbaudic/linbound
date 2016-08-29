@@ -79,7 +79,7 @@ int LB_Init() {
 int LB_ParseOptions(int argc, char *argv[]) {
 	/* if (argc >= 3){
 		//Recognize and use resolution requested by the user
-		//If arguments are bad, use default to let the soft run and avoid hacking by buffer overflow.
+		//If arguments are bad, use default to let the soft run
 		if (strncmp(argv[1], "640\0",3) == 0 && strncmp(argv[2], "480\0", 3) == 0){
 			iscreenw = 640;
 			iscreenh = 480;
@@ -136,7 +136,7 @@ int LB_InitNetwork(Uint8 *imode) {
 	}
 
 	//TODO: create UDP sockets
-	serverSocket = SDLNet_UDP_Open(6545);
+	serverSocket = SDLNet_UDP_Open(SERVER_PORT);
 	if(serverSocket == NULL){
 		cout << gettext("Server socket creation error: ") << SDLNet_GetError() << endl;
 		return -1;

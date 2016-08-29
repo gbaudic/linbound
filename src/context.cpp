@@ -15,10 +15,11 @@
  */
  
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 class LB_Context {
 	public:
-	LB_Context();
+	LB_Context(SDL_Renderer* renderer);
 	virtual ~LB_Context() = 0;
 	virtual void drawBackground() = 0;
 	virtual void drawMiddleground() = 0;
@@ -68,6 +69,12 @@ void LB_Menu::processEvent(SDL_Event event) {
 			break; //check if there is a click on a button
 		default: break;
 	}
+}
+
+LB_Menu::LB_Menu() {
+	SDL_Surface* bck = IMG_Load("./res/menu/menuLB.jpg");
+	background = SDL_CreateTextureFromSurface(renderer, bck);
+	SDL_FreeSurface(bck);
 }
 
 LB_Menu::~LB_Menu() {

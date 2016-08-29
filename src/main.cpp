@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 	icon = IMG_Load("./res/linbound.gif");
 	SDL_SetWindowIcon(screen, icon);
 
-	cursor = IMG_Load("./res/arrow.png");
+	cursor = IMG_Load("./res/cursor.png");
 
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);

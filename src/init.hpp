@@ -17,6 +17,7 @@
 #define _H_INIT_
 
 const int CHANNELS = 2; //stereo audio
+const Uint16 SERVER_PORT = 6545;
 
 enum GameMode {MENU_MODE, SETTINGS_MODE, SERVER_VIEW_MODE, SERVER_LIST_MODE, ITEM_SHOP_MODE, LOBBY_MODE, ROOM_MODE};
 
