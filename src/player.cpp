@@ -16,11 +16,11 @@
 /**
  *  \brief Get the achievement with the correct gold and xp settings for this player
  *  \param base the Achievement with the base values
- *  \param popularity additive factor for increase or decrease
+ *   popularity acts as an additive factor for increase or decrease
  *  \param itemsOn if true, allows player items to be taken into account
  *  \return an Achievement holding the correct values
  */
-Achievement LB_Player::getPersonalizedValue(Achievement base, Sint8 popularity, bool itemsOn) {
+Achievement LB_Player::getPersonalizedValue(Achievement base, bool itemsOn) {
 	if(!itemsOn) {
 		return base;
 	} else {
@@ -63,8 +63,46 @@ void LB_Player::computeStats() {
 		delay += items[i].delay;
 	}
 }
+
+/**
+ *  \brief Compute the damage experienced by receiver
+ *  \param shot a pointer to a LB_Shot. The damage field will be modified by this method.
+ *  \param sender the player firing the shot
+ *  \param receiver the player who will sustain the damage
+ */
+void computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver) {
+	double distance = getDistance(sender->x, sender->y, receiver->x, receiver->y);
+	if(distance >= MAX_DISTANCE) {
+		//Too far, no damage
+		shot->damage = 0;
+	} else {
+		//Linear decrease of damage
+		Uint16 maxDamage = getBaseDamage(shot->weapon) * (MAX_DISTANCE - distance) / MAX_DISTANCE;
+		Sint8 factor = 100 + sender->getPlayerStat(ATTACK_STAT) - receiver->getPlayerStat(DEFENCE_STAT);
+		shot->damage = maxDamage * factor / 100;
+	}
+}
+
+Uint16 LB_Player::getCurrentMobile() {
+	return usesMobile1 ? playerMobile1 : playerMobile2;
+}
+
+Sint8 LB_Player::getPlayerStat(Statistic stat) {
+	return playerStats[stat];
+}
+
+/**
+ *  Implementation of Pythagore theorem
+ *  Required for damage computation
+ */
+double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2) {
+	return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+}
  
- 
+/**
+ *  Returns the base value for actual damage computation
+ *  TODO: add more changes by making a different method for each mobile
+ */
 Uint16 getBaseDamage(Weapon weapon) {
 	switch(weapon){
 		case WEAPON_SHOT1: return 200;

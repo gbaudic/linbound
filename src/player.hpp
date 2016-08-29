@@ -24,9 +24,10 @@ enum Weapon {WEAPON_SHOT1 = 1, WEAPON_SHOT2 = 2, WEAPON_SUPER_SHOT = 55};
 enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
 				DIAMOND, ROCK, TANK, ICEBERG, PLANE, TRASH_CAN, RESISTOR, 
 				SHEEP, GOAT, PIG, COW, UNICORN, DOLPHIN, DUCK};
+enum Statistic {POPULARITY_STAT, DEFENCE_STAT, ATTACK_STAT, BUNGE_STAT, HEART_STAT,
+				BLUEDELAY_STAT, ORANGEDELAY_STAT, DELAY_STAT};
 
-
-				
+static const int MAX_DISTANCE = 50; 
 
 Uint16 getBaseDamage(Weapon weapon);
 
@@ -45,6 +46,7 @@ struct LB_Shot {
 	char team;
 	bool crossedWeather;
 	Uint16 damage;
+	Uint16 radius; 
 	Uint32 time;
 };
 
@@ -61,16 +63,9 @@ struct LB_AvatarItem
     enum Type {HEAD, GLASSES, BODY, FLAG, EX};
 
 	Type type;
-	Sint8 popularity;
-	Sint8 defence;
-	Sint8 attack;
-	Sint8 bunge;
-	Sint8 heart;
-	Sint8 blueDelay;
-	Sint8 orangeDelay;
-	Sint8 delay;
+	Sint8 stats[8];
 
-	Uint32 goldPrices[3];
+	Uint32 goldPrices[3]; //monthly, yearly, permanent?
 	Uint32 cashPrices[3];
 
 };
@@ -117,10 +112,12 @@ class LB_Player
 		Sint16 life1; //any value between 0 and 1500 is OK, >1500 is cheating, <0 is dead
 		Sint16 life2; //used only in Duo mode
 		
-		Achievement getPersonalizedValue(Achievement base, Sint8 popularity, bool itemsOn); //compute values considering items worn
+		Achievement getPersonalizedValue(Achievement base, bool itemsOn); //compute values considering items worn
 		void reset();
 		void computeStats();
 		void finalizeTurn(); //update angles, delay
+		Uint16 getCurrentMobile();
+		Sint8 getPlayerStat(Statistic stat);
 
 	protected:
 		Uint32 xp;
@@ -140,18 +137,12 @@ class LB_Player
 
 		LB_AvatarItem items[5];
 		
-		Sint8 popularity;
-		Sint8 defence;
-		Sint8 attack;
-		Sint8 bunge;
-		Sint8 heart;
-		Sint8 blueDelay;
-		Sint8 orangeDelay;
-		Sint8 delay;
+		Sint8 playerStats[8];
 
 };
 
-Uint16 computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
+void computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
+double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2);
 
 /**
  * \class LB_PlayerShortInfo
