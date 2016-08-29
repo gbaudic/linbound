@@ -15,7 +15,6 @@
  * as defined by the Mozilla Public License, v. 2.0.
  */
 
-//#include <ssl.h> -- using cURL will make this include unnecessary
 #include <libintl.h>
 #include <locale.h>
 
@@ -189,6 +188,7 @@ void LB_Quit() {
 
 	if (isNETEnabled){
 		//close sockets if needed
+		SDLNet_UDP_Close(serverSocket);
 		SDLNet_Quit();
 	}
 

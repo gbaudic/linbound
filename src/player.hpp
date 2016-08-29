@@ -28,7 +28,7 @@ enum Mobile {TEAPOT, COFFEE_CUP, TREE, ORANGE, ROSE, CABBAGE, RASPBERRY,
 
 				
 
-Unit16 getBaseDamage(Weapon weapon);
+Uint16 getBaseDamage(Weapon weapon);
 
 /**
  *  Representation of a shot
@@ -49,10 +49,10 @@ struct LB_Shot {
 };
 
 /**
- * \class LB_Avatar
+ * \struct LB_Avatar
  * Abstracts an avatar item
  */
-class LB_AvatarItem
+struct LB_AvatarItem
 {
 	char staticImage[];
 	char gameImage[];
@@ -107,7 +107,7 @@ class LB_Player
 
 		bool isActivePlayer;
 
-		Uint16 x,y;
+		Uint16 x,y; //center coordinates!
 
 		Sint16 currentAngle;
 		Sint16 lastAngle;
@@ -120,6 +120,7 @@ class LB_Player
 		Achievement getPersonalizedValue(Achievement base, Sint8 popularity, bool itemsOn); //compute values considering items worn
 		void reset();
 		void computeStats();
+		void finalizeTurn(); //update angles, delay
 
 	protected:
 		Uint32 xp;

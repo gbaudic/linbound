@@ -60,6 +60,8 @@ class LB_Menu : public LB_Context {
 LB_Context::~LB_Context() {};
 
 void LB_Menu::processEvent(SDL_Event event) {
+	//Mouse clicks = buttons, pass to guisan
+	//Key presses: either game control (handle) or text typing (pass to guisan)
 	switch(event.type){
 		case SDL_MOUSEBUTTONDOWN:
 		case SDL_MOUSEBUTTONUP: 

@@ -46,7 +46,7 @@ class LB_Map
 
     bool has2Sides;
     bool isASide;
-	bool refreshForeground;
+	bool refreshForeground; //!< trigger texture refreshing only when needed
 	Uint32 backColor; //to be used if background loading fails
 
     std::string name;
