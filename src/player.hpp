@@ -30,6 +30,7 @@ enum Statistic {POPULARITY_STAT, DEFENCE_STAT, ATTACK_STAT, BUNGE_STAT, HEART_ST
 static const int MAX_DISTANCE = 50; 
 
 Uint16 getBaseDamage(Weapon weapon);
+Uint16 getBaseRadius(Weapon weapon);
 
 /**
  *  Representation of a shot
@@ -113,6 +114,7 @@ class LB_Player
 		Sint16 life2; //used only in Duo mode
 		
 		Achievement getPersonalizedValue(Achievement base, bool itemsOn); //compute values considering items worn
+		void applyAchievement(Achievement ach);
 		void reset();
 		void computeStats();
 		void finalizeTurn(); //update angles, delay
@@ -141,7 +143,7 @@ class LB_Player
 
 };
 
-void computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
+Uint16 computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
 double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2);
 
 /**

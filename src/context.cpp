@@ -34,7 +34,7 @@ class LB_Context {
 //Start menu
 class LB_Menu : public LB_Context {
 	public:
-	LB_Menu();
+	LB_Menu(SDL_Renderer* renderer);
 	~LB_Menu();
 	void drawBackground();
 	void drawMiddleground();
@@ -58,6 +58,10 @@ class LB_Menu : public LB_Context {
 //Avatar item shop
 
 
+LB_Context::LB_Context(SDL_Renderer* renderer){
+	this->renderer = renderer;
+}
+
 LB_Context::~LB_Context() {};
 
 void LB_Menu::processEvent(SDL_Event event) {
@@ -71,9 +75,9 @@ void LB_Menu::processEvent(SDL_Event event) {
 	}
 }
 
-LB_Menu::LB_Menu() {
+LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	SDL_Surface* bck = IMG_Load("./res/menu/menuLB.jpg");
-	background = SDL_CreateTextureFromSurface(renderer, bck);
+	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
 }
 

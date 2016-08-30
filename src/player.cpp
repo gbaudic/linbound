@@ -7,7 +7,7 @@
  * If a copy of the MPL was not distributed with this file, 
  * You can obtain one at http://mozilla.org/MPL/2.0/.
  * 
- * This Source Code Form is �Incompatible With Secondary Licenses�, 
+ * This Source Code Form is "Incompatible With Secondary Licenses", 
  * as defined by the Mozilla Public License, v. 2.0.
  */
  
@@ -27,10 +27,19 @@ Achievement LB_Player::getPersonalizedValue(Achievement base, bool itemsOn) {
 		Achievement result;
 		result.name = base.name;
 		result.type = base.type;
-		result.gold = base.gold * (100+popularity) / 100;
-		result.xp = base.xp * (100+popularity) / 100;
+		result.gold = base.gold * (100+playerStats[POPULARITY_STAT]) / 100;
+		result.xp = base.xp * (100+playerStats[POPULARITY_STAT]) / 100;
 		return result;
 	}
+}
+
+/**
+ * Change player attributes following an achievement
+ * \param ach the Achievement to apply
+ */
+void LB_Player::applyAchievement(Achievement ach) {
+    xp += ach.xp;
+    playerGold += ach.gold;
 }
 
 /**
@@ -49,37 +58,32 @@ void LB_Player::reset() {
  */
 void LB_Player::computeStats() {
 	//reset
-	popularity = 0; defence = 0; attack = 0; bunge = 0;
-	heart = 0; blueDelay = 0; orangeDelay = 0; delay = 0;
+	for(int stat = 0 ; stat < 8 ; stat++)
+	    playerStats[stat] = 0;
 	//refill
 	for(int i = 0 ; i < 5 ; i++){
-		popularity += items[i].popularity;
-		defence += items[i].defence;
-		attack += items[i].attack;
-		bunge += items[i].bunge;
-		heart += items[i].heart;
-		blueDelay += items[i].blueDelay;
-		orangeDelay += items[i].orangeDelay;
-		delay += items[i].delay;
+	    for(int stat = 0 ; stat < 8 ; stat++){
+	        playerStats[stat] += items[i].stats[stat];
+	    }
 	}
 }
 
 /**
  *  \brief Compute the damage experienced by receiver
- *  \param shot a pointer to a LB_Shot. The damage field will be modified by this method.
+ *  \param shot a pointer to a LB_Shot. 
  *  \param sender the player firing the shot
  *  \param receiver the player who will sustain the damage
  */
-void computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver) {
+Uint16 computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver) {
 	double distance = getDistance(sender->x, sender->y, receiver->x, receiver->y);
 	if(distance >= MAX_DISTANCE) {
 		//Too far, no damage
-		shot->damage = 0;
+		return 0;
 	} else {
 		//Linear decrease of damage
 		Uint16 maxDamage = getBaseDamage(shot->weapon) * (MAX_DISTANCE - distance) / MAX_DISTANCE;
 		Sint8 factor = 100 + sender->getPlayerStat(ATTACK_STAT) - receiver->getPlayerStat(DEFENCE_STAT);
-		shot->damage = maxDamage * factor / 100;
+		return maxDamage * factor / 100;
 	}
 }
 
@@ -108,6 +112,19 @@ Uint16 getBaseDamage(Weapon weapon) {
 		case WEAPON_SHOT1: return 200;
 		case WEAPON_SHOT2: return 300;
 		case WEAPON_SUPER_SHOT: return 500;
+		default: return 0;
+	}
+}
+
+/**
+ * Returns the base value for destruction radius in pixels
+ * TODO: add more changes by making a different method for each mobile
+ */
+Uint16 getBaseRadius(Weapon weapon) {
+	switch(weapon){
+		case WEAPON_SHOT1: return 40;
+		case WEAPON_SHOT2: return 50;
+		case WEAPON_SUPER_SHOT: return 70;
 		default: return 0;
 	}
 }
