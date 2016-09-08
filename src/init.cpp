@@ -34,6 +34,7 @@ bool isTTFEnabled = true;
 bool isNETEnabled = true;
 extern UDPsocket serverSocket;
 extern UDPsocket clientSocket;
+bool isServer = false;
 
 /**
  * Initializes the libraries and surfaces which will always be used, regardless of the game mode

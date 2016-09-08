@@ -16,6 +16,10 @@
  
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
+
+using namespace gcn;
 
 class LB_Context {
 	public:
@@ -43,6 +47,14 @@ class LB_Menu : public LB_Context {
 	
 	private:
 	SDL_Texture* background;
+	Label lbl_buttonHelp;
+	Label lbl_version;
+	Button btn_settings;
+	Button btn_play;
+	Button btn_localPlay;
+	Button btn_onlinePlay;
+	Button btn_quit;
+	Button btn_credits;
 };
 
 //Settings view
@@ -79,6 +91,7 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	SDL_Surface* bck = IMG_Load("./res/menu/menuLB.jpg");
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
+	//TODO: init GUI widgets
 }
 
 LB_Menu::~LB_Menu() {

@@ -9,7 +9,7 @@
 #ifndef _H_SERVER_
 #define _H_SERVER_
 
-
+//#include <sqlite3.h>
 
 /**
 *
