@@ -1,6 +1,6 @@
 # LinBound template file for gettext translations.
-# Copyright (C) 2012 G. B.
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2016 G. B.
+# This file is distributed under the same license as the linbound package.
 # G. B. <podgy.piglet@users.sourceforge.net>, 2012.
 #
 #, fuzzy
@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-12 14:47+0200\n"
+"POT-Creation-Date: 2016-09-10 12:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,42 +17,58 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/init.cpp:152
-msgid "All channels haven't been allocated, exiting"
-msgstr ""
-
-#: src/image.cpp:55
+#: src/image.cpp:47
 msgid "ERROR : Cannot load the img: "
 msgstr ""
 
-#: src/init.cpp:148
-msgid "Error loading audio decoding libraries : "
-msgstr ""
-
-#: src/init.cpp:35
+#: src/init.cpp:46
 msgid "FATAL : Cannot init SDL : "
 msgstr ""
 
-#: src/init.cpp:41
+#: src/init.cpp:52
 msgid "FATAL : Cannot init SDL_ttf "
 msgstr ""
 
-#: src/main.cpp:65
-msgid "FATAL : Cannot set video mode : "
+#: src/init.cpp:60
+msgid "Font opening failed! "
 msgstr ""
 
-#: src/init.cpp:49
-msgid "Font opening failed!"
+#: src/init.cpp:134
+msgid "SDL_net init error: "
 msgstr ""
 
-#: src/main.cpp:51
+#: src/init.cpp:142
+msgid "Server socket creation error: "
+msgstr ""
+
+#: src/init.cpp:166
+msgid "Error loading audio decoding libraries : "
+msgstr ""
+
+#: src/init.cpp:170
+msgid "All channels haven't been allocated, exiting"
+msgstr ""
+
+#: src/main.cpp:53
 msgid "Initializing LinBound v0.1a..."
 msgstr ""
 
-#: src/sound.cpp:56
-msgid "Music not loaded : "
+#: src/main.cpp:72
+msgid "FATAL : Cannot create window: "
 msgstr ""
 
-#: src/main.cpp:92
-msgid "error with the music ! : "
+#: src/main.cpp:76
+msgid "FATAL : Cannot create renderer: "
+msgstr ""
+
+#: src/main.cpp:98
+msgid "FATAL : Cannot create cursor: "
+msgstr ""
+
+#: src/main.cpp:118
+msgid "error with the music! : "
+msgstr ""
+
+#: src/sound.cpp:58
+msgid "Music not loaded: "
 msgstr ""

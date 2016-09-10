@@ -1,11 +1,13 @@
 #Generated 2008-07-30 by G. B. then completed with a lot of stuff from wormux configure.ac
 dnl *** NOT TESTED YET !!! *********
 
-AC_INIT(src/main.cpp)
-AM_INIT_AUTOMAKE(linbound,0.1)
+AC_INIT(linbound, 0.1)
+AC_CONFIG_SRCDIR(src/main.cpp)
+AM_INIT_AUTOMAKE(foreign)
 
 dnl *** Check for gettext and friends ***************************************
 
+AM_GNU_GETTEXT_VERSION(0.19)
 AM_GNU_GETTEXT([external])
 
 if test "x$USE_NLS" != "xyes"; then
@@ -31,7 +33,7 @@ dnl *****************
 
 SDL_VERSION=2.0
 
-AM_PATH_SDL($SDL_VERSION,
+AM_PATH_SDL2($SDL_VERSION,
             :,
             AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"

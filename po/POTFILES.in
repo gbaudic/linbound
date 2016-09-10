@@ -1,4 +1,6 @@
 # List of source files which contain translatable strings.
+src/channel.cpp
+src/context.cpp
 src/error.cpp
 src/event.cpp
 src/gui_lb.cpp
@@ -6,6 +8,11 @@ src/image.cpp
 src/init.cpp
 src/main.cpp
 src/map.cpp
+src/message.cpp
+src/network.cpp
+src/player.cpp
+src/room.cpp
 src/server.cpp
 src/sound.cpp
 src/update.cpp
+src/xml.cpp
