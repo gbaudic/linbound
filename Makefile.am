@@ -1,4 +1,3 @@
-AUTOMAKE_OPTIONS = gnu
 SUBDIRS = src po
 
 ACLOCAL_AMFLAGS = -I m4

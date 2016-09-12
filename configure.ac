@@ -3,7 +3,7 @@ dnl *** NOT TESTED YET !!! *********
 
 AC_INIT(linbound, 0.1)
 AC_CONFIG_SRCDIR(src/main.cpp)
-AM_INIT_AUTOMAKE(foreign)
+AM_INIT_AUTOMAKE([foreign])
 
 dnl *** Check for gettext and friends ***************************************
 
