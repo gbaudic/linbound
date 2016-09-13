@@ -144,7 +144,6 @@ class LB_Player
 };
 
 Uint16 computeDamage(LB_Shot* shot, LB_Player* sender, LB_Player* receiver);
-double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2);
 
 /**
  * \class LB_PlayerShortInfo

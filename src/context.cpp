@@ -49,12 +49,12 @@ class LB_Menu : public LB_Context {
 	SDL_Texture* background;
 	Label lbl_buttonHelp;
 	Label lbl_version;
-	Button btn_settings;
-	Button btn_play;
-	Button btn_localPlay;
-	Button btn_onlinePlay;
-	Button btn_quit;
-	Button btn_credits;
+	ImageButton btn_settings;
+	ImageButton btn_play;
+	ImageButton btn_localPlay;
+	ImageButton btn_onlinePlay;
+	ImageButton btn_quit;
+	ImageButton btn_credits;
 };
 
 //Settings view

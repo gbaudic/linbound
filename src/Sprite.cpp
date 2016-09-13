@@ -42,6 +42,7 @@
 #include <SDL2/SDL2_rotozoom.h>
 
 #include "Sprite.hpp"
+#include "utils.hpp"
 
 /* returns maximum or minimum of number */
 #define SDL_COLLIDE_MAX(a,b)	((a > b) ? a : b)
@@ -159,7 +160,7 @@ Sint16 Sprite::getSpeedAngle() {
 }
 
 void Sprite::rotate(Sint16 angle) {
-	Sint16 normalizedAngle = angle % 360;
+	Sint16 normalizedAngle = normalizeAngle(angle);
 	bool flip = abs(normalizedAngle) > 90;
 	
 	SDL_FreeSurface(rotated);

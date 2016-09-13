@@ -12,6 +12,7 @@
  */
  
 #include "player.hpp"
+#include "utils.hpp"
 
 /**
  *  \brief Get the achievement with the correct gold and xp settings for this player
@@ -93,14 +94,6 @@ Uint16 LB_Player::getCurrentMobile() {
 
 Sint8 LB_Player::getPlayerStat(Statistic stat) {
 	return playerStats[stat];
-}
-
-/**
- *  Implementation of Pythagore theorem
- *  Required for damage computation
- */
-double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2) {
-	return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
  
 /**

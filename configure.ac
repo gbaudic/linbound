@@ -60,7 +60,7 @@ if test "$static" = yes; then
   LIBS="$LIBS -lm -ldl -lfreetype -lz"
 fi
 AC_CHECK_LIB(SDL2_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
-AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
+AC_CHECK_HEADERS(SDL2_rotozoom.h,,check_sdl_gfx="no")
 
 dnl ****** Check for pkg-config **************************************************
 
