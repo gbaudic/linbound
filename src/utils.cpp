@@ -34,3 +34,24 @@ double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2) {
 	return sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 }
 
+/**
+ * Implements a conversion to get same angle notation as in GunBound
+ * Required to make transition easier for players
+ * \param angle the angle in degree
+ * \returns a normalized value with 0 <= abs(angle) <= 90, 0 is horizontal, pointing downwards is negative
+ */
+Sint16 getShotAngle(Sint16 angle) {
+	angle = normalizeAngle(angle); //[0; 360)
+	angle -= 180; //[-180; 180)
+
+	if(angle > 90){
+		return 90 - (angle - 90);
+	} else {
+		if(angle < -90) {
+			return -90 - (90 + angle);
+		} else {
+			return angle;
+		}
+	}
+
+}

@@ -47,14 +47,14 @@ class LB_Menu : public LB_Context {
 	
 	private:
 	SDL_Texture* background;
-	Label lbl_buttonHelp;
-	Label lbl_version;
-	ImageButton btn_settings;
-	ImageButton btn_play;
-	ImageButton btn_localPlay;
-	ImageButton btn_onlinePlay;
-	ImageButton btn_quit;
-	ImageButton btn_credits;
+	Label* lbl_buttonHelp;
+	Label* lbl_version;
+	ImageButton* btn_settings;
+	ImageButton* btn_play;
+	ImageButton* btn_localPlay;
+	ImageButton* btn_onlinePlay;
+	ImageButton* btn_quit;
+	ImageButton* btn_credits;
 };
 
 //Settings view
@@ -96,6 +96,8 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);
+
+	//TODO: delete widgets
 }
 
 void LB_Menu::drawBackground() {

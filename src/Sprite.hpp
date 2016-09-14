@@ -56,7 +56,7 @@ public:
 	Uint16 dx; //Motion vector coordinates
 	Uint16 dy;
 	
-	Sint16 angle;
+	Sint16 angle; //angle of which the sprite has been rotated to produce rotated
 
 	//Uint8 orderZ; //may be useful to sort blitting operations in a suitable order
 	bool isVisible;

@@ -31,7 +31,7 @@ dnl *****************
 dnl *** SDL check ***
 dnl *****************
 
-SDL_VERSION=2.0
+SDL_VERSION=2.0.0
 
 AM_PATH_SDL2($SDL_VERSION,
             :,
@@ -76,6 +76,7 @@ AC_CHECK_LIB(SDL2_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL2_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
 AC_CHECK_LIB([SDL2_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL2_net], [SDLNet_Init],,check_sdl_net="no")
+AC_CHECK_LIB(sqlite3, sqlite3_open,,check_sqlite3="no")
 if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32 -luser32"; fi
 
 dnl *** Errors to display when missing ***********************************
@@ -86,6 +87,7 @@ if test \
   -o x${check_sdl_ttf} = xno \
   -o x${check_sdl_gfx} = xno \
   -o x${check_sdl_net} = xno \
+  -o x${check_sqlite3} = xno \
   ; then
   AC_MSG_RESULT([])
   if test x${check_sdl_image} = xno; then
@@ -98,10 +100,13 @@ if test \
     AC_MSG_RESULT([ERROR: SDL2_ttf library required])
   fi
   if test x${check_sdl_gfx} = xno; then
-    AC_MSG_RESULT([ERROR: SDL2_gfx library version >= 2.0.13 required])
+    AC_MSG_RESULT([ERROR: SDL2_gfx library version >= 1.0.0 required])
   fi
   if test x${check_sdl_net} = xno; then
     AC_MSG_RESULT([ERROR: SDL2_net library required])
+  fi
+  if test x${check_sqlite3} = xno; then
+    AC_MSG_RESULT([ERROR: sqlite3 library required])
   fi
   exit 1
 fi
