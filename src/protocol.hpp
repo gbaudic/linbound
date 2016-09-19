@@ -1,5 +1,5 @@
 /**
- * protocol.hpp
+ *  \file protocol.hpp
  *
  *  \brief Protocol defines for the LinBound game
  *  \version 0.1a

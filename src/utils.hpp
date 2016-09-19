@@ -17,5 +17,6 @@
  Sint16 normalizeAngle(Sint16 angle);
  double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2);
  Sint16 getShotAngle(Sint16 angle);
+ bool flip(Sint16 angle);
  
  #endif

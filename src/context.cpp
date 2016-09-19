@@ -13,6 +13,9 @@
  * This Source Code Form is "Incompatible With Secondary Licenses", 
  * as defined by the Mozilla Public License, v. 2.0.
  */
+
+#include <libintl.h>
+#include <locale.h>
  
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -20,6 +23,8 @@
 #include <guisan/sdl.hpp>
 
 using namespace gcn;
+
+//TODO: extern guisan objects (gui, container, imageloader...)
 
 class LB_Context {
 	public:
@@ -51,6 +56,7 @@ class LB_Menu : public LB_Context {
 	Label* lbl_version;
 	ImageButton* btn_settings;
 	ImageButton* btn_play;
+	ImageButton* btn_back;
 	ImageButton* btn_localPlay;
 	ImageButton* btn_onlinePlay;
 	ImageButton* btn_quit;
@@ -91,13 +97,39 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	SDL_Surface* bck = IMG_Load("./res/menu/menuLB.jpg");
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
+	
 	//TODO: init GUI widgets
+	lbl_buttonHelp = new Label("");
+	lbl_version = new Label("Version ");
+	btn_settings = new ImageButton("./res/menu/settings.png");
+	btn_settings->setCaption(gettext("Settings"));
+	btn_play = new ImageButton("./res/menu/newgame.png");
+	btn_play->setCaption(gettext("New game"));
+	btn_localPlay = new ImageButton("./res/menu/localgame.png");
+	btn_localPlay->setCaption(gettext("New local game"));
+	btn_onlinePlay = new ImageButton("./res/menu/webgame.png");
+	btn_onlinePlay->setCaption(gettext("New online/network game"));
+	btn_back = new ImageButton("./res/menu/back.png");
+	btn_back->setCaption(gettext("Back"));
+	btn_quit = new ImageButton("./res/menu/quit.png");
+	btn_quit->setCaption(gettext("Quit Linbound"));
+	btn_credits = new ImageButton("./res/menu/credits.png");
+	btn_credits->setCaption(gettext("Credits"));
 }
 
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);
 
 	//TODO: delete widgets
+	delete lbl_buttonHelp;
+	delete lbl_version;
+	delete btn_settings;
+	delete btn_play;
+	delete btn_localPlay;
+	delete btn_onlinePlay;
+	delete btn_back;
+	delete btn_quit;
+	delete btn_credits;
 }
 
 void LB_Menu::drawBackground() {

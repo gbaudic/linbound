@@ -11,6 +11,8 @@
  * as defined by the Mozilla Public License, v. 2.0.
  */
 
+#include <cstdlib>
+#include <cmath>
 #include <SDL2/SDL.h>
 #include "utils.hpp"
 
@@ -55,3 +57,13 @@ Sint16 getShotAngle(Sint16 angle) {
 	}
 
 }
+
+/**
+ * Determine if mirroring is needed
+ * \param angle the angle in degree
+ */
+bool flip(Sint16 angle){
+    angle = normalizeAngle(angle) - 180;
+    return abs(angle) > 90;
+}
+

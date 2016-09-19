@@ -15,6 +15,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include <sqlite3.h>
 using namespace std;
 
@@ -22,6 +23,7 @@ sqlite3 *serverDB;
 
 /**
  * Open the database file
+ * \return 0 on success, non-zero on error
  */
 int LB_initDB(){
 	int result = sqlite3_open("linbound.db", &serverDB);
@@ -33,6 +35,26 @@ int LB_initDB(){
 	return 0;
 }
 
+/**
+ * Wrapper for db closing
+ */
 void LB_closeDB(){
 	sqlite3_close(serverDB);
 }
+
+/**
+ * Add a new player in this server's database
+ */
+int LB_createPlayer(string name, string password){
+    //TODO
+    return 0;
+}
+
+/**
+ * Try to enter a room
+ */
+int LB_getRoom(int number){
+    //TODO
+    return 0;
+}
+
