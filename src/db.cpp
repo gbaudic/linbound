@@ -17,9 +17,12 @@
 #include <iostream>
 #include <string>
 #include <sqlite3.h>
+
+#include "room.hpp"
+#include "player.hpp"
 using namespace std;
 
-sqlite3 *serverDB;
+sqlite3 *serverDB = NULL;
 
 /**
  * Open the database file
@@ -35,11 +38,16 @@ int LB_initDB(){
 	return 0;
 }
 
+bool isDBOpen() {
+	return serverDB != NULL;
+}
+
 /**
  * Wrapper for db closing
  */
 void LB_closeDB(){
 	sqlite3_close(serverDB);
+	serverDB = NULL;
 }
 
 /**
@@ -50,11 +58,41 @@ int LB_createPlayer(string name, string password){
     return 0;
 }
 
+//Delete player: not supported, modify db file from the outside
+
+/**
+ *  Edit an existing player
+ *  \return 0 on success, -1 on error
+ */
+int LB_editPlayer(LB_Player &player){
+	return 0;
+}
+
+LB_Player* LB_getPlayer(string name) {
+	return NULL;
+}
+
+bool LB_authenticatePlayer(string name, string password) {
+	return false;
+}
+
+int LB_createRoom(LB_Room &targetRoom) {
+	return 0;
+}
+
 /**
  * Try to enter a room
  */
-int LB_getRoom(int number){
+LB_Room* LB_getRoom(int number){
     //TODO
     return 0;
+}
+
+int LB_editRoom(LB_Room &newRoom){
+	return 0;
+}
+
+int LB_deleteRoom(int number){
+	return 0;
 }
 
