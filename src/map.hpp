@@ -13,6 +13,8 @@
 #ifndef _H_MAP_
 #define _H_MAP_
 
+#include "Sprite.hpp"
+
 class LB_MapBackground
 {
 public:

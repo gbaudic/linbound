@@ -18,6 +18,7 @@
 
 #include "channel.hpp"
 #include "map.hpp"
+#include "player.hpp"
 
 enum RoomMode {SOLO, DUO, MULTI, POINTS};
 enum RoomStatus {ROOM_WAITING, ROOM_FULL, ROOM_PLAYING};

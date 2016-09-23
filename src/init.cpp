@@ -24,6 +24,8 @@
 #include <SDL2/SDL_net.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
 
 #include "init.hpp"
 using namespace std;
@@ -34,6 +36,9 @@ bool isTTFEnabled = true;
 bool isNETEnabled = true;
 extern UDPsocket serverSocket;
 extern UDPsocket clientSocket;
+extern gcn::SDLInput* input;
+extern gcn::SDLGraphics* graphics;
+extern gcn::SDLImageLoader* imageLoader;
 bool isServer = false;
 
 /**
@@ -65,6 +70,10 @@ int LB_Init() {
 		return -1;
 	}
 
+	//Create GUI base objects
+	input = new gcn::SDLInput();
+	imageLoader = new gcn::SDLImageLoader();
+	graphics = new gcn::SDLGraphics();
 
 	SDL_DisableScreenSaver();
 
@@ -192,6 +201,10 @@ void LB_Quit() {
 		SDLNet_UDP_Close(serverSocket);
 		SDLNet_Quit();
 	}
+
+	delete input;
+	delete graphics;
+	delete imageLoader;
 
 	Mix_CloseAudio();
 

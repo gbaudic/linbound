@@ -21,8 +21,11 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL2_framerate.h>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
 
 #include "main.hpp"
 #include "init.hpp"
@@ -41,6 +44,13 @@ Uint16 iscreenh = 600;
 bool IsFirstRun = true;
 
 FPSmanager mgr;
+
+gcn::SDLInput* input;             // Input driver
+gcn::SDLGraphics* graphics;       // Graphics driver
+gcn::SDLImageLoader* imageLoader; // For loading images
+gcn::Gui* gui;            // A Gui object - binds it all together
+gcn::Container* top;      // A top container
+//gcn::SDLTrueTypeFont* font; //font is needed for widgets
 
 /**
  * The holy Main Function
@@ -85,6 +95,13 @@ int main(int argc, char *argv[])
 
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
+
+	graphics->setTarget(SDL_GetWindowSurface(screen));
+	top = new gcn::Container();
+	gui = new gcn::Gui();
+	gui->setGraphics(graphics);
+	gui->setInput(input);
+	gui->setTop(top);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
 	int ckresult = SDL_SetColorKey(cursor, SDL_TRUE, SDL_MapRGB(cursor->format, 0xff, 0, 0xff));
@@ -131,6 +148,8 @@ int main(int argc, char *argv[])
 	//SDL_Delay(3000);
 
 	//Free the memory allocated to the images
+	delete top;
+	delete gui;
 	//TODO : it would be more clever to use an array to put the images and free them at once by making a function iterate through the whole table
 	SDL_FreeCursor(mousePointer); 
 	//SDL_FreeSurface(refresh_test);
@@ -160,6 +179,7 @@ void MainLoop()
 				//cout << "break" << endl;
 				return;
 			}
+			input->pushInput(event);
 		}
 
         //Network events (send and receive)

@@ -100,21 +100,41 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	
 	//TODO: init GUI widgets
 	lbl_buttonHelp = new Label("");
+	lbl_buttonHelp->setPosition(70, 400);
+
 	lbl_version = new Label("Version ");
+	lbl_version->setPosition(20, 570);
+
 	btn_settings = new ImageButton("./res/menu/settings.png");
 	btn_settings->setCaption(gettext("Settings"));
+	btn_settings->setPosition(240, 220);
+
 	btn_play = new ImageButton("./res/menu/newgame.png");
 	btn_play->setCaption(gettext("New game"));
+	btn_play->setPosition(70, 220);
+
 	btn_localPlay = new ImageButton("./res/menu/localgame.png");
 	btn_localPlay->setCaption(gettext("New local game"));
+	btn_localPlay->setPosition(240, 220);
+	btn_localPlay->setVisible(false);
+
 	btn_onlinePlay = new ImageButton("./res/menu/webgame.png");
 	btn_onlinePlay->setCaption(gettext("New online/network game"));
+	btn_onlinePlay->setPosition(410, 220);
+	btn_onlinePlay->setVisible(false);
+
 	btn_back = new ImageButton("./res/menu/back.png");
 	btn_back->setCaption(gettext("Back"));
+	btn_back->setPosition(70, 220);
+	btn_back->setVisible(false);
+
 	btn_quit = new ImageButton("./res/menu/quit.png");
 	btn_quit->setCaption(gettext("Quit Linbound"));
+	btn_quit->setPosition(570, 220);
+
 	btn_credits = new ImageButton("./res/menu/credits.png");
 	btn_credits->setCaption(gettext("Credits"));
+	btn_credits->setPosition(410, 220);
 }
 
 LB_Menu::~LB_Menu() {

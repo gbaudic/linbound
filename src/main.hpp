@@ -20,11 +20,6 @@
 #ifndef _H_MAIN_
 #define _H_MAIN_
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-
-#include "player.hpp"
-
 SDL_Window *screen = NULL;
 SDL_Renderer *renderer = NULL;
 //SDL_Surface *old_screen;
