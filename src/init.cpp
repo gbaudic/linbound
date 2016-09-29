@@ -28,6 +28,7 @@
 #include <guisan/sdl.hpp>
 
 #include "init.hpp"
+#include "sound.hpp"
 using namespace std;
 
 TTF_Font *font = NULL;
@@ -180,7 +181,14 @@ int LB_InitSound(int channels) {
 		return -1;
 	}
 
-	Mix_VolumeMusic(MIX_MAX_VOLUME/2); //Set the volume to 50% to begin
+	if (LB_LoadSFX() != 0){
+		cout << gettext("Error loading SFX files: ") << Mix_GetError() << endl;
+		//Missing audio files is unpleasant but not critical, no return here
+	}
+
+	//Set the volume to 50% to begin
+	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
+	Mix_Volume(-1, MIX_MAX_VOLUME/2);
 
 	return 0;
 
@@ -188,6 +196,7 @@ int LB_InitSound(int channels) {
 
 /**
  * The function in charge of exiting everything and calling quit functions for the called libraries
+ * Should be called only once when shutting down the program
  */
 void LB_Quit() {
 
@@ -206,6 +215,8 @@ void LB_Quit() {
 	delete graphics;
 	delete imageLoader;
 
+	LB_FreeSFX();
+	Mix_Quit();
 	Mix_CloseAudio();
 
 	SDL_Quit();

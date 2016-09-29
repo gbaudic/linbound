@@ -41,7 +41,7 @@ using namespace std;
 Uint16 iscreenw = 800;
 Uint16 iscreenh = 600;
 
-bool IsFirstRun = true;
+bool isFirstRun = true;
 
 FPSmanager mgr;
 

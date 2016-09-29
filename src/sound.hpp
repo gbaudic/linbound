@@ -19,8 +19,10 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
-int LB_PlayMusic(char* file);
+int LB_PlayMusic(std::string file);
+int LB_LoadSFX();
 int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);
+void LB_FreeSFX();
 int LB_CountGoldRepeat(Sint16 value);
 
 #endif /* _H_SOUND_ */

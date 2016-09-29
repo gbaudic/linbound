@@ -32,12 +32,12 @@ Mix_Music* music;
 map<string, Mix_Chunk*> effects;
 
 /**
-  * One basic function to load the music
-  * \param file the new music we want to play
-  * \return 0 if OK, -1 if something gets wrong
-*/
+ * One basic function to load the music
+ * @param file the new music we want to play
+ * @return 0 if OK, -1 if something gets wrong
+ */
 //TODO: test this function, even if it should really work
-int LB_PlayMusic(char* file) {
+int LB_PlayMusic(string file) {
 	//We must first check if there's some music playin'
  	if (Mix_PlayingMusic() == 1) {
 		//If it is the case, we stop it: we are here to change it!
@@ -53,7 +53,7 @@ int LB_PlayMusic(char* file) {
 	}
 
     //Load the new music
-    music = Mix_LoadMUS(file);
+    music = Mix_LoadMUS(file.c_str());
     if(music == NULL){
     	cout << gettext("Music not loaded: ") << Mix_GetError() << endl;
     	return -1;
@@ -65,11 +65,25 @@ int LB_PlayMusic(char* file) {
 
 /**
  * Idea: load all possible FX in a Map and fetch them afterwards with their name
+ * @return 0 on success, the number of errors encountered otherwise
  */
 int LB_LoadSFX(){
-	string effectNames[] = {"wind", "turn", "win", "lose", "money"};
+	string effectNames[] = {"wind1", "turn", "victory", "lose", "money",
+							"cow", "duck", "electron", "goat", "ice", "pig", "sheep", "tea", "unicorn"};
+	int counter = 0;
 	
-	return 0;
+	for(string item : effectNames){
+		string path = "./res/sounds/" + item + ".ogg";
+		Mix_Chunk* res = Mix_LoadWAV(path.c_str());
+		if (res != NULL) {
+			effects.insert(make_pair(item, res));
+		} else {
+			//Error while loading file
+			counter++;
+		}
+	}
+
+	return counter;
 }
 
 //Another function to play some SFX (rather useless currently...)
@@ -89,8 +103,10 @@ int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops) {
 /**
  * Free all allocated FXs
  */
-int LB_FreeSFX() {
-	return 0;
+void LB_FreeSFX() {
+	for(auto item : effects){ //C++11
+		Mix_FreeChunk(item.second);
+	}
 }
 
 /**
