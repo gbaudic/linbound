@@ -66,8 +66,14 @@ dnl ****** Check for pkg-config ************************************************
 
 AC_PATH_PROGS([PACKAGE_CONFIG], [$host_alias-pkg-config pkg-config], [none])
 if test "x$PACKAGE_CONFIG" = "xnone"; then
-  AC_MSG_ERROR([*** pkg-config, needed to check for libxml2 existence has not been found.])
+  AC_MSG_ERROR([*** pkg-config, needed to check for libguisan existence has not been found.])
 fi
+PKG_PROG_PKG_CONFIG()
+PKG_CHECK_MODULES(GUISAN, libguisan, [], [AC_MSG_FAILURE([libguisan not found])])
+CFLAGS="$CFLAGS $GUISAN_CFLAGS"
+CPPFLAGS="$CPPFLAGS $GUISAN_CFLAGS"
+CXXFLAGS="$CXXFLAGS $GUISAN_CFLAGS"
+LIBS="$LIBS $GUISAN_LIBS"
 
 dnl ****** Check for the whole SDL shabang ***************************************
 
@@ -113,3 +119,6 @@ fi
 
 
 AC_OUTPUT(Makefile po/Makefile.in src/Makefile)
+
+echo "Configuration of linbound done. "
+echo "Now type make to compile then sudo make install to install."
