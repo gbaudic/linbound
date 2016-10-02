@@ -67,7 +67,7 @@ int LB_Init() {
 	}
 
 	//Initialize the sound system
-	if (LB_InitSound(CHANNELS) == -1){
+	if (!isServer && LB_InitSound(CHANNELS) == -1){
 		return -1;
 	}
 
@@ -120,6 +120,8 @@ int LB_ParseOptions(int argc, char *argv[]) {
 		iscreenw = 800;
 		iscreenh = 600;
 	} */
+	
+	//TODO: detect if we are launched as a server
 
 	if(argc >= 2){
 		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
@@ -164,31 +166,33 @@ int LB_InitNetwork(Uint8 *imode) {
  * @return 0 if no error, -1 otherwise
  */
 int LB_InitSound(int channels) {
- 	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
-		cout << "Mix_OpenAudio: " << Mix_GetError() << endl;
-		return -1;
+	if (!isServer) {
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+			cout << "Mix_OpenAudio: " << Mix_GetError() << endl;
+			return -1;
+		}
+
+		int flags = MIX_INIT_OGG; //MP3 is unlikely to work everywhere...
+		int res = Mix_Init(flags);
+
+		if(res != flags){
+			cout << gettext("Error loading audio decoding libraries : ") << Mix_GetError() << endl;
+		}
+
+		if (Mix_AllocateChannels(channels) != channels){
+			cout << gettext("All channels haven't been allocated, exiting") << endl;
+			return -1;
+		}
+
+		if (LB_LoadSFX() != 0){
+			cout << gettext("Error loading SFX files: ") << Mix_GetError() << endl;
+			//Missing audio files is unpleasant but not critical, no return here
+		}
+
+		//Set the volume to 50% to begin
+		Mix_VolumeMusic(MIX_MAX_VOLUME/2);
+		Mix_Volume(-1, MIX_MAX_VOLUME/2);
 	}
-
- 	int flags = MIX_INIT_OGG; //MP3 is unlikely to work everywhere...
- 	int res = Mix_Init(flags);
-
- 	if(res != flags){
- 		cout << gettext("Error loading audio decoding libraries : ") << Mix_GetError() << endl;
- 	}
-
-	if (Mix_AllocateChannels(channels) != channels){
-		cout << gettext("All channels haven't been allocated, exiting") << endl;
-		return -1;
-	}
-
-	if (LB_LoadSFX() != 0){
-		cout << gettext("Error loading SFX files: ") << Mix_GetError() << endl;
-		//Missing audio files is unpleasant but not critical, no return here
-	}
-
-	//Set the volume to 50% to begin
-	Mix_VolumeMusic(MIX_MAX_VOLUME/2);
-	Mix_Volume(-1, MIX_MAX_VOLUME/2);
 
 	return 0;
 
@@ -214,10 +218,12 @@ void LB_Quit() {
 	delete input;
 	delete graphics;
 	delete imageLoader;
-
-	LB_FreeSFX();
-	Mix_Quit();
-	Mix_CloseAudio();
+	
+	if(!isServer){
+		LB_FreeSFX();
+		Mix_Quit();
+		Mix_CloseAudio();
+	}
 
 	SDL_Quit();
 	return;

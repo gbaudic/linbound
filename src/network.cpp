@@ -23,7 +23,21 @@
 
 UDPsocket serverSocket;
 UDPsocket clientSocket;
+extern bool isServer;
 
-void doNothing() {
+void LB_doNothing() {
 
+}
+
+/**
+ *  Checks if the version of the server matches the version of this client (protocol.hpp/LB_PROTOCOL_VERSION)
+ *  \param version the server version, as sent after discovery phase
+ *  \return true if compatible, false otherwise
+ */
+bool LB_isServerCompatible(Uint8 version){
+	return true;
+}
+
+void LB_discoverServers(){
+	//TODO: return a list
 }

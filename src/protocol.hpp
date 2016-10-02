@@ -40,6 +40,8 @@ const Uint8 ITEMS_MSG = 135; //Item choice when playing (for server consistency 
 const Uint8 COORDS_MSG = 130; //Coordinates (for players landing, at the beginning or when respawning)
 const Uint8 RESULTS_MSG = 150; //Results of the battle : wins/loses, rewards
 
+const Uint8 LB_PROTOCOL_VERSION = 1; //Used to denote incompatibilities between versions
+
 /******* Special senders/recipients *******/
 const char* CHANNEL = "ch";
 const char* SERVER = "sr";
