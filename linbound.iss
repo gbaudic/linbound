@@ -38,7 +38,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "linbound.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "dlls/*.dll"; DestDir: "{app}"
+Source: "dll/*.dll"; DestDir: "{app}"
 Source: "res/*"; DestDir: "{app}/res"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
