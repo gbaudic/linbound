@@ -35,11 +35,11 @@ SDL_VERSION=2.0.0
 
 AM_PATH_SDL2($SDL_VERSION,
             :,
-            AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
-CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
-CFLAGS="$CFLAGS $SDL_CFLAGS"
-CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
-LIBS="$LIBS $SDL_LIBS"
+            AC_MSG_ERROR([*** SDL2 version $SDL_VERSION not found!]))
+CXXFLAGS="$CXXFLAGS $SDL2_CFLAGS -std=c++11"
+CFLAGS="$CFLAGS $SDL2_CFLAGS"
+CPPFLAGS="$CPPFLAGS $SDL2_CFLAGS"
+LIBS="$LIBS $SDL2_LIBS"
 
 dnl *** png check, used by SDL2_image ... is it really compulsory since sdl_image requests libpng as a dependency ???***
 
@@ -50,17 +50,17 @@ dnl *********************
 AC_ARG_WITH(sdl2-gfx-prefix,
             [  --with-sdl2-gfx-prefix=DIR       specify where SDL2_gfx library is installed],
             [SDL_GFX_PREFIX="$withval"])
-AC_SUBST(SDL_GFX_PREFIX)
-if test "x$SDL_GFX_PREFIX" != "x"; then
-  CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL2"
-  CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL2"
-  LIBS="-L$SDL_GFX_PREFIX/lib $LIBS"
+AC_SUBST(SDL2_GFX_PREFIX)
+if test "x$SDL2_GFX_PREFIX" != "x"; then
+  CPPFLAGS="$CPPFLAGS -I$SDL2_GFX_PREFIX/include/SDL2"
+  CXXFLAGS="$CXXFLAGS -I$SDL2_GFX_PREFIX/include/SDL2"
+  LIBS="-L$SDL2_GFX_PREFIX/lib $LIBS"
 fi
 if test "$static" = yes; then
   LIBS="$LIBS -lm -ldl -lfreetype -lz"
 fi
 AC_CHECK_LIB(SDL2_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
-AC_CHECK_HEADERS(SDL2_rotozoom.h,,check_sdl_gfx="no")
+AC_CHECK_HEADERS([SDL2/SDL2_rotozoom.h],,check_sdl_gfx="no")
 
 dnl ****** Check for pkg-config **************************************************
 
@@ -69,7 +69,7 @@ if test "x$PACKAGE_CONFIG" = "xnone"; then
   AC_MSG_ERROR([*** pkg-config, needed to check for libguisan existence has not been found.])
 fi
 PKG_PROG_PKG_CONFIG()
-PKG_CHECK_MODULES(GUISAN, libguisan, [], [AC_MSG_FAILURE([libguisan not found])])
+PKG_CHECK_MODULES(guisan, libguisan, [], [AC_MSG_FAILURE([libguisan not found])])
 CFLAGS="$CFLAGS $GUISAN_CFLAGS"
 CPPFLAGS="$CPPFLAGS $GUISAN_CFLAGS"
 CXXFLAGS="$CXXFLAGS $GUISAN_CFLAGS"
@@ -84,6 +84,8 @@ AC_CHECK_LIB([SDL2_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL2_net], [SDLNet_Init],,check_sdl_net="no")
 AC_CHECK_LIB(sqlite3, sqlite3_open,,check_sqlite3="no")
 if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32 -luser32"; fi
+
+dnl *** TODO: decide whether checking headers too may be useful here
 
 dnl *** Errors to display when missing ***********************************
 
