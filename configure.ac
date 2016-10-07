@@ -62,12 +62,12 @@ AC_CHECK_HEADERS([SDL2/SDL2_rotozoom.h],,check_sdl_gfx="no")
 dnl ****** Check for pkg-config **************************************************
 
 PKG_PROG_PKG_CONFIG()
-PKG_CHECK_MODULES(guisan, guisan, [], [AC_MSG_FAILURE([guisan not found, see https://github/gbaudic/guisan])])
-PKG_CHECK_MODULES(tinyxml2, tinyxml2, [], [AC_MSG_FAILURE([tinyxml2 not found])])
-CFLAGS="$CFLAGS $guisan_CFLAGS $tinyxml2_CFLAGS"
-CPPFLAGS="$CPPFLAGS $guisan_CFLAGS $tinyxml2_CFLAGS"
-CXXFLAGS="$CXXFLAGS $guisan_CFLAGS $tinyxml2_CFLAGS"
-LIBS="$LIBS $guisan_LIBS $tinyxml2_LIBS"
+PKG_CHECK_MODULES(GUISAN, guisan, [], [AC_MSG_FAILURE([guisan not found, see https://github/gbaudic/guisan])])
+PKG_CHECK_MODULES(TINYXML2, tinyxml2, [], [AC_MSG_FAILURE([tinyxml2 not found])])
+CFLAGS="$CFLAGS $GUISAN_CFLAGS $TINYXML2_CFLAGS"
+CPPFLAGS="$CPPFLAGS $GUISAN_CFLAGS $TINYXML2_CFLAGS"
+CXXFLAGS="$CXXFLAGS $GUISAN_CFLAGS $TINYXML2_CFLAGS"
+LIBS="$LIBS $GUISAN_LIBS $TINYXML2_LIBS"
 
 dnl ****** Check for the whole SDL shabang ***************************************
 
@@ -77,8 +77,6 @@ AC_CHECK_LIB([SDL2_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
 AC_CHECK_LIB([SDL2_net], [SDLNet_Init],,check_sdl_net="no")
 AC_CHECK_LIB(sqlite3, sqlite3_open,,check_sqlite3="no")
 if test "${WIN32}" = "yes"; then LIBS="$LIBS -lwsock32 -lws2_32 -luser32"; fi
-
-dnl *** TODO: decide whether checking headers too may be useful here
 
 dnl *** Errors to display when missing ***********************************
 
@@ -113,7 +111,7 @@ if test \
 fi
 
 
-AC_OUTPUT(Makefile po/Makefile.in src/Makefile)
+AC_OUTPUT(Makefile po/Makefile.in src/Makefile data/Makefile)
 
 echo "Configuration of linbound done. "
 echo "Now type make to compile then sudo make install to install."

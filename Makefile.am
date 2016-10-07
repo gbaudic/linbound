@@ -1,4 +1,4 @@
-SUBDIRS = src po
+SUBDIRS = src res po
 
 ACLOCAL_AMFLAGS = -I m4
 
