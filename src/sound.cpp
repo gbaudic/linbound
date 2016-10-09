@@ -20,20 +20,19 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <stdexcept>
 #include <cstdlib>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "sound.hpp"
 using namespace std;
 
-//As of 2009-08-17, all functions listed here need preallocated sound buffers
-//This will be completed in an hypothetical future
 Mix_Music* music;
 map<string, Mix_Chunk*> effects;
 
 /**
  * One basic function to load the music
- * @param file the new music we want to play
+ * @param file the new music file we want to play
  * @return 0 if OK, -1 if something gets wrong
  */
 //TODO: test this function, even if it should really work
@@ -86,22 +85,28 @@ int LB_LoadSFX(){
 	return counter;
 }
 
-//Another function to play some SFX (rather useless currently...)
-//Returns 0 if OK, -1 if something went wrong
 /**
  * Plays a sound which is not the background music, e.g. SFX
  * @param filename the file to play
- * @param channel the channel on which you want to play the sound
  * @param loops the number of iterations of the sound
  * @return 0 if OK, -1 if something went wrong
  */
-//TODO: test this function, even if it should really work
-int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops) {
- 	return Mix_PlayChannel(channel, filename, loops);
+//TODO: test this function
+int LB_PlaySFX(string SFXname, int loops) {
+	int res;
+	try {
+		res = Mix_PlayChannel(-1, effects.at(SFXname), loops);
+	} catch (const out_of_range& e) {
+		SDL_SetError("Sound effect not found: "+ SFXname);
+		return -1;
+	}
+
+ 	return (res > 0 ? 0 : res);
 }
 
 /**
  * Free all allocated FXs
+ * Used at program shutdown
  */
 void LB_FreeSFX() {
 	for(auto item : effects){ //C++11
@@ -110,7 +115,17 @@ void LB_FreeSFX() {
 }
 
 /**
- *  Determine how many times we have to repeat the sound
+ *  Stop and free the music
+ *  Used at program shutdown
+ */
+void LB_FreeMusic() {
+	Mix_HaltMusic();
+	Mix_FreeMusic(music);
+}
+
+/**
+ *  Determine how many times we have to repeat the sound for money
+ *  @return the number of times to play between 1 and 5
  */
 int LB_CountGoldRepeat(Sint16 value) {
 	int repeats = 1;

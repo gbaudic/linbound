@@ -62,16 +62,16 @@ int main(int argc, char *argv[])
 {
 	cout << gettext("Initializing LinBound v0.1a...") << endl;
 
-	//int result = LB_ParseOptions(argc, argv);
-	/* if(result == -1){
-	 * 	return 0;
-	 * }
-	 */
-
+	int result = LB_ParseOptions(argc, argv);
+	if(result == -1){
+		return 0;
+	}
+	
 	//gettext support
 	setlocale(LC_ALL, "");
 	bindtextdomain("linbound", "./po");
 	textdomain("linbound");
+	
 
 	LB_Init();
 

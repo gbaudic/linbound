@@ -21,8 +21,9 @@
 
 int LB_PlayMusic(std::string file);
 int LB_LoadSFX();
-int LB_PlaySFX(Mix_Chunk *filename, int channel, int loops);
+int LB_PlaySFX(string SFXname, int loops);
 void LB_FreeSFX();
+void LB_FreeMusic();
 int LB_CountGoldRepeat(Sint16 value);
 
 #endif /* _H_SOUND_ */

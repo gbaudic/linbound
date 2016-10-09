@@ -121,7 +121,7 @@ int LB_ParseOptions(int argc, char *argv[]) {
 		iscreenh = 600;
 	} */
 	
-	//TODO: detect if we are launched as a server
+	//TODO: manage help option to display possible options
 
 	if(argc >= 2){
 		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
@@ -129,6 +129,12 @@ int LB_ParseOptions(int argc, char *argv[]) {
 					<< "(C) 2008-2016 G. B. aka podgy_piglet and contributors\n"
 					<< "This software is free software released under the Mozilla Public License 2.0\n";
 			return -1;
+		}
+		
+		//Detect if we are launched as a server
+		if(strncmp(argv[1], "--server\0", 8) == 0){
+			isServer = true;
+			cout << "Running in server mode" << endl;
 		}
 	}
 
@@ -221,6 +227,7 @@ void LB_Quit() {
 	
 	if(!isServer){
 		LB_FreeSFX();
+		LB_FreeMusic();
 		Mix_Quit();
 		Mix_CloseAudio();
 	}
