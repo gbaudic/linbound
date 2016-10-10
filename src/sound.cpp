@@ -97,7 +97,8 @@ int LB_PlaySFX(string SFXname, int loops) {
 	try {
 		res = Mix_PlayChannel(-1, effects.at(SFXname), loops);
 	} catch (const out_of_range& e) {
-		SDL_SetError("Sound effect not found: "+ SFXname);
+		string errstring = gettext("Sound effect not found: ") + SFXname;
+		SDL_SetError(errstring.c_str());
 		return -1;
 	}
 

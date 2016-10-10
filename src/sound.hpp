@@ -21,7 +21,7 @@
 
 int LB_PlayMusic(std::string file);
 int LB_LoadSFX();
-int LB_PlaySFX(string SFXname, int loops);
+int LB_PlaySFX(std::string SFXname, int loops);
 void LB_FreeSFX();
 void LB_FreeMusic();
 int LB_CountGoldRepeat(Sint16 value);

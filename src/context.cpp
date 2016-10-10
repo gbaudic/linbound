@@ -21,10 +21,13 @@
 #include <SDL2/SDL_image.h>
 #include <guisan.hpp>
 #include <guisan/sdl.hpp>
+#include "sound.hpp" //may be useful
 
 using namespace gcn;
 
 //TODO: extern guisan objects (gui, container, imageloader...)
+extern gcn::Gui* gui;
+extern gcn::Container* top;
 
 class LB_Context {
 	public:
@@ -32,7 +35,6 @@ class LB_Context {
 	virtual ~LB_Context() = 0;
 	virtual void drawBackground() = 0;
 	virtual void drawMiddleground() = 0;
-	virtual void drawGUI() = 0;
 	virtual void processEvent(SDL_Event event) = 0;
 	
 	protected:
@@ -47,10 +49,10 @@ class LB_Menu : public LB_Context {
 	~LB_Menu();
 	void drawBackground();
 	void drawMiddleground();
-	void drawGUI();
 	void processEvent(SDL_Event event);
 	
 	private:
+	Uint8 mode; //0 for start menu, 1 for game buttons, 2 for credits
 	SDL_Texture* background;
 	Label* lbl_buttonHelp;
 	Label* lbl_version;
@@ -98,9 +100,12 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
 	
-	//TODO: init GUI widgets
+	mode = 0;
+
+	//Init GUI widgets
 	lbl_buttonHelp = new Label("");
 	lbl_buttonHelp->setPosition(70, 400);
+	lbl_buttonHelp->setAlignment(gcn::Graphics::CENTER);
 
 	lbl_version = new Label("Version ");
 	lbl_version->setPosition(20, 570);
@@ -135,10 +140,24 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_credits = new ImageButton("./res/menu/credits.png");
 	btn_credits->setCaption(gettext("Credits"));
 	btn_credits->setPosition(410, 220);
+
+	//Add to container
+	top->add(lbl_buttonHelp);
+	top->add(lbl_version);
+	top->add(btn_settings);
+	top->add(btn_play);
+	top->add(btn_localPlay);
+	top->add(btn_onlinePlay);
+	top->add(btn_back);
+	top->add(btn_quit);
+	top->add(btn_credits);
 }
 
 LB_Menu::~LB_Menu() {
 	SDL_DestroyTexture(background);
+
+	//Remove from container if not already done
+	top->clear();
 
 	//TODO: delete widgets
 	delete lbl_buttonHelp;
@@ -160,6 +179,3 @@ void LB_Menu::drawMiddleground() {
 	return; //Nothing to draw
 }
 
-void LB_Menu::drawGUI() {
-	return; //TBD
-}

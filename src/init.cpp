@@ -85,41 +85,9 @@ int LB_Init() {
  * Parses the options given to the main function and acts accordingly
  * @param argc the number of arguments passed
  * @param argv the array containing those arguments
- * @return 0 if OK, -1 if there's an error
+ * @return 0 if execution must continue, -1 if program should stop
  */
 int LB_ParseOptions(int argc, char *argv[]) {
-	/* if (argc >= 3){
-		//Recognize and use resolution requested by the user
-		//If arguments are bad, use default to let the soft run
-		if (strncmp(argv[1], "640\0",3) == 0 && strncmp(argv[2], "480\0", 3) == 0){
-			iscreenw = 640;
-			iscreenh = 480;
-			cout << "Using 640*480, user-defined" << endl;
-		}
-
-		if (strncmp(argv[1], "800\0",3) == 0 && strncmp(argv[2], "600\0", 3) == 0){
-			iscreenw = 800;
-			iscreenh = 600;
-			cout << "Using 800*600, user-defined" << endl;
-		}
-
-		if (strncmp(argv[1], "1024\0",4) == 0 && strncmp(argv[2], "768\0", 3) == 0){
-			iscreenw = 1024;
-			iscreenh = 768;
-			cout << "Using 1024*768, user-defined" << endl;
-		}
-
-		if (iscreenw == 0){
-			iscreenw = 800;
-			iscreenh = 600;
-			cout << "Bad arguments, using default 800*600" << endl;
-		}
-	}  else {
-		//Use default and tell the user if he put nothing
-		cout << "No resolution defined, using default 800*600." << endl;
-		iscreenw = 800;
-		iscreenh = 600;
-	} */
 	
 	//TODO: manage help option to display possible options
 

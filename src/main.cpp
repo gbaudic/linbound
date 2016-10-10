@@ -185,6 +185,7 @@ void MainLoop()
         //Network events (send and receive)
 
         //Update the model
+		gui->logic();
 
         //Update the graphics
 		SDL_RenderClear(renderer);
@@ -193,6 +194,7 @@ void MainLoop()
 		//**Foreground
 
 		//**GUI
+		gui->draw();
 
 		SDL_RenderPresent(renderer);
 
