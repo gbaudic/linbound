@@ -50,7 +50,7 @@ gcn::SDLGraphics* graphics;       // Graphics driver
 gcn::SDLImageLoader* imageLoader; // For loading images
 gcn::Gui* gui;            // A Gui object - binds it all together
 gcn::Container* top;      // A top container
-//gcn::SDLTrueTypeFont* font; //font is needed for widgets
+gcn::SDLTrueTypeFont* gcnfont; //font is needed for widgets
 
 /**
  * The holy Main Function

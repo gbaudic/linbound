@@ -12,7 +12,10 @@
  * This Source Code Form is “Incompatible With Secondary Licenses”, 
  * as defined by the Mozilla Public License, v. 2.0.
  */
- 
+
+#include <libintl.h>
+#include <locale.h>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <guisan.hpp>
@@ -22,7 +25,7 @@
 
 using namespace gcn;
 
-void ButtonActionListener::action(const gcn::ActionEvent& actionEvent) {
+void LB_Menu::action(const gcn::ActionEvent& actionEvent) {
 	if (actionEvent.getId() == "newgame") {
 		lbl_buttonHelp->setCaption(btn_play->getCaption());
 		btn_localPlay->setVisible(true);
@@ -54,8 +57,6 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	SDL_FreeSurface(bck);
 	
 	mode = 0;
-	
-	buttonActionListener = new ButtonActionListener();
 
 	//Init GUI widgets
 	lbl_buttonHelp = new Label("");
@@ -69,46 +70,46 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_settings->setCaption(gettext("Settings"));
 	btn_settings->setPosition(240, 220);
 	btn_settings->setActionEventId("settings");
-	btn_settings->addActionListener(buttonActionListener);
+	btn_settings->addActionListener(this);
 
 	btn_play = new ImageButton("./res/menu/newgame.png");
 	btn_play->setCaption(gettext("New game"));
 	btn_play->setPosition(70, 220);
 	btn_play->setActionEventId("newgame");
-	btn_play->addActionListener(buttonActionListener);
+	btn_play->addActionListener(this);
 
 	btn_localPlay = new ImageButton("./res/menu/localgame.png");
 	btn_localPlay->setCaption(gettext("New local game"));
 	btn_localPlay->setPosition(240, 220);
 	btn_localPlay->setActionEventId("localgame");
 	btn_localPlay->setVisible(false);
-	btn_localPlay->addActionListener(buttonActionListener);
+	btn_localPlay->addActionListener(this);
 
 	btn_onlinePlay = new ImageButton("./res/menu/webgame.png");
 	btn_onlinePlay->setCaption(gettext("New online/network game"));
 	btn_onlinePlay->setPosition(410, 220);
 	btn_onlinePlay->setActionEventId("onlinegame");
 	btn_onlinePlay->setVisible(false);
-	btn_onlinePlay->addActionListener(buttonActionListener);
+	btn_onlinePlay->addActionListener(this);
 
 	btn_back = new ImageButton("./res/menu/back.png");
 	btn_back->setCaption(gettext("Back"));
 	btn_back->setPosition(70, 220);
 	btn_back->setActionEventId("back");
 	btn_back->setVisible(false);
-	btn_back->addActionListener(buttonActionListener);
+	btn_back->addActionListener(this);
 
 	btn_quit = new ImageButton("./res/menu/quit.png");
 	btn_quit->setCaption(gettext("Quit Linbound"));
 	btn_quit->setActionEventId("quit");
 	btn_quit->setPosition(570, 220);
-	btn_quit->addActionListener(buttonActionListener);
+	btn_quit->addActionListener(this);
 
 	btn_credits = new ImageButton("./res/menu/credits.png");
 	btn_credits->setCaption(gettext("Credits"));
 	btn_credits->setActionEventId("credits");
 	btn_credits->setPosition(410, 220);
-	btn_credits->addActionListener(buttonActionListener);
+	btn_credits->addActionListener(this);
 
 	//Add to container
 	top->add(lbl_buttonHelp);
@@ -127,8 +128,6 @@ LB_Menu::~LB_Menu() {
 
 	//Remove from container if not already done
 	top->clear();
-	
-	delete buttonActionListener;
 
 	//TODO: delete widgets
 	delete lbl_buttonHelp;

@@ -18,19 +18,18 @@
 
 #include "context.hpp"
 
-class ButtonActionListener : public gcn::ActionListener {
-    public:
-	void action(const gcn::ActionEvent& actionEvent);
-};
-
-class LB_Menu : public LB_Context {
+class LB_Menu : public LB_Context, public gcn::ActionListener {
+	/* Note: abusing multiple inheritance of C++ to make this class an ActionListener
+	 * is the simplest idea I have had to overcome issues with a nested separate ActionListener class.
+	 */
 	public:
 	LB_Menu(SDL_Renderer* renderer);
 	~LB_Menu();
 	void drawBackground();
 	void drawMiddleground();
 	void processEvent(SDL_Event event);
-	
+	void action(const gcn::ActionEvent& actionEvent);
+
 	private:
 	Uint8 mode; //0 for start menu, 1 for game buttons, 2 for credits
 	SDL_Texture* background;
@@ -44,7 +43,6 @@ class LB_Menu : public LB_Context {
 	gcn::ImageButton* btn_quit;
 	gcn::ImageButton* btn_credits;
 	
-	ButtonActionListener* buttonActionListener;
 };
 
 #endif
