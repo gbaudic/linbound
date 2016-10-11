@@ -1,5 +1,5 @@
 /**
- * \file context.cpp
+ * \file context.hpp
  * \brief Context definition, used to represent various views in game
  * \version 0.1a
  * \author G. B.
@@ -12,36 +12,25 @@
  * This Source Code Form is "Incompatible With Secondary Licenses", 
  * as defined by the Mozilla Public License, v. 2.0.
  */
-
-#include <libintl.h>
-#include <locale.h>
  
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <guisan.hpp>
-#include <guisan/sdl.hpp>
-#include "context.hpp"
+#ifndef _H_CONTEXT_
+#define _H_CONTEXT_
 
-using namespace gcn;
+extern gcn::Gui* gui;
+extern gcn::Container* top;
 
-//Settings view
+class LB_Context {
+	public:
+	LB_Context(SDL_Renderer* renderer);
+	virtual ~LB_Context() = 0;
+	virtual void drawBackground() = 0;
+	virtual void drawMiddleground() = 0;
+	virtual void processEvent(SDL_Event event) = 0;
+	
+	protected:
+	SDL_Renderer* renderer; //reference, this object is created and managed outside the class
+	
+};
 
-//Server list
-
-//Room list
-
-//Room lobby view
-
-//Room game view
-
-//Avatar item shop
-
-
-LB_Context::LB_Context(SDL_Renderer* renderer){
-	this->renderer = renderer;
-}
-
-LB_Context::~LB_Context() {};
-
-
-
+#endif
+ 
