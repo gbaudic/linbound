@@ -32,6 +32,8 @@
 #include "event.hpp"
 #include "image.hpp"
 #include "sound.hpp"
+#include "context.hpp"
+#include "menu.hpp"
 
 #include "message.hpp"
 
@@ -52,16 +54,18 @@ gcn::Gui* gui;            // A Gui object - binds it all together
 gcn::Container* top;      // A top container
 gcn::SDLTrueTypeFont* gcnfont; //font is needed for widgets
 
+LB_Context* currentContext;
+
 /**
  * The holy Main Function
  * @param argc the number of arguments given
  * @param argv the arguments
  * @return 1 on error, 0 otherwise
  */
-int main(int argc, char *argv[])
-{
-	cout << gettext("Initializing LinBound v0.1a...") << endl;
-
+int main(int argc, char *argv[]) {
+	cout << gettext("Initializing LinBound...") << endl;
+    
+    //Handle any startup options
 	int result = LB_ParseOptions(argc, argv);
 	if(result == -1){
 		return 0;
@@ -72,7 +76,7 @@ int main(int argc, char *argv[])
 	bindtextdomain("linbound", "./po");
 	textdomain("linbound");
 	
-
+    //Initialize required libraries
 	LB_Init();
 
 	//Set up the screen
@@ -102,6 +106,9 @@ int main(int argc, char *argv[])
 	gui->setGraphics(graphics);
 	gui->setInput(input);
 	gui->setTop(top);
+	
+	gcnfont = new gcn::SDLTrueTypeFont("./res/fonts/LiberationSans-Regular.ttf", 12);
+	gcn::Widget::setGlobalFont(gcnfont);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
 	int ckresult = SDL_SetColorKey(cursor, SDL_TRUE, SDL_MapRGB(cursor->format, 0xff, 0, 0xff));
@@ -127,9 +134,9 @@ int main(int argc, char *argv[])
 		case 0 :
 			SDL_RenderPresent(renderer);
 			break;
-		}
-	//cout << "pic shown" << endl;
+	}
 
+    currentContext = new LB_Menu(renderer);
 
     if(LB_PlayMusic("./res/sound/test.ogg") != 0){
         cout << gettext("error with the music! : ") << SDL_GetError() << endl;
@@ -144,13 +151,12 @@ int main(int argc, char *argv[])
 	//cout << "Entering main loop" << endl;
 	MainLoop();
 
-	//Let the user see how marvellous it is for 3 seconds
-	//SDL_Delay(3000);
-
 	//Free the memory allocated to the images
+	delete currentContext;
+	delete gcnfont;
 	delete top;
 	delete gui;
-	//TODO : it would be more clever to use an array to put the images and free them at once by making a function iterate through the whole table
+	//TODO : it would be more clever to use a list to put the images and free them at once by making a function iterate through it
 	SDL_FreeCursor(mousePointer); 
 	//SDL_FreeSurface(refresh_test);
 	SDL_FreeSurface(image);
@@ -167,14 +173,13 @@ int main(int argc, char *argv[])
 /**
  * The function acting as the base loop powering the game
  */
-void MainLoop()
-{
+void MainLoop() {
 	for(;;){
 		//The true loop begins here...
 		//cout << "loop" << endl;
 
 		//Here we poll the user events
-		if (SDL_PollEvent(&event) == 1) {
+		while (SDL_PollEvent(&event) == 1) {
 			if (LB_EventProcessor(event) == -1) {
 				//cout << "break" << endl;
 				return;
@@ -190,8 +195,10 @@ void MainLoop()
         //Update the graphics
 		SDL_RenderClear(renderer);
 		//**Background
-
+		currentContext->drawBackground();
+        
 		//**Foreground
+		currentContext->drawMiddleground()
 
 		//**GUI
 		gui->draw();

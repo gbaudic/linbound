@@ -35,8 +35,10 @@ void LB_Menu::action(const gcn::ActionEvent& actionEvent) {
 		btn_play->setVisible(false);
 		btn_quit->setVisible(false);
 		btn_credits->setVisible(false);
+		mode = 1;
 	} else if (actionEvent.getId() == "credits") {
 		//Display an internal closable window with credits
+		mode = 2;
 	}
 }
 
