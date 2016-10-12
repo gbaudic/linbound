@@ -39,6 +39,11 @@ void LB_Menu::action(const gcn::ActionEvent& actionEvent) {
 	} else if (actionEvent.getId() == "credits") {
 		//Display an internal closable window with credits
 		mode = 2;
+	} else if (actionEvent.getId() == "quit") {
+		//Generate a quit event for proper exiting
+		SDL_Event quitevt;
+		quitevt.type = SDL_QUIT;
+		SDL_PushEvent(&quitevt);
 	}
 }
 
@@ -54,7 +59,7 @@ void LB_Menu::processEvent(SDL_Event event) {
 }
 
 LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
-	SDL_Surface* bck = IMG_Load("./res/menu/menuLB.jpg");
+	SDL_Surface* bck = IMG_Load("./res/menu/LB_menu.png");
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
 	

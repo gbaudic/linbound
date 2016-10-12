@@ -40,6 +40,7 @@ extern UDPsocket clientSocket;
 extern gcn::SDLInput* input;
 extern gcn::SDLGraphics* graphics;
 extern gcn::SDLImageLoader* imageLoader;
+extern gcn::SDLTrueTypeFont* gcnfont;
 bool isServer = false;
 
 /**
@@ -74,7 +75,10 @@ int LB_Init() {
 	//Create GUI base objects
 	input = new gcn::SDLInput();
 	imageLoader = new gcn::SDLImageLoader();
+	gcn::Image::setImageLoader(imageLoader);
 	graphics = new gcn::SDLGraphics();
+	gcnfont = new gcn::SDLTrueTypeFont("./res/fonts/LiberationSans-Regular.ttf", 12);
+	gcn::Widget::setGlobalFont(gcnfont);
 
 	SDL_DisableScreenSaver();
 

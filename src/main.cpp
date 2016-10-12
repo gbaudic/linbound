@@ -106,9 +106,6 @@ int main(int argc, char *argv[]) {
 	gui->setGraphics(graphics);
 	gui->setInput(input);
 	gui->setTop(top);
-	
-	gcnfont = new gcn::SDLTrueTypeFont("./res/fonts/LiberationSans-Regular.ttf", 12);
-	gcn::Widget::setGlobalFont(gcnfont);
 
 	//The colorkey needs the image to be loaded before doing anything, otherwise it crashes (function moved to image.cpp)
 	int ckresult = SDL_SetColorKey(cursor, SDL_TRUE, SDL_MapRGB(cursor->format, 0xff, 0, 0xff));
@@ -198,7 +195,7 @@ void MainLoop() {
 		currentContext->drawBackground();
         
 		//**Foreground
-		currentContext->drawMiddleground()
+		currentContext->drawMiddleground();
 
 		//**GUI
 		gui->draw();
