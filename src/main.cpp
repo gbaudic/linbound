@@ -102,6 +102,7 @@ int main(int argc, char *argv[]) {
 
 	graphics->setTarget(SDL_GetWindowSurface(screen));
 	top = new gcn::Container();
+	top->setDimension(gcn::Rectangle(0, 0, iscreenw, iscreenh));
 	gui = new gcn::Gui();
 	gui->setGraphics(graphics);
 	gui->setInput(input);
@@ -120,18 +121,6 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 	SDL_SetCursor(mousePointer);
-
-	//Call a function which displays an image
-	//If it crashed, don't let the user see a black window: he might be scared.
-	switch (LB_ShowPicture(renderer, "./res/menu/menuLB.jpg")) {
-		case -1 :
-			SDL_FreeSurface(image);
-			SDL_Quit();
-			return 1;
-		case 0 :
-			SDL_RenderPresent(renderer);
-			break;
-	}
 
     currentContext = new LB_Menu(renderer);
 

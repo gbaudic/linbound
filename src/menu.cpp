@@ -21,6 +21,7 @@
 #include <guisan.hpp>
 #include <guisan/sdl.hpp>
 #include "sound.hpp" //may be useful
+#include "utils.hpp"
 #include "menu.hpp"
 
 using namespace gcn;
@@ -44,6 +45,15 @@ void LB_Menu::action(const gcn::ActionEvent& actionEvent) {
 		SDL_Event quitevt;
 		quitevt.type = SDL_QUIT;
 		SDL_PushEvent(&quitevt);
+	} else if (actionEvent.getId() == "back") {
+		mode = 0;
+		btn_localPlay->setVisible(false);
+		btn_onlinePlay->setVisible(false);
+		btn_back->setVisible(false);
+		btn_settings->setVisible(true);
+		btn_play->setVisible(true);
+		btn_quit->setVisible(true);
+		btn_credits->setVisible(true);
 	}
 }
 
@@ -70,7 +80,7 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	lbl_buttonHelp->setPosition(70, 400);
 	lbl_buttonHelp->setAlignment(gcn::Graphics::CENTER);
 
-	lbl_version = new Label("Version ");
+	lbl_version = new Label("Version "+getVersionString());
 	lbl_version->setPosition(20, 570);
 
 	btn_settings = new ImageButton("./res/menu/settings.png");
@@ -136,7 +146,7 @@ LB_Menu::~LB_Menu() {
 	//Remove from container if not already done
 	top->clear();
 
-	//TODO: delete widgets
+	//Delete widgets
 	delete lbl_buttonHelp;
 	delete lbl_version;
 	delete btn_settings;

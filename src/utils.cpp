@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include <cmath>
+#include <string>
 #include <SDL2/SDL.h>
 #include "utils.hpp"
 
@@ -67,3 +68,16 @@ bool flip(Sint16 angle){
     return abs(angle) > 90;
 }
 
+/**
+ *  User-friendly version display
+ */
+std::string getVersionString(){
+	return MAJOR_VERSION + "." + MINOR_VERSION + "." + PATCH_VERSION;
+}
+
+/**
+ *  Version number to compare compatibilities
+ */
+int getVersion(){
+	return PATCH_VERSION + MINOR_VERSION*10 + MAJOR_VERSION*1000;
+}
