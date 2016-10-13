@@ -72,7 +72,10 @@ bool flip(Sint16 angle){
  *  User-friendly version display
  */
 std::string getVersionString(){
-	return MAJOR_VERSION + "." + MINOR_VERSION + "." + PATCH_VERSION;
+	std::string result = std::to_string(MAJOR_VERSION);
+	result += "." + std::to_string(MINOR_VERSION);
+	result += "." + std::to_string(PATCH_VERSION);
+	return result;
 }
 
 /**

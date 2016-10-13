@@ -13,6 +13,8 @@
  
 #ifndef _H_UTILS_
 #define _H_UTILS_
+
+#include <string>
  
 const int MAJOR_VERSION = 0;
 const int MINOR_VERSION = 1;

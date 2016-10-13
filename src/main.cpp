@@ -55,6 +55,8 @@ gcn::Container* top;      // A top container
 gcn::SDLTrueTypeFont* gcnfont; //font is needed for widgets
 
 LB_Context* currentContext;
+SDL_Surface* guiSurface; //Required to use simultaneously guisan and SDL Rendering API
+SDL_Texture* guiTexture;
 
 /**
  * The holy Main Function
@@ -103,6 +105,7 @@ int main(int argc, char *argv[]) {
 	graphics->setTarget(SDL_GetWindowSurface(screen));
 	top = new gcn::Container();
 	top->setDimension(gcn::Rectangle(0, 0, iscreenw, iscreenh));
+	top->setOpaque(false);
 	gui = new gcn::Gui();
 	gui->setGraphics(graphics);
 	gui->setInput(input);
@@ -135,7 +138,18 @@ int main(int argc, char *argv[]) {
     SDL_initFramerate(&mgr);
 
 	//cout << "Entering main loop" << endl;
-	MainLoop();
+    try {
+    	MainLoop();
+    } catch (gcn::Exception &e) {
+		cerr << e.getMessage() << endl;
+		return 1;
+	} catch (std::exception &e) {
+		cerr << "Std exception: " << e.what() << endl;
+		return 1;
+	} catch (...) {
+		cerr << "Unknown exception" << endl;
+		return 1;
+	}
 
 	//Free the memory allocated to the images
 	delete currentContext;
@@ -145,6 +159,8 @@ int main(int argc, char *argv[]) {
 	//TODO : it would be more clever to use a list to put the images and free them at once by making a function iterate through it
 	SDL_FreeCursor(mousePointer); 
 	//SDL_FreeSurface(refresh_test);
+	//SDL_DestroyTexture(guiTexture);
+	//SDL_FreeSurface(guiSurface);
 	SDL_FreeSurface(image);
 	SDL_FreeSurface(cursor);
 	SDL_FreeSurface(icon);
@@ -188,8 +204,13 @@ void MainLoop() {
 
 		//**GUI
 		gui->draw();
+		//Move guisurface to guitexture
+		//SDL_UpdateTexture(guitexture, NULL, guisurface->pixels, guisurface->pitch);
+		//copy texture to screen
+		//SDL_RenderCopy(renderer, guitexture, NULL, NULL);
 
 		SDL_RenderPresent(renderer);
+		//SDL_UpdateWindowSurface(screen);
 
         //Change audio if needed
 

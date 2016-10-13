@@ -88,12 +88,14 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_settings->setPosition(240, 220);
 	btn_settings->setActionEventId("settings");
 	btn_settings->addActionListener(this);
+	btn_settings->adjustSize();
 
 	btn_play = new ImageButton("./res/menu/newgame.png");
 	btn_play->setCaption(gettext("New game"));
 	btn_play->setPosition(70, 220);
 	btn_play->setActionEventId("newgame");
 	btn_play->addActionListener(this);
+	btn_play->adjustSize();
 
 	btn_localPlay = new ImageButton("./res/menu/localgame.png");
 	btn_localPlay->setCaption(gettext("New local game"));
@@ -101,6 +103,7 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_localPlay->setActionEventId("localgame");
 	btn_localPlay->setVisible(false);
 	btn_localPlay->addActionListener(this);
+	btn_localPlay->adjustSize();
 
 	btn_onlinePlay = new ImageButton("./res/menu/webgame.png");
 	btn_onlinePlay->setCaption(gettext("New online/network game"));
@@ -108,6 +111,7 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_onlinePlay->setActionEventId("onlinegame");
 	btn_onlinePlay->setVisible(false);
 	btn_onlinePlay->addActionListener(this);
+	btn_onlinePlay->adjustSize();
 
 	btn_back = new ImageButton("./res/menu/back.png");
 	btn_back->setCaption(gettext("Back"));
@@ -115,18 +119,21 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_back->setActionEventId("back");
 	btn_back->setVisible(false);
 	btn_back->addActionListener(this);
+	btn_back->adjustSize();
 
 	btn_quit = new ImageButton("./res/menu/quit.png");
 	btn_quit->setCaption(gettext("Quit Linbound"));
 	btn_quit->setActionEventId("quit");
 	btn_quit->setPosition(570, 220);
 	btn_quit->addActionListener(this);
+	btn_quit->adjustSize();
 
 	btn_credits = new ImageButton("./res/menu/credits.png");
 	btn_credits->setCaption(gettext("Credits"));
 	btn_credits->setActionEventId("credits");
 	btn_credits->setPosition(410, 220);
 	btn_credits->addActionListener(this);
+	btn_credits->adjustSize();
 
 	//Add to container
 	top->add(lbl_buttonHelp);
