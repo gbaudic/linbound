@@ -92,17 +92,20 @@ int main(int argc, char *argv[]) {
 		cout << gettext("FATAL : Cannot create renderer: ") << SDL_GetError() << endl;
 		return 1;
 	}
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 	
 	//Set up GUI rendering surfaces
 	guiSurface = SDL_CreateRGBSurface(0, iscreenw, iscreenh, 32, 0x00FF0000,
                                       0x0000FF00, 0x000000FF, 0xFF000000);
 	guiTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, iscreenw, iscreenh);
+	//guiTexture = SDL_CreateTextureFromSurface(renderer, guiSurface);
 	if (guiSurface == NULL || guiTexture == NULL){
 	    cout << gettext("FATAL : Cannot create GUI surface: ") << SDL_GetError() << endl;
 		return 1;
 	}
 	SDL_SetColorKey(guiSurface, SDL_TRUE, SDL_MapRGB(guiSurface->format, 0xff, 0, 0xff));
 	SDL_SetSurfaceRLE(guiSurface, 1);
+	SDL_SetTextureBlendMode(guiTexture, SDL_BLENDMODE_BLEND);
 	
 	//Give an icon to the window
 	icon = IMG_Load("./res/linbound.gif");
@@ -155,10 +158,10 @@ int main(int argc, char *argv[]) {
 		cerr << e.getMessage() << endl;
 		return 1;
 	} catch (std::exception &e) {
-		cerr << "Std exception: " << e.what() << endl;
+		cerr << gettext("Std exception: ") << e.what() << endl;
 		return 1;
 	} catch (...) {
-		cerr << "Unknown exception" << endl;
+		cerr << gettext("Unknown exception") << endl;
 		return 1;
 	}
 
@@ -218,7 +221,7 @@ void MainLoop() {
 		gui->draw();
 		//Move guisurface to guitexture
 		SDL_UpdateTexture(guiTexture, NULL, guiSurface->pixels, guiSurface->pitch);
-		//copy texture to screen
+		//Copy texture to screen
 		SDL_RenderCopy(renderer, guiTexture, NULL, NULL);
 
 		SDL_RenderPresent(renderer);
