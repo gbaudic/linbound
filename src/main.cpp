@@ -93,6 +93,17 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 	
+	//Set up GUI rendering surfaces
+	guiSurface = SDL_CreateRGBSurface(0, iscreenw, iscreenh, 32, 0x00FF0000,
+                                      0x0000FF00, 0x000000FF, 0xFF000000);
+	guiTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, iscreenw, iscreenh);
+	if (guiSurface == NULL || guiTexture == NULL){
+	    cout << gettext("FATAL : Cannot create GUI surface: ") << SDL_GetError() << endl;
+		return 1;
+	}
+	SDL_SetColorKey(guiSurface, SDL_TRUE, SDL_MapRGB(guiSurface->format, 0xff, 0, 0xff));
+	SDL_SetSurfaceRLE(guiSurface, 1);
+	
 	//Give an icon to the window
 	icon = IMG_Load("./res/linbound.gif");
 	SDL_SetWindowIcon(screen, icon);
@@ -102,7 +113,7 @@ int main(int argc, char *argv[]) {
 	//The next function puts the cursor at the center of our screen
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
-	graphics->setTarget(SDL_GetWindowSurface(screen));
+	graphics->setTarget(guiSurface);
 	top = new gcn::Container();
 	top->setDimension(gcn::Rectangle(0, 0, iscreenw, iscreenh));
 	top->setOpaque(false);
@@ -159,8 +170,8 @@ int main(int argc, char *argv[]) {
 	//TODO : it would be more clever to use a list to put the images and free them at once by making a function iterate through it
 	SDL_FreeCursor(mousePointer); 
 	//SDL_FreeSurface(refresh_test);
-	//SDL_DestroyTexture(guiTexture);
-	//SDL_FreeSurface(guiSurface);
+	SDL_DestroyTexture(guiTexture);
+	SDL_FreeSurface(guiSurface);
 	SDL_FreeSurface(image);
 	SDL_FreeSurface(cursor);
 	SDL_FreeSurface(icon);
@@ -196,6 +207,7 @@ void MainLoop() {
 
         //Update the graphics
 		SDL_RenderClear(renderer);
+		SDL_FillRect(guiSurface, NULL, SDL_MapRGB(guiSurface->format, 0xff, 0, 0xff));
 		//**Background
 		currentContext->drawBackground();
         
@@ -205,9 +217,9 @@ void MainLoop() {
 		//**GUI
 		gui->draw();
 		//Move guisurface to guitexture
-		//SDL_UpdateTexture(guitexture, NULL, guisurface->pixels, guisurface->pitch);
+		SDL_UpdateTexture(guiTexture, NULL, guiSurface->pixels, guiSurface->pitch);
 		//copy texture to screen
-		//SDL_RenderCopy(renderer, guitexture, NULL, NULL);
+		SDL_RenderCopy(renderer, guiTexture, NULL, NULL);
 
 		SDL_RenderPresent(renderer);
 		//SDL_UpdateWindowSurface(screen);
