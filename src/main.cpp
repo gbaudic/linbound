@@ -97,14 +97,14 @@ int main(int argc, char *argv[]) {
 	//Set up GUI rendering surfaces
 	guiSurface = SDL_CreateRGBSurface(0, iscreenw, iscreenh, 32, 0x00FF0000,
                                       0x0000FF00, 0x000000FF, 0xFF000000);
-	guiTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, iscreenw, iscreenh);
-	//guiTexture = SDL_CreateTextureFromSurface(renderer, guiSurface);
+	//guiTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, iscreenw, iscreenh);
+	SDL_SetColorKey(guiSurface, SDL_TRUE, SDL_MapRGB(guiSurface->format, 0xff, 0, 0xff));
+	SDL_SetSurfaceRLE(guiSurface, 1);
+	guiTexture = SDL_CreateTextureFromSurface(renderer, guiSurface);
 	if (guiSurface == NULL || guiTexture == NULL){
 	    cout << gettext("FATAL : Cannot create GUI surface: ") << SDL_GetError() << endl;
 		return 1;
 	}
-	SDL_SetColorKey(guiSurface, SDL_TRUE, SDL_MapRGB(guiSurface->format, 0xff, 0, 0xff));
-	SDL_SetSurfaceRLE(guiSurface, 1);
 	SDL_SetTextureBlendMode(guiTexture, SDL_BLENDMODE_BLEND);
 	
 	//Give an icon to the window

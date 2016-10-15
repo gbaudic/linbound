@@ -111,7 +111,7 @@ if test \
 fi
 
 
-AC_OUTPUT(Makefile po/Makefile.in src/Makefile data/Makefile)
+AC_OUTPUT(Makefile po/Makefile.in src/Makefile res/Makefile)
 
 echo "Configuration of linbound done. "
 echo "Now type make to compile then sudo make install to install."
