@@ -29,6 +29,7 @@
 
 #include "init.hpp"
 #include "sound.hpp"
+#include "db.hpp"
 using namespace std;
 
 TTF_Font *font = NULL;
@@ -71,6 +72,7 @@ int LB_Init() {
 	if (!isServer && LB_InitSound(CHANNELS) == -1){
 		return -1;
 	}
+	
 
 	//Create GUI base objects
 	input = new gcn::SDLInput();
@@ -133,6 +135,10 @@ int LB_InitNetwork(Uint8 *imode) {
 		return -1;
 	}
 	//client socket
+	
+	if(isServer){
+		LB_initDB();
+	}
 
 	return 0;
 
@@ -185,6 +191,10 @@ void LB_Quit() {
 	if (isTTFEnabled){
 		TTF_CloseFont(font);
 		TTF_Quit();
+	}
+	
+	if(isServer){
+		LB_closeDB();
 	}
 
 	if (isNETEnabled){

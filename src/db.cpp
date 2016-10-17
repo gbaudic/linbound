@@ -20,6 +20,7 @@
 
 #include "room.hpp"
 #include "player.hpp"
+#include "db.hpp"
 using namespace std;
 
 sqlite3 *serverDB = NULL;
@@ -46,8 +47,10 @@ bool isDBOpen() {
  * Wrapper for db closing
  */
 void LB_closeDB(){
-	sqlite3_close(serverDB);
-	serverDB = NULL;
+	if(serverDB != NULL){
+		sqlite3_close(serverDB);
+		serverDB = NULL;
+	}
 }
 
 /**
@@ -72,6 +75,9 @@ LB_Player* LB_getPlayer(string name) {
 	return NULL;
 }
 
+/**
+ *  \return true if authentication succeeded, false otherwise
+ */
 bool LB_authenticatePlayer(string name, string password) {
 	return false;
 }
