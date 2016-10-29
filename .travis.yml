@@ -1,12 +1,10 @@
 language: cpp
 compiler: gcc
-addons:
-  apt:
-    packages:
-    - libsdl2-dev
-    - libsdl2-image-dev
-    - libsdl2-gfx-dev
-    - libsdl2-mixer-dev
-    - libsdl2-net-dev
-    - libsdl2-ttf-dev
+before_install: 
+	- sudo apt-get update -qq
+	- sudo apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-gfx-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsqlite3-dev libtinyxml2-dev
+install:
+	- git clone https://github.com/gbaudic/guisan.git guisan
+	- pushd guisan && scons && sudo scons install && popd
 
+script: ./configure && make
