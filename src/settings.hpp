@@ -18,7 +18,12 @@
 #define _H_SETTINGS_
 
 #include <SDL2/SDL.h>
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
 
+/**
+ *  Singleton to encapsulate game settings
+ */
 class Settings {
 public:
 	static Uint8 getEffectsVolume() const;
@@ -47,6 +52,21 @@ private:
 	Settings (const Settings&) = delete;
 };
 
+/**
+ *  Subwindow to control settings from main menu
+ */
+class SettingsWindow {
+	public:
+	SettingsWindow();
+	~SettingsWindow();
+	
+	private:
+	gcn::Window settings;
+	gcn::Button btn_ok, btn_cancel;
+	gcn::Label lbl_music, lbl_effects;
+	gcn::Slider sl_music, sl_effects;
+	
+};
 
 
 #endif /* _H_SETTINGS_ */

@@ -13,6 +13,12 @@
  * This Source Code Form is "Incompatible With Secondary Licenses",
  * as defined by the Mozilla Public License, v. 2.0.
  */
+ 
+#include <libintl.h>
+#include <locale.h>
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "settings.hpp"
 
@@ -55,7 +61,7 @@ void Settings::setWidth(static Uint16 width) {
 }
 
 Settings::Settings() {
-
+	init();
 }
 
 Settings::~Settings() {
@@ -73,11 +79,35 @@ void Settings::setServer(static bool isServer) {
  * Initialize settings from external config file
  */
 void Settings::init(){
-
+	//Try to read the config file
+	
+	//If it fails...
+	width = 800;
+	height = 600;
+	musicVolume = MIX_MAX_VOLUME / 2;
+	effectsVolume = MIX_MAX_VOLUME / 2;
 }
 
 /**
  * Write setting changes to disk
  */
 void Settings::save() {
+	
+}
+
+SettingsWindow::SettingsWindow() : settings(gettext("Settings")),
+sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME),
+lbl_music(gettext("Music volume")), lbl_effects(gettext("Effects volume")),
+btn_ok(gettext("OK")), btn_cancel(gettext("Cancel"))
+{
+	sl_music.setValue(Settings.getMusicVolume());
+	sl_effects.setValue(Settings.getEffectsVolume());
+	
+	//todo: set window bck color
+	window.add(btn_ok);
+	window.add(btn_cancel);
+	window.add(lbl_music);
+	window.add(lbl_effects);
+	window.add(sl_music);
+	window.add(sl_effects);
 }
