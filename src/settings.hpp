@@ -26,28 +26,28 @@
  */
 class Settings {
 public:
-	static Uint8 getEffectsVolume() const;
-	void setEffectsVolume(static Uint8 effectsVolume);
-	static Uint16 getHeight() const;
-	void setHeight(static Uint16 height);
-	const Settings& getInstance() const;
-	static Uint8 getMusicVolume() const;
-	void setMusicVolume(static Uint8 musicVolume);
-	static Uint16 getWidth() const;
-	void setWidth(static Uint16 width);
-	static bool isServer() const;
-	void setServer(static bool isServer);
+	Uint8 getEffectsVolume();
+	void setEffectsVolume(Uint8 effectsVolume);
+	Uint16 getHeight();
+	void setHeight(Uint16 height);
+	static Settings* getInstance();
+	Uint8 getMusicVolume();
+	void setMusicVolume(Uint8 musicVolume);
+	Uint16 getWidth();
+	void setWidth(Uint16 width);
+	bool isAServer();
+	void setServer(bool isServer);
+	void save();
 
 private:
-	static Uint8 musicVolume;
-	static Uint8 effectsVolume;
-	static Uint16 height, width; //window size
-	static bool isServer;
-	static Settings instance;
+	Uint8 musicVolume;
+	Uint8 effectsVolume;
+	Uint16 height, width; //window size
+	bool isServer;
+	static Settings* instance;
 	Settings();
 	~Settings();
 	void init();
-	void save();
 	Settings& operator= (const Settings&) = delete; //ensure singleton
 	Settings (const Settings&) = delete;
 };

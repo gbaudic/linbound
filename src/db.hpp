@@ -17,14 +17,17 @@
 #ifndef _H_DB_
 #define _H_DB_
  
+#include "room.hpp"
+#include "player.hpp"
+
 int LB_initDB();
 bool isDBOpen();
 void LB_closeDB();
 
-int LB_createPlayer(string name, string password);
+int LB_createPlayer(std::string name, std::string password);
 int LB_editPlayer(LB_Player &player);
-LB_Player* LB_getPlayer(string name);
-bool LB_authenticatePlayer(string name, string password);
+LB_Player* LB_getPlayer(std::string name);
+bool LB_authenticatePlayer(std::string name, std::string password);
 
 int LB_createRoom(LB_Room &targetRoom);
 LB_Room* LB_getRoom(int number);
