@@ -1,6 +1,6 @@
 /**
  * \file gui_lb.hpp
- * \brief Header for the GUI subsystem
+ * \brief GUI additions to guisan, specific to LinBound
  * \author G. B.
  * \version 0.1a
  * \date 24/10/2010
@@ -16,19 +16,19 @@
 #ifndef _H_GUI_LB_
 #define _H_GUI_LB_
 
-//Here we will define some constants for the error display function
+#include <guisan.hpp>
+#include <guisan/sdl.hpp>
+#include "room.hpp"
 
-class LB_GUI{
+class LB_RoomButton : public gcn::ImageButton {
 public:
-	LB_GUI();
-	virtual ~LB_GUI();
+	LB_RoomButton();
+	virtual ~LB_RoomButton();
+	virtual void draw();
 
 private:
-	/*gcn::Gui* gui;
-	gcn::Container* top;
-	gcn::SDLInput* input;
-	gcn::SDLGraphics* graphics;
-	gcn::SDLImageLoader* imageLoader;*/
+	LB_Room* mRoom;
+	
 };
 
 #endif
