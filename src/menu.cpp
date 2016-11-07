@@ -23,6 +23,7 @@
 #include "sound.hpp" //may be useful
 #include "utils.hpp"
 #include "menu.hpp"
+#include "settings.hpp"
 
 using namespace gcn;
 

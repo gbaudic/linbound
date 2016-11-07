@@ -81,7 +81,10 @@ bool Settings::isAServer() {
 }
 
 void Settings::setServer( bool isServer) {
-	this->isServer = isServer;
+	if(!isServerSet){
+		this->isServer = isServer;
+		this->isServerSet = true;
+	}
 }
 
 /**
@@ -112,8 +115,14 @@ void Settings::init(){
  * Write setting changes to disk
  */
 void Settings::save() {
-	ofstream output("linbound.config", ios::out);
 	
+	ofstream output("linbound.config", ios::out);
+	output << "[Display]" << endl;
+	output << "Height=" << height << endl
+		   << "Width=" << width << endl << endl;
+	output << "[Audio]" << endl;
+	output << "MusicVolume=" << musicVolume << endl
+		   << "EffectsVolume=" << effectsVolume << endl;
 	output.close();
 }
 
@@ -124,6 +133,9 @@ sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME)
 {
 	sl_music.setValue(Settings::getInstance()->getMusicVolume());
 	sl_effects.setValue(Settings::getInstance()->getEffectsVolume());
+	btn_cancel.adjustSize();
+	btn_ok.setWidth(btn_cancel.getWidth());
+	btn_ok.setHeight(btn_cancel.getHeight()); //just for aesthetics
 	
 	gcn::Color color(0x1f, 0x75, 0xf5, 0);
 	settings.setBaseColor(color);
@@ -134,3 +146,5 @@ sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME)
 	settings.add(&sl_music, 60, 30);
 	settings.add(&sl_effects, 60, 60);
 }
+
+

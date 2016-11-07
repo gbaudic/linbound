@@ -44,6 +44,7 @@ private:
 	Uint8 effectsVolume;
 	Uint16 height, width; //window size
 	bool isServer;
+	bool isServerSet; //ensure boolean above is only touched once
 	static Settings* instance;
 	Settings();
 	~Settings();
@@ -55,7 +56,7 @@ private:
 /**
  *  Subwindow to control settings from main menu
  */
-class SettingsWindow {
+class SettingsWindow : public gcn::ActionListener {
 	public:
 	SettingsWindow();
 	~SettingsWindow();
