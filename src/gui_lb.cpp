@@ -31,8 +31,18 @@ SDL_Color white; /* Needs to be set somewhere */
 /**
  * A GUI button representing a room in server view
  */
-LB_RoomButton::LB_RoomButton() : gcn::ImageButton() {
-	
+LB_RoomButton::LB_RoomButton(LB_Room* room) : gcn::ImageButton("./res/roombutton.png") {
+	mRoom = room;
 }
 
+LB_RoomButton::~LB_RoomButton() {
 
+}
+
+void LB_RoomButton::draw() {
+	//TODO
+	//Draw background
+	//Draw texts
+	//Draw room image
+	//Draw status image
+}

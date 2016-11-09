@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
 
 	//Set up the screen
 	screen = SDL_CreateWindow("LinBound", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, iscreenw, iscreenh, SDL_WINDOW_SHOWN);
-	renderer = SDL_CreateRenderer(screen, -1, 0);
+	renderer = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 	if (screen == NULL) {
 		cout << gettext("FATAL : Cannot create window: ") << SDL_GetError() << endl;
 		return 1;
@@ -118,6 +118,7 @@ int main(int argc, char *argv[]) {
 	SDL_WarpMouseInWindow(screen, iscreenw/2, iscreenh/2);
 
 	graphics->setTarget(guiSurface);
+	//graphics->setRenderTarget(renderer);
 	top = new gcn::Container();
 	top->setDimension(gcn::Rectangle(0, 0, iscreenw, iscreenh));
 	top->setOpaque(false);

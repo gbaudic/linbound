@@ -22,7 +22,7 @@
 
 class LB_RoomButton : public gcn::ImageButton {
 public:
-	LB_RoomButton();
+	LB_RoomButton(LB_Room* room);
 	virtual ~LB_RoomButton();
 	virtual void draw();
 

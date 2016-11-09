@@ -99,6 +99,8 @@ void Settings::init(){
 		if(!line.empty() && line.front() != '['){
 			int eqpos = line.find('=');
 			//Maybe a value here
+			//determine if we know this key
+			//if yes, check value consistency and inject; if no, ignore
 		}
 	}
 
@@ -136,15 +138,28 @@ sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME)
 	btn_cancel.adjustSize();
 	btn_ok.setWidth(btn_cancel.getWidth());
 	btn_ok.setHeight(btn_cancel.getHeight()); //just for aesthetics
+	btn_ok.setActionEventId("ok");
+	btn_ok.addActionListener(this);
+	btn_cancel.setActionEventId("cancel");
+	btn_cancel.addActionListener(this);
 	
 	gcn::Color color(0x1f, 0x75, 0xf5, 0);
 	settings.setBaseColor(color);
-	settings.add(&btn_ok);
-	settings.add(&btn_cancel);
+	settings.add(&btn_ok, 100, 100);
+	settings.add(&btn_cancel, 150, 100);
 	settings.add(&lbl_music, 10, 30);
 	settings.add(&lbl_effects, 10, 60);
 	settings.add(&sl_music, 60, 30);
 	settings.add(&sl_effects, 60, 60);
+
+	settings.setVisible(true);
 }
 
+SettingsWindow::~SettingsWindow() {
+
+}
+
+void SettingsWindow::action(const gcn::ActionEvent& actionEvent) {
+
+}
 
