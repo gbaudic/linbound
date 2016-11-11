@@ -20,15 +20,20 @@
 #include <guisan/sdl.hpp>
 #include "room.hpp"
 
+const Uint16 BALLOON_RADIUS = 5; //for rounded corners
+
 class LB_RoomButton : public gcn::ImageButton {
 public:
 	LB_RoomButton(LB_Room* room);
 	virtual ~LB_RoomButton();
 	virtual void draw();
+	Uint16 getNumber();
 
 private:
 	LB_Room* mRoom;
-	
+	gcn::Image* mStatusImages;
 };
+
+void drawMessageBalloon(SDL_Surface* message, Uint16 x, Uint16 y, SDL_Renderer *target);
 
 #endif

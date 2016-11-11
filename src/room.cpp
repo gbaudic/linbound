@@ -48,7 +48,11 @@ RoomStatus LB_Room::getStatus() const {
 }
 
 bool LB_Room::testPassword(std::string attempt) {
-	return attempt == password; 
+	if(isPasswordProtectedRoom) {
+		return attempt == password;
+	} else {
+		return true; 
+	} 
 	//TODO: should ask the server instead
 }
 
