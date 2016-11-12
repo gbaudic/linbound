@@ -163,3 +163,10 @@ void SettingsWindow::action(const gcn::ActionEvent& actionEvent) {
 
 }
 
+/**
+ * Shows or hides the settings window
+ */
+void SettingsWindow::setVisible(bool visible) {
+	settings.setVisible(visible);
+}
+

@@ -43,6 +43,8 @@ class LB_Menu : public LB_Context, public gcn::ActionListener {
 	gcn::ImageButton* btn_quit;
 	gcn::ImageButton* btn_credits;
 	
+	SettingsWindow win_settings;
+
 };
 
 #endif

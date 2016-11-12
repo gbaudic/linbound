@@ -26,7 +26,7 @@ class LB_RoomButton : public gcn::ImageButton {
 public:
 	LB_RoomButton(LB_Room* room);
 	virtual ~LB_RoomButton();
-	virtual void draw();
+	virtual void draw(gcn::Graphics* graphics);
 	Uint16 getNumber();
 
 private:

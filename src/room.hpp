@@ -85,6 +85,8 @@ class LB_Room
 
     RoomMode getMode() const;
     RoomStatus getStatus() const;
+    Uint16 getNumber() const;
+    std::string getName() const;
     bool testPassword(std::string attempt);
     LB_Room(std::string name, Uint16 roomNumber, Uint8 maxPlayers, RoomMode mode, std::string password = "");
     void changeRoomStatus(RoomStatus newStatus);

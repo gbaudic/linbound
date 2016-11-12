@@ -23,6 +23,7 @@
 #include "channel.hpp"
 #include "map.hpp"
 #include "room.hpp"
+using namespace std;
 
 /**
  *  Reset some attributes once a game is finished
@@ -45,6 +46,14 @@ RoomMode LB_Room::getMode() const {
 
 RoomStatus LB_Room::getStatus() const {
 	return status;
+}
+
+Uint16 LB_Room::getNumber() const {
+	return roomNumber;
+}
+
+std::string LB_Room::getName() const {
+	return name;
 }
 
 bool LB_Room::testPassword(std::string attempt) {
@@ -168,10 +177,23 @@ LB_WindData generateWind() {
 
 /**
  * Generate a new weather effect 
+ * \param mapWidth
  */
 LB_Weather generateWeather(Sint16 mapWidth) {
     Sint16 position = rand() % mapWidth;
     int type = rand() % 3; //Magic number = nb of values in WeatherType
     
     return LB_Weather((WeatherType)type, position);
+}
+
+std::string LB_GameItem::getName() const {
+	return name;
+}
+
+std::string LB_GameItem::getDescription() const {
+	return description;
+}
+
+Uint8 LB_GameItem::getSize() const {
+	return size;
 }

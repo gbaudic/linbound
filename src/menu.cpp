@@ -55,6 +55,9 @@ void LB_Menu::action(const gcn::ActionEvent& actionEvent) {
 		btn_play->setVisible(true);
 		btn_quit->setVisible(true);
 		btn_credits->setVisible(true);
+	} else if (actionEvent.getId() == "settings") {
+		//Open the settings window
+		win_settings.setVisible(true);
 	}
 }
 
@@ -69,7 +72,7 @@ void LB_Menu::processEvent(SDL_Event event) {
 	}
 }
 
-LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
+LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer), win_settings() {
 	SDL_Surface* bck = IMG_Load("./res/menu/LB_menu.png");
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
@@ -151,6 +154,8 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer){
 	btn_credits->setBorderSize(0);
 	btn_credits->setBaseColor(transparent);
 	btn_credits->adjustSize();
+
+	win_settings.setVisible(false);
 
 	//Add to container
 	top->add(lbl_buttonHelp);

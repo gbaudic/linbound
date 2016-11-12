@@ -18,10 +18,11 @@
 #include <locale.h>
 
 #include <iostream>
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_gfxPrimitives.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
 #include "gui_lb.hpp"
 using namespace std;
 
@@ -39,19 +40,66 @@ LB_RoomButton::~LB_RoomButton() {
 
 }
 
-void LB_RoomButton::draw() {
+void LB_RoomButton::draw(gcn::Graphics* graphics) {
 	//TODO
-	//Draw background
-	//Draw texts
-	//Draw room image
-	//Draw status image
+
+	gcn::Color faceColor = getBaseColor();
+	gcn::Color highlightColor, shadowColor;
+	int alpha = getBaseColor().a;
+
+	if (isPressed())
+	{
+		faceColor = faceColor - 0x303030;
+		faceColor.a = alpha;
+		highlightColor = faceColor - 0x303030;
+		highlightColor.a = alpha;
+		shadowColor = faceColor + 0x303030;
+		shadowColor.a = alpha;
+	}
+	else
+	{
+		highlightColor = faceColor + 0x303030;
+		highlightColor.a = alpha;
+		shadowColor = faceColor - 0x303030;
+		shadowColor.a = alpha;
+	}
+
+	graphics->setColor(faceColor);
+	graphics->fillRectangle(gcn::Rectangle(1, 1, getDimension().width-1, getHeight() - 1));
+
+	graphics->setColor(highlightColor);
+	graphics->drawLine(0, 0, getWidth() - 1, 0);
+	graphics->drawLine(0, 1, 0, getHeight() - 1);
+
+	graphics->setColor(shadowColor);
+	graphics->drawLine(getWidth() - 1, 1, getWidth() - 1, getHeight() - 1);
+	graphics->drawLine(1, getHeight() - 1, getWidth() - 1, getHeight() - 1);
+
+	graphics->setColor(getForegroundColor());
+
+	if(isPressed()) {
+		graphics->drawImage(mImage, 0 + 1, 0 + 1);
+		graphics->drawText(to_string(mRoom->getNumber()), 2 + 1, 2 + 1, gcn::Graphics::LEFT);
+		graphics->drawText(mRoom->getName(), 20 + 1, 2 + 1, gcn::Graphics::LEFT);
+		//Draw room image
+		//Draw status image
+	} else {
+		graphics->drawImage(mImage, 0, 0);
+		graphics->drawText(to_string(mRoom->getNumber()), 2, 2, gcn::Graphics::LEFT);
+		graphics->drawText(mRoom->getName(), 20, 2, gcn::Graphics::LEFT);
+
+		if (isFocused()) {
+			graphics->drawRectangle(gcn::Rectangle(2, 2, getWidth() - 4, getHeight() - 4));
+		}
+	}
+
 }
 
 /**
  *  May be necessary for GUI interaction
  *  Returns the number for the room represented by this button on the GUI
  */
-Uint16 LB_RoomButton::getRoomNumber() {
+Uint16 LB_RoomButton::getNumber() {
 	LB_RoomBasicInfo roomInfo = mRoom->getInfo();
 	return roomInfo.roomNumber; 
 }

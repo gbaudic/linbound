@@ -61,6 +61,7 @@ class SettingsWindow : public gcn::ActionListener {
 	SettingsWindow();
 	~SettingsWindow();
 	void action(const gcn::ActionEvent& actionEvent);
+	void setVisible(bool visible);
 	
 	private:
 	gcn::Window settings;
