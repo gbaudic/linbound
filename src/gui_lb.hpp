@@ -16,6 +16,7 @@
 #ifndef _H_GUI_LB_
 #define _H_GUI_LB_
 
+#include <vector>
 #include <guisan.hpp>
 #include <guisan/sdl.hpp>
 #include "room.hpp"
@@ -34,6 +35,16 @@ private:
 	gcn::Image* mStatusImages;
 };
 
-void drawMessageBalloon(SDL_Surface* message, Uint16 x, Uint16 y, SDL_Renderer *target);
+class LB_MessageBalloon {
+public:
+	LB_MessageBalloon(std::string text);
+	~LB_MessageBalloon();
+	void draw(SDL_Renderer* target, Uint16 x, Uint16 y);
+	
+private:
+	std::vector<SDL_Surface*> textLines;
+	std::vector<SDL_Texture*> textTextures;
+	Uint16 width, height;
+}
 
 #endif

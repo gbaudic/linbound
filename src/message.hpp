@@ -25,15 +25,15 @@ enum MessageType { SERVER_MSG, BUGLE_MSG, REWARD_MSG, PENALTY_MSG, USER_MSG, POW
  */
 struct Achievement {
     std::string name;
-    Sint16 gold; //base value
-    Sint8 xp; //base value
-    MessageType type; //typically only REWARD or PENALTY
+    Sint16 gold; //! base value
+    Sint8 xp; //! base value
+    MessageType type; //! typically only REWARD or PENALTY
 };
 
 class LB_Message {
     public:
 
-    static const Uint32 TIME_TO_LIVE = 5000; //Maximum time to display in milliseconds
+    static const Uint32 TIME_TO_LIVE = 5000; //! Maximum time to display in milliseconds
 
     SDL_Surface *inGameText; //Colored text
     SDL_Surface *inChannelText; //White text
