@@ -17,6 +17,7 @@
 #define _H_GUI_LB_
 
 #include <vector>
+#include <SDL2/SDL.h>
 #include <guisan.hpp>
 #include <guisan/sdl.hpp>
 #include "room.hpp"
@@ -45,6 +46,25 @@ private:
 	std::vector<SDL_Surface*> textLines;
 	std::vector<SDL_Texture*> textTextures;
 	Uint16 width, height;
-}
+	Uint8 lines;
+};
+
+/**
+ * A subwindow to conduct a chat with one of your in-game friends
+ */
+class LB_ChatWindow {
+public:
+	LB_ChatWindow(std::string friendName);
+	void setVisible(bool visible);
+	void addMessage(std::string author, std::string message);
+
+private:
+	gcn::Window chatWindow;
+	gcn::TextField tf_msg;
+	gcn::ScrollArea sa_scroll;
+	gcn::TextBox tb_chat;
+	gcn::Button btn_close;
+	gcn::Button btn_send;
+};
 
 #endif

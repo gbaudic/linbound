@@ -109,9 +109,7 @@ Uint16 LB_RoomButton::getNumber() {
  *  Create a balloon to display a chat message in a more pleasant way
  *  \param text a string to represent the text to display, only the first 100 characters are used
  */
-LB_MessageBalloon::LB_MessageBalloon(std::string text, Uint16 x, Uint16 y) {
-	this->x = x;
-	this->y = y;
+LB_MessageBalloon::LB_MessageBalloon(std::string text) {
 	
 	//Compute line size
 	int w, h;
@@ -123,7 +121,7 @@ LB_MessageBalloon::LB_MessageBalloon(std::string text, Uint16 x, Uint16 y) {
 	} else {
 		width = text.length()*w + 2*BALLOON_RADIUS;
 	}
-	Uint8 lines = text.length() / 20 + 1;
+	lines = text.length() / 20 + 1;
 	height = lines > 5 ? 5 : lines;
 	height *= h;
 	height += 2*BALLOON_RADIUS;
@@ -163,12 +161,56 @@ void LB_MessageBalloon::draw(SDL_Renderer *target, Uint16 x, Uint16 y) {
 			//Create textures from surfaces if necessary
 			textTextures.push_back(SDL_CreateTextureFromSurface(target, textLines[i-1]));
 		}
-		dstRect.h = textTextures[i-1]->h;
-		dstRect.w = textTextures[i-1]->w; 
+		int w, h;
+		SDL_QueryTexture(textTextures[i-1], NULL, NULL, &w, &h);
+		dstRect.h = h;
+		dstRect.w = w;
 		SDL_RenderCopy(target, textTextures[i-1], NULL, &dstRect);
-		dstRect.y += textTextures[i-1]->h;
+		dstRect.y += h;
 	}
 	//Add tip at the bottom
 	filledTrigonRGBA(target, x, y, x, y - 30, x + 20, y - 30, 0xff, 0xff, 0xff, 0);
 	
+
+}
+
+LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), sa_scroll(),
+		tb_chat(), btn_close("x"), btn_send(gettext("Send")){
+	chatWindow.setCaption(friendName);
+	chatWindow.setWidth(200);
+	chatWindow.setHeight(300);
+
+	tb_chat.setEditable(false);
+	sa_scroll.setContent(&tb_chat);
+	sa_scroll.setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
+	sa_scroll.setWidth(190);
+	sa_scroll.setHeight(250);
+
+	btn_close.adjustSize();
+	btn_send.adjustSize(); //precaution for i18n
+
+	tf_msg.setWidth(200 - 3*2 - btn_send.getWidth()); //avoid overlap between textfield and button
+
+	//Add widgets
+	chatWindow.add(&btn_close, 200 - 2 - btn_close.getWidth(), 2);
+	chatWindow.add(&sa_scroll, 2, 20);
+	chatWindow.add(&tf_msg, 2, 20 + 250 + 2);
+	chatWindow.add(&btn_send, 200 - 2 - btn_send.getWidth(), 20 + 250 + 2);
+}
+
+/**
+ * Change visibility of the internal gcn::window
+ */
+void LB_ChatWindow::setVisible(bool visible) {
+	chatWindow.setVisible(visible);
+}
+
+/**
+ * Add a new message at the end of the current conversation
+ * \param author writer name
+ * \param message text message
+ */
+void LB_ChatWindow::addMessage(std::string author, std::string message) {
+	tb_chat.addRow(author + "] " + message);
+	chatWindow.setVisible(true); //put the window back in foreground if necessary
 }

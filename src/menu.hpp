@@ -17,6 +17,7 @@
 #define _H_MENU_
 
 #include "context.hpp"
+#include "settings.hpp"
 
 class LB_Menu : public LB_Context, public gcn::ActionListener {
 	/* Note: abusing multiple inheritance of C++ to make this class an ActionListener
