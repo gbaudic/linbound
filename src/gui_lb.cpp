@@ -130,6 +130,8 @@ LB_MessageBalloon::LB_MessageBalloon(std::string text) {
 	for(int i = 1 ; i <= lines ; i++) {
 		textLines.push_back(TTF_RenderText_Solid(font, text.substr(20*(lines -1), 20).c_str(), black));
 	}
+	
+	creationTime = SDL_GetTicks();
 }
 
 LB_MessageBalloon::~LB_MessageBalloon() {
@@ -147,31 +149,31 @@ LB_MessageBalloon::~LB_MessageBalloon() {
  *  \param x position of the player talking, balloon will be drawn above
  *  \param y position of the player talking, balloon will be drawn above
  */
-void LB_MessageBalloon::draw(SDL_Renderer *target, Uint16 x, Uint16 y) {	
-	// 30 and 20 are respectively the height and width of the balloon tip
-	//Draw balloon
-	roundedBoxRGBA(target, x - width / 2, y - height - 30 + 1, x + width / 2, y - 30, BALLOON_RADIUS, 0xff, 0xff, 0xff, 0);
-	roundedRectangleRGBA(target, x - width / 2, y - height - 30 + 1, x + width / 2, y - 30, BALLOON_RADIUS, 0, 0, 0, 0);
-	//Add text
-	SDL_Rect dstRect;
-	dstRect.x = x - width / 2 + BALLOON_RADIUS;
-	dstRect.y = y - height - 30 + BALLOON_RADIUS;
-	for(int i = 1 ; i <= lines ; i++) {
-		if(textTextures.size() < lines) {
-			//Create textures from surfaces if necessary
-			textTextures.push_back(SDL_CreateTextureFromSurface(target, textLines[i-1]));
+void LB_MessageBalloon::draw(SDL_Renderer *target, Uint16 x, Uint16 y) {
+	if(SDL_GetTicks() - creationTime < BALLOON_TIMEOUT){
+		// 30 and 20 are respectively the height and width of the balloon tip
+		//Draw balloon
+		roundedBoxRGBA(target, x - width / 2, y - height - 30 + 1, x + width / 2, y - 30, BALLOON_RADIUS, 0xff, 0xff, 0xff, 0);
+		roundedRectangleRGBA(target, x - width / 2, y - height - 30 + 1, x + width / 2, y - 30, BALLOON_RADIUS, 0, 0, 0, 0);
+		//Add text
+		SDL_Rect dstRect;
+		dstRect.x = x - width / 2 + BALLOON_RADIUS;
+		dstRect.y = y - height - 30 + BALLOON_RADIUS;
+		for(int i = 1 ; i <= lines ; i++) {
+			if(textTextures.size() < lines) {
+				//Create textures from surfaces if necessary
+				textTextures.push_back(SDL_CreateTextureFromSurface(target, textLines[i-1]));
+			}
+			int w, h;
+			SDL_QueryTexture(textTextures[i-1], NULL, NULL, &w, &h);
+			dstRect.h = h;
+			dstRect.w = w;
+			SDL_RenderCopy(target, textTextures[i-1], NULL, &dstRect);
+			dstRect.y += h;
 		}
-		int w, h;
-		SDL_QueryTexture(textTextures[i-1], NULL, NULL, &w, &h);
-		dstRect.h = h;
-		dstRect.w = w;
-		SDL_RenderCopy(target, textTextures[i-1], NULL, &dstRect);
-		dstRect.y += h;
+		//Add tip at the bottom
+		filledTrigonRGBA(target, x, y, x, y - 30, x + 20, y - 30, 0xff, 0xff, 0xff, 0);
 	}
-	//Add tip at the bottom
-	filledTrigonRGBA(target, x, y, x, y - 30, x + 20, y - 30, 0xff, 0xff, 0xff, 0);
-	
-
 }
 
 LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), sa_scroll(),
@@ -179,6 +181,8 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	chatWindow.setCaption(friendName);
 	chatWindow.setWidth(200);
 	chatWindow.setHeight(300);
+	gcn::Color color(0x1f, 0x75, 0xf5, 0);
+	chatWindow.setBaseColor(color);
 
 	tb_chat.setEditable(false);
 	sa_scroll.setContent(&tb_chat);
@@ -188,6 +192,7 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 
 	btn_close.adjustSize();
 	btn_send.adjustSize(); //precaution for i18n
+	//TODO: text colors for text areas
 
 	tf_msg.setWidth(200 - 3*2 - btn_send.getWidth()); //avoid overlap between textfield and button
 
@@ -196,6 +201,13 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	chatWindow.add(&sa_scroll, 2, 20);
 	chatWindow.add(&tf_msg, 2, 20 + 250 + 2);
 	chatWindow.add(&btn_send, 200 - 2 - btn_send.getWidth(), 20 + 250 + 2);
+}
+
+/**
+ *  2-parameter constructor to start new conversation from incoming message
+ */
+LB_ChatWindow::LB_ChatWindow(std::string friendName, std::string message) : LB_ChatWindow(friendName) {
+	this->addMessage(friendName, message);
 }
 
 /**
@@ -213,4 +225,14 @@ void LB_ChatWindow::setVisible(bool visible) {
 void LB_ChatWindow::addMessage(std::string author, std::string message) {
 	tb_chat.addRow(author + "] " + message);
 	chatWindow.setVisible(true); //put the window back in foreground if necessary
+}
+
+/**
+ *  Get the name of the friend you are chatting with
+ *  When a new message is received, this method will come in handy to know if this is part
+ *  of an ongoing conversation (existing window) or if it is a new one (constructor call necessary)
+ *  \return the friend name, as a std::string
+ */
+string LB_ChatWindow::getRecipientName() {
+	return chatWindow.getCaption();
 }

@@ -145,8 +145,8 @@ sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME)
 	
 	gcn::Color color(0x1f, 0x75, 0xf5, 0);
 	settings.setBaseColor(color);
-	settings.add(&btn_ok, 100, 100);
-	settings.add(&btn_cancel, 150, 100);
+	settings.add(&btn_ok, settings.getWidth() / 2 - 2 - btn_ok.getWidth(), 100);
+	settings.add(&btn_cancel, settings.getWidth() / 2 + 2, 100);
 	settings.add(&lbl_music, 10, 30);
 	settings.add(&lbl_effects, 10, 60);
 	settings.add(&sl_music, 60, 30);

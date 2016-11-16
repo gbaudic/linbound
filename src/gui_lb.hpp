@@ -22,7 +22,8 @@
 #include <guisan/sdl.hpp>
 #include "room.hpp"
 
-const Uint16 BALLOON_RADIUS = 5; //for rounded corners
+const Uint16 BALLOON_RADIUS = 5; //! radius for rounded corners
+const Uint32 BALLOON_TIMEOUT = 5000; //! time in milliseconds
 
 class LB_RoomButton : public gcn::ImageButton {
 public:
@@ -47,6 +48,7 @@ private:
 	std::vector<SDL_Texture*> textTextures;
 	Uint16 width, height;
 	Uint8 lines;
+	Uint32 creationTime;
 };
 
 /**
@@ -55,8 +57,10 @@ private:
 class LB_ChatWindow {
 public:
 	LB_ChatWindow(std::string friendName);
+	LB_ChatWindow(std::string friendName, std::string message);
 	void setVisible(bool visible);
 	void addMessage(std::string author, std::string message);
+	std::string getRecipientName();
 
 private:
 	gcn::Window chatWindow;
