@@ -182,9 +182,13 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	chatWindow.setWidth(200);
 	chatWindow.setHeight(300);
 	gcn::Color color(0x1f, 0x75, 0xf5, 0);
+	gcn::Color bckColor(0, 0, 0x66, 0);
+	gcn::Color textColor(0xff, 0xff, 0xff, 0);
 	chatWindow.setBaseColor(color);
 
 	tb_chat.setEditable(false);
+	tb_chat.setBackgroundColor(bckColor);
+	tb_chat.setForegroundColor(textColor);
 	sa_scroll.setContent(&tb_chat);
 	sa_scroll.setHorizontalScrollPolicy(gcn::ScrollArea::SHOW_NEVER);
 	sa_scroll.setWidth(190);
@@ -192,9 +196,10 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 
 	btn_close.adjustSize();
 	btn_send.adjustSize(); //precaution for i18n
-	//TODO: text colors for text areas
 
 	tf_msg.setWidth(200 - 3*2 - btn_send.getWidth()); //avoid overlap between textfield and button
+	tb_msg.setBackgroundColor(bckColor);
+	tb_msg.setForegroundColor(textColor);
 
 	//Add widgets
 	chatWindow.add(&btn_close, 200 - 2 - btn_close.getWidth(), 2);
