@@ -206,6 +206,8 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	chatWindow.add(&sa_scroll, 2, 20);
 	chatWindow.add(&tf_msg, 2, 20 + 250 + 2);
 	chatWindow.add(&btn_send, 200 - 2 - btn_send.getWidth(), 20 + 250 + 2);
+	
+	recipient = friendName;
 }
 
 /**
@@ -239,5 +241,5 @@ void LB_ChatWindow::addMessage(std::string author, std::string message) {
  *  \return the friend name, as a std::string
  */
 string LB_ChatWindow::getRecipientName() {
-	return chatWindow.getCaption();
+	return recipient;
 }

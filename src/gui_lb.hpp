@@ -69,6 +69,19 @@ private:
 	gcn::TextBox tb_chat;
 	gcn::Button btn_close;
 	gcn::Button btn_send;
+	std::string recipient; //! necessary if caption displays other infos
 };
+
+class CreditsWindow {
+public:
+	CreditsWindow();
+	~CreditsWindow();
+
+private:
+	gcn::Window creditsWindow;
+	gcn::TextBox tb_text;
+	gcn::ScrollArea sa_scroll;
+	gcn::Button btn_close;
+}
 
 #endif

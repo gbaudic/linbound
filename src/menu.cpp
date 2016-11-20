@@ -72,7 +72,7 @@ void LB_Menu::processEvent(SDL_Event event) {
 	}
 }
 
-LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer), win_settings() {
+LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer), win_settings(), win_credits() {
 	SDL_Surface* bck = IMG_Load("./res/menu/LB_menu.png");
 	background = SDL_CreateTextureFromSurface(this->renderer, bck);
 	SDL_FreeSurface(bck);
@@ -156,6 +156,7 @@ LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer), win_settings() 
 	btn_credits->adjustSize();
 
 	win_settings.setVisible(false);
+	win_credits.setVisible(false);
 
 	//Add to container
 	top->add(lbl_buttonHelp);
