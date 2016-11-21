@@ -18,6 +18,7 @@
 
 #include "context.hpp"
 #include "settings.hpp"
+#include "gui_lb.hpp"
 
 class LB_Menu : public LB_Context, public gcn::ActionListener {
 	/* Note: abusing multiple inheritance of C++ to make this class an ActionListener
@@ -32,6 +33,9 @@ class LB_Menu : public LB_Context, public gcn::ActionListener {
 	void action(const gcn::ActionEvent& actionEvent);
 
 	private:
+	SettingsWindow win_settings;
+	CreditsWindow win_credits;
+	
 	Uint8 mode; //0 for start menu, 1 for game buttons, 2 for credits
 	SDL_Texture* background;
 	gcn::Label* lbl_buttonHelp;
@@ -43,9 +47,6 @@ class LB_Menu : public LB_Context, public gcn::ActionListener {
 	gcn::ImageButton* btn_onlinePlay;
 	gcn::ImageButton* btn_quit;
 	gcn::ImageButton* btn_credits;
-	
-	SettingsWindow win_settings;
-	CreditsWindow win_credits;
 
 };
 

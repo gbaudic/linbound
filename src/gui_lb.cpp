@@ -198,8 +198,8 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	btn_send.adjustSize(); //precaution for i18n
 
 	tf_msg.setWidth(200 - 3*2 - btn_send.getWidth()); //avoid overlap between textfield and button
-	tb_msg.setBackgroundColor(bckColor);
-	tb_msg.setForegroundColor(textColor);
+	tf_msg.setBackgroundColor(bckColor);
+	tf_msg.setForegroundColor(textColor);
 
 	//Add widgets
 	chatWindow.add(&btn_close, 200 - 2 - btn_close.getWidth(), 2);
@@ -242,4 +242,26 @@ void LB_ChatWindow::addMessage(std::string author, std::string message) {
  */
 string LB_ChatWindow::getRecipientName() {
 	return recipient;
+}
+
+CreditsWindow::CreditsWindow() : creditsWindow(), tb_text(), sa_scroll(), btn_close(gettext("Close")) {
+
+	creditsWindow.setCaption(gettext("Credits"));
+	btn_close.adjustSize();
+	tb_text.setEditable(false);
+
+	sa_scroll.setContent(&tb_text);
+	//Add text to tb_text
+
+	//Add widgets to window
+}
+
+CreditsWindow::~CreditsWindow() {
+}
+
+/**
+ * Change visibility of the internal gcn::window
+ */
+void CreditsWindow::setVisible(bool visible) {
+	creditsWindow.setVisible(visible);
 }

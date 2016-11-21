@@ -48,7 +48,7 @@ private:
 	std::vector<SDL_Texture*> textTextures;
 	Uint16 width, height;
 	Uint8 lines;
-	Uint32 creationTime;
+	Uint32 creationTime; //! needed
 };
 
 /**
@@ -72,16 +72,21 @@ private:
 	std::string recipient; //! necessary if caption displays other infos
 };
 
+/**
+ * A subwindow to display the credits directly from the menu
+ * Data will be fetched from the existing AUTHORS file
+ */
 class CreditsWindow {
 public:
 	CreditsWindow();
 	~CreditsWindow();
+	void setVisible(bool visible);
 
 private:
 	gcn::Window creditsWindow;
 	gcn::TextBox tb_text;
 	gcn::ScrollArea sa_scroll;
 	gcn::Button btn_close;
-}
+};
 
 #endif

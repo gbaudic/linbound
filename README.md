@@ -1,6 +1,8 @@
 # LinBound
 
-LinBound aims to be an open-source clone of the game GunBound, primarily targeted to Linux but which aims to be as cross-platform as possible. 
+[![Build Status](https://travis-ci.org/gbaudic/linbound.svg?branch=master)](https://travis-ci.org/gbaudic/linbound)
+
+LinBound aims to be an open-source clone of the game [GunBound](http://gunbound.softnyx.net), a multiplayer turn-based arcade game with a gameplay very close to Worms, Hedgewars or WarMUX. It is primarily targeted to Linux but it aims to be as cross-platform as possible. 
 
 ## Documentation
 
@@ -8,7 +10,7 @@ Please see the wiki for more information about the goals of this project, implem
 
 ## Dependencies
 
-Linbound uses SDL2, SDL2_image, SDL2_ttf, SDL2_mixer, SDL2_net and SDL2_gfx. It also relies on TinyXML2 for XML processing. GUI subsystem will be handled by guisan (https://github.com/kallisti5/guisan). 
+Linbound uses SDL2, SDL2_image, SDL2_ttf, SDL2_mixer, SDL2_net and SDL2_gfx. It also relies on TinyXML2 for XML processing. GUI subsystem will be handled by guisan (https://github.com/gbaudic/guisan). 
 
 ## Credits
 
