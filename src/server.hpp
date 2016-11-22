@@ -20,7 +20,7 @@
 #include "player.hpp"
 
 /**
-*
+* Minimal information to represent a server in the server list
 */
 struct LB_BasicServerInfo
 {

@@ -39,5 +39,7 @@ bool LB_isServerCompatible(Uint8 version){
 }
 
 void LB_discoverServers(){
+	//Send a broadcast message, wait for replies
+	
 	//TODO: return a list
 }
