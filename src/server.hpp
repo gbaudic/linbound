@@ -17,6 +17,7 @@
 #define _H_SERVER_
 
 #include <sqlite3.h>
+#include "player.hpp"
 
 /**
 *

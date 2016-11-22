@@ -247,6 +247,7 @@ string LB_ChatWindow::getRecipientName() {
 CreditsWindow::CreditsWindow() : creditsWindow(), tb_text(), sa_scroll(), btn_close(gettext("Close")) {
 
 	creditsWindow.setCaption(gettext("Credits"));
+	creditsWindow.setVisible(false); //we will show it on demand afterwards
 	btn_close.adjustSize();
 	tb_text.setEditable(false);
 
@@ -254,6 +255,7 @@ CreditsWindow::CreditsWindow() : creditsWindow(), tb_text(), sa_scroll(), btn_cl
 	//Add text to tb_text
 
 	//Add widgets to window
+	creditsWindow.add(&sa_scroll, 2, 20);
 }
 
 CreditsWindow::~CreditsWindow() {
@@ -264,4 +266,46 @@ CreditsWindow::~CreditsWindow() {
  */
 void CreditsWindow::setVisible(bool visible) {
 	creditsWindow.setVisible(visible);
+}
+
+LoginWindow::LoginWindow() : loginWindow(), lbl_status(""), tf_login(), tf_password(),
+		btn_login(gettext("Login")), btn_cancel(gettext("Cancel")) {
+	loginWindow.setCaption(gettext("Login"));
+	loginWindow.setVisible(false);
+	lbl_status.setCaption(gettext("Login required."));
+
+	btn_login.adjustSize();
+	btn_cancel.adjustSize();
+	tf_password.setWidth(tf_login.getWidth());
+
+	loginWindow.add(&lbl_status, 2, 20);
+	loginWindow.add(&tf_login, 2, 40);
+	loginWindow.add(&tf_password, 2, 70);
+	loginWindow.add(&btn_login, 2 + 2 + tf_login.getWidth(), 40);
+	loginWindow.add(&btn_cancel, 2 + 2 + tf_login.getWidth(), 70);
+
+}
+
+LoginWindow::~LoginWindow() {
+}
+
+void LoginWindow::setVisible(bool visible) {
+	loginWindow.setVisible(visible);
+}
+
+std::string LoginWindow::getLogin() {
+	return tf_login.getText();
+}
+
+std::string LoginWindow::getPassword() {
+	return tf_password.getText();
+}
+
+/**
+ * Change status label within LoginWindow
+ * Used to indicate errors in login process
+ * \param status the new text to display
+ */
+void LoginWindow::setStatus(std::string status) {
+	lbl_status.setCaption(status);
 }

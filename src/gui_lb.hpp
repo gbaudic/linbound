@@ -89,4 +89,24 @@ private:
 	gcn::Button btn_close;
 };
 
+/**
+ * The subwindow which opens in the server list to let you login to a server
+ */
+class LoginWindow {
+public:
+	LoginWindow();
+	~LoginWindow();
+	void setVisible(bool visible);
+	std::string getLogin();
+	std::string getPassword();
+	void setStatus(std::string status);
+
+private:
+	gcn::Window loginWindow;
+	gcn::Label lbl_status;
+	gcn::TextField tf_login;
+	gcn::PasswordField tf_password;
+	gcn::Button btn_login, btn_cancel;
+};
+
 #endif
