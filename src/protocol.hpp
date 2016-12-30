@@ -19,8 +19,16 @@
 #define _H_PROTOCOL_
 
 /******* Message types *******/
-const Uint8 ERROR = 255; //Used for special popups or real errors
-const Uint8 INTERNAL = 250; //Used for login, ping measures...
+const Uint8 STATUS_INTERNAL = 1; //Used for server-side errors...
+const Uint8 STATUS_OK = 0;
+const Uint8 STATUS_BANNED = 2;
+const Uint8 STATUS_FORBIDDEN = 3;
+const Uint8 STATUS_NOTFOUND = 4;
+const Uint8 STATUS_REPEAT = 5; //Send again
+const Uint8 STATUS_DISCONNECTED = 6;
+const Uint8 STATUS_INVALID = 7;
+const Uint8 STATUS_PING = 8;
+const Uint8 STATUS_PONG = 9;
 
 const Uint8 SERVER_INFO = 200; //Basic server info
 const Uint8 ROOM0_INFO = 210; //Basic room info in channel : number, title, type, map used, status
