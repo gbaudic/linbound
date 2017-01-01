@@ -2,6 +2,8 @@
  *  \file utils.hpp
  *  \brief Utility functions
  *  \author G. B.
+ *  \date /11/2016
+ *  \version 0.1a
  */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
@@ -26,5 +28,6 @@ Sint16 getShotAngle(Sint16 angle);
 bool flip(Sint16 angle);
 std::string getVersionString();
 int getVersion();
+std::string prettifyIP(Uint32 address);
  
 #endif

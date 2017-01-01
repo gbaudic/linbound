@@ -87,6 +87,7 @@ class LB_Room
     RoomStatus getStatus() const;
     Uint16 getNumber() const;
     std::string getName() const;
+	Uint8 getPlayers() const;
     bool testPassword(std::string attempt);
     LB_Room(std::string name, Uint16 roomNumber, Uint8 maxPlayers, RoomMode mode, std::string password = "");
     void changeRoomStatus(RoomStatus newStatus);
@@ -120,25 +121,29 @@ class LB_Room
 
     Uint8 maxPlayers, currentPlayers;
 
-    LB_Player* players[MAX_PLAYERS];
+    LB_Player* players[MAX_PLAYERS]; //TODO: use a list instead, append so that 0 is always admin
 	LB_Weather weather[10];
 
     LB_MessageChannel* channel;
 };
 
 class LB_GameItem {
-	public:
-	
+	public:	
 	virtual void use();
 	std::string getName() const;
 	std::string getDescription() const;
 	Uint8 getSize() const;
+	Uint16 getDelay() const;
+	bool isEnabled() const;
+	void enable(bool newState);
 	
 	private:
 	Uint8 size; //1 or 2 slots out of 6
-	SDL_Surface* surf;
+	SDL_Surface* surf; //for GUI button
 	std::string name;
 	std::string description;
+	Uint16 delay;
+	bool enabled; //admin can disable items
 };
 
 #endif

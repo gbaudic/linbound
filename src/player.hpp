@@ -79,10 +79,10 @@ class LB_Player
 {
 	public:
 
-        enum Level {Chick, WoodHammer, DoubleWoodHammer, StoneAxe, DoubleStoneAxe,
-        MetalAxe, DoubleMetalAxe, SilverAxe, DoubleSilverAxe, GoldAxe, DoubleGoldAxe,
-        MetalDoubleSidedAxe, MetalDoubleSidedAxePlus, SilverDoubleSidedAxe, SilverDoubleSidedAxePlus,
-        GoldDoubleSidedAxe, GoldDoubleSidedAxePlus, BronzeStar, SilverStar, GoldStar, DoubleStars,
+        enum Level {Chick = 500, WoodHammer = 600, DoubleWoodHammer = 700, StoneAxe = 850, DoubleStoneAxe = 1000,
+        MetalAxe = 1200, DoubleMetalAxe = 1400, SilverAxe = 1700, DoubleSilverAxe = 2000, GoldAxe = 2400, DoubleGoldAxe = 2800,
+        MetalDoubleSidedAxe = 3500, MetalDoubleSidedAxePlus = 4000, SilverDoubleSidedAxe = 4700, SilverDoubleSidedAxePlus = 5400,
+        GoldDoubleSidedAxe = 6500, GoldDoubleSidedAxePlus = 7500, BronzeStar = 9000, SilverStar = 10500, GoldStar, DoubleStars,
         TripleStars, VioletHole, SapphireHole, RedRubyHole, DiamondHole, BlueDragon, RedDragon, SilverDragon,
         BlueKnight, RedKnight, SilverKnight, BluePhoenix, RedPhoenix, SilverPhoenix,
         BronzeMedal, SilverMedal, GoldMedal, BronzeCrown, SilverCrown, GoldCrown, VIP,
@@ -118,10 +118,13 @@ class LB_Player
 		void reset();
 		void computeStats();
 		void finalizeTurn(); //update angles, delay
+		bool isDead();
 		Uint16 getCurrentMobile();
 		Sint8 getPlayerStat(Statistic stat);
 
 	protected:
+		bool isAdmin;
+	
 		Uint32 xp;
 		Uint32 playerGold;
 		Uint32 playerCash;

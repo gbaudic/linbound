@@ -56,6 +56,10 @@ std::string LB_Room::getName() const {
 	return name;
 }
 
+Uint8 LB_Room::getPlayers() const {
+	return currentPlayers;
+}
+
 bool LB_Room::testPassword(std::string attempt) {
 	if(isPasswordProtectedRoom) {
 		return attempt == password;
@@ -196,4 +200,16 @@ std::string LB_GameItem::getDescription() const {
 
 Uint8 LB_GameItem::getSize() const {
 	return size;
+}
+
+Uint16 LB_GameItem::getDelay() const {
+	return delay;
+}
+
+bool LB_GameItem::isEnabled() const {
+	return enabled;
+}
+	
+void LB_GameItem::enable(bool newState){
+	enabled = newState;
 }

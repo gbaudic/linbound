@@ -2,6 +2,8 @@
  *  \file utils.cpp
  *  \brief Utility functions
  *  \author G. B.
+ *  \date /11/2016
+ *  \version 0.1a
  */
 /* This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. 
  * If a copy of the MPL was not distributed with this file, 
@@ -83,4 +85,17 @@ std::string getVersionString(){
  */
 int getVersion(){
 	return PATCH_VERSION + MINOR_VERSION*10 + MAJOR_VERSION*1000;
+}
+
+/**
+ *  User-friendly IP address display for server choice
+ *  \param address the Uint32 containing the address, using system endianness
+ */
+std::string prettifyIP(Uint32 address){
+	int ip32 = (address >> 24) & 0xff;
+	int ip24 = (address >> 16) & 0xff;
+	int ip16 = (address >> 8) & 0xff;
+	int ip8 = address & 0xff;
+	
+	return std::to_string(ip32)+"."+std::to_string(ip24)+"."+std::to_string(ip16)+"."+std::to_string(ip8);
 }
