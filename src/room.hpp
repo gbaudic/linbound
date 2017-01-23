@@ -20,14 +20,16 @@
 #include "map.hpp"
 #include "player.hpp"
 
-enum RoomMode {SOLO, DUO, MULTI, POINTS};
-enum RoomStatus {ROOM_WAITING, ROOM_FULL, ROOM_PLAYING};
-enum SuddenDeathType {BIGBOMB, DOUBLE, SS};
-enum PlayerStatus {IDLE, READY, LOADING, OK}; //used when waiting/pre-game
-enum MobileStatus {WAITING, FALLING, FLYING, SHOOTING, DEAD, DYING}; //used in-game
-enum WeatherType {TORNADO, MIRROR, FORCE};
+enum class RoomMode {SOLO, DUO, MULTI, POINTS};
+enum class RoomStatus {ROOM_WAITING, ROOM_FULL, ROOM_PLAYING};
+enum class SuddenDeathType {BIGBOMB, DOUBLE, DOUBLEPLUS, SS};
+enum class PlayerStatus {IDLE, READY, LOADING, OK}; //used when waiting/pre-game
+enum class MobileStatus {WAITING, FALLING, FLYING, SHOOTING, DEAD, DYING}; //used in-game
+enum WeatherType {TORNADO, MIRROR, FORCE}; //no enum class since I need int correspondence
 
 const int MAX_PLAYERS = 8;
+
+std::string to_string(SuddenDeathType s);
 
 /**
  *  Summary of infos, returned by the server in the Channel view

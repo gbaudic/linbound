@@ -109,4 +109,23 @@ private:
 	gcn::Button btn_login, btn_cancel;
 };
 
+/**
+ *  A subwindow to create a new room
+ */
+class CreateRoomWindow {
+	public:
+	CreateRoomWindow();
+	~CreateRoomWindow();
+	void setVisible(bool visible);
+	
+	private:
+	gcn::Window createRoomWindow;
+	gcn::Label lbl_name, lbl_password, lbl_sdType, lbl_sdTurns;
+	gcn::TextField tf_name, tf_password;
+	gcn::RadioButton rb_bigbomb, rb_double, rb_doubleplus, rb_ss; //SuddenDeathType
+	gcn::RadioButton rb_40, rb_56, rb_72; //nb of turns
+	gcn::Button btn_ok, btn_cancel;
+	
+}
+
 #endif

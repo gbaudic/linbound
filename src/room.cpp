@@ -25,6 +25,26 @@
 #include "room.hpp"
 using namespace std;
 
+
+/**
+ *  Pretty string representation of Sudden Death types for GUI display
+ *  \param s a SuddenDeathType value
+ */
+std::string to_string(SuddenDeathType s) {
+	switch(s) {
+		case SuddenDeathType::BIGBOMB:
+			return "Bigbomb";
+		case SuddenDeathType::DOUBLE:
+			return "Double";
+		case SuddenDeathType::DOUBLEPLUS:
+			return "Double+";
+		case SuddenDeathType::SS:
+			return "SuperShot";
+		default:
+			return "";
+	}
+}
+
 /**
  *  Reset some attributes once a game is finished
  */
@@ -32,9 +52,9 @@ void LB_Room::reset(){
 	turnsPlayed = 0;
 	
 	if(currentPlayers == maxPlayers){
-		status = ROOM_FULL;
+		status = RoomStatus::ROOM_FULL;
 	} else {
-		status = ROOM_WAITING;
+		status = RoomStatus::ROOM_WAITING;
 	}
 	
 	//weather
@@ -90,7 +110,7 @@ void LB_Room::changeWind(LB_WindData newWind) {
 }
 
 void LB_Room::addPlayer(LB_Player* player) {
-	if(status == ROOM_WAITING && currentPlayers < maxPlayers) {
+	if(status == RoomStatus::ROOM_WAITING && currentPlayers < maxPlayers) {
 		players[currentPlayers] = player;
 		currentPlayers++;
 	} else {
@@ -138,6 +158,8 @@ LB_Weather::LB_Weather(WeatherType type, Sint16 x) {
 		case FORCE:
 			element = IMG_Load("./res/force.png");
 			break;
+		default:
+			break; //TBD -- should never happen
 	}
 }
 
