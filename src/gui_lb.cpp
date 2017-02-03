@@ -18,6 +18,7 @@
 #include <locale.h>
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -252,10 +253,24 @@ CreditsWindow::CreditsWindow() : creditsWindow(), tb_text(), sa_scroll(), btn_cl
 	tb_text.setEditable(false);
 
 	sa_scroll.setContent(&tb_text);
-	//Add text to tb_text
+	
+	//Add text to tb_text	
+	ifstream input("AUTHORS", ios::in);
+	string line;
+	
+	while(getline(input, line) && !input.eof()){
+		if(!line.empty()){
+			tb_text.addRow(line);
+		}
+	}
+	//TODO: check if we managed to get some text
+	//tb_text.addRow(gettext("Error while trying to open AUTHORS credits file. "));
+
+	input.close();
 
 	//Add widgets to window
 	creditsWindow.add(&sa_scroll, 2, 20);
+	creditsWindow.add(&btn_close, 100, 200); //TODO: adjust coords
 }
 
 CreditsWindow::~CreditsWindow() {

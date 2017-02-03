@@ -95,8 +95,6 @@ int LB_Init() {
  * @return 0 if execution must continue, -1 if program should stop
  */
 int LB_ParseOptions(int argc, char *argv[]) {
-	
-	//TODO: manage help option to display possible options
 
 	if(argc >= 2){
 		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
@@ -110,6 +108,16 @@ int LB_ParseOptions(int argc, char *argv[]) {
 		if(strncmp(argv[1], "--server\0", 8) == 0){
 			isServer = true;
 			cout << "Running in server mode" << endl;
+		}
+		
+		//Manage help flag
+		if(strncmp(argv[1], "-h\0", 2) || strncmp(argv[1], "--help\0", 6)){
+			cout << "LinBound v0.1a\n" << endl
+				 << "Supported commands: " << endl
+				 << "-h, --help    : display this help and exit" << endl
+				 << "-v, --version : display version number and exit" << endl
+				 << "--server      : start a server" << endl;
+			return -1;
 		}
 	}
 
