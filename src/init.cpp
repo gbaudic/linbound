@@ -31,6 +31,7 @@
 #include "sound.hpp"
 #include "db.hpp"
 #include "settings.hpp"
+#include "utils.hpp"
 using namespace std;
 
 TTF_Font *font = NULL;
@@ -98,8 +99,8 @@ int LB_ParseOptions(int argc, char *argv[]) {
 
 	if(argc >= 2){
 		if(strncmp(argv[1], "-v\0", 2) == 0 || strncmp(argv[1], "--version\0", 9) == 0){
-			cout << "LinBound v0.1a\n"
-					<< "(C) 2008-2016 G. B. aka podgy_piglet and contributors\n"
+			cout << "LinBound v" << getVersionString() << endl
+					<< "(C) 2008-2017 G. B. aka podgy_piglet and contributors" << endl
 					<< "This software is free software released under the Mozilla Public License 2.0\n";
 			return -1;
 		}
@@ -112,7 +113,7 @@ int LB_ParseOptions(int argc, char *argv[]) {
 		
 		//Manage help flag
 		if(strncmp(argv[1], "-h\0", 2) || strncmp(argv[1], "--help\0", 6)){
-			cout << "LinBound v0.1a\n" << endl
+			cout << "LinBound v" << getVersionString() << "\n" << endl
 				 << "Supported commands: " << endl
 				 << "-h, --help    : display this help and exit" << endl
 				 << "-v, --version : display version number and exit" << endl
@@ -169,7 +170,7 @@ int LB_InitSound(int channels) {
 		int res = Mix_Init(flags);
 
 		if(res != flags){
-			cout << gettext("Error loading audio decoding libraries : ") << Mix_GetError() << endl;
+			cout << gettext("Error loading audio decoding libraries: ") << Mix_GetError() << endl;
 		}
 
 		if (Mix_AllocateChannels(channels) != channels){

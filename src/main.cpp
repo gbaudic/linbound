@@ -154,6 +154,8 @@ int main(int argc, char *argv[]) {
     SDL_initFramerate(&mgr);
 
 	//cout << "Entering main loop" << endl;
+	
+	//try/catch block from guisan examples
     try {
     	MainLoop();
     } catch (gcn::Exception &e) {
