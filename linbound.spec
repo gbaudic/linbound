@@ -4,10 +4,10 @@
 
 Summary: A turn-based multiplayer shooting game in the style of Worms
 Name: linbound
-Version: 0.1
+Version: 0.1.0
 Release: 1
 License: MPL
-Group: Applications/Games/ArcadeGame
+Group: Amusements/Games/Action/Shoot
 Source: https://github.com/gbaudic/linbound/archive/master.zip
 URL: https://github.com/gbaudic/linbound
 Packager: Your Name <email@mail.com>

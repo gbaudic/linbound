@@ -1,3 +1,5 @@
 TODO :
-full gettext support
-doxygen
+- protocol definition
+- SQLite calls
+- more graphics and sound
+- find a workaround to the SDL2 transparency issue
