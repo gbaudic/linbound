@@ -65,7 +65,8 @@ void LB_LoadMap(const char *filename){
  *  Load the list of avatar items in the program
  */
 void LB_LoadItemsList(const char* filename){
-
+	XMLDocument doc;
+	doc.LoadFile(filename);
 
 }
 

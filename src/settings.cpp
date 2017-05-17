@@ -94,21 +94,55 @@ void Settings::init(){
 	//Try to read the config file
 	ifstream input("linbound.config", ios::in);
 	string line;
+	Uint8 flags = 0; //to know which fields were set
 	
 	while(getline(input, line) && !input.eof()){
 		if(!line.empty() && line.front() != '['){
 			int eqpos = line.find('=');
-			//Maybe a value here
-			//determine if we know this key
-			//if yes, check value consistency and inject; if no, ignore
+			if(eqpos != string::npos){
+				//Maybe a value here
+				//determine if we know this key
+				string key = line.substr(0, eqpos);
+				string value = line.substr(eqpos + 1);
+				//if yes, check value consistency and inject; if no, ignore
+				switch(key) {
+					case "Height":
+						height = stoi(value);
+						flags |= 1;
+						break;
+					case "Width":
+						width = stoi(value);
+						flags |= 2;
+						break;
+					case "MusicVolume":
+						musicVolume = stoi(value);
+						flags |= 4;
+						break;
+					case "EffectsVolume":
+						effectsVolume = stoi(value);
+						flags |= 16;
+						break;
+					default:
+						break;
+				}
+			}
 		}
 	}
 
-	//If it fails...
-	width = 800;
-	height = 600;
-	musicVolume = MIX_MAX_VOLUME / 2;
-	effectsVolume = MIX_MAX_VOLUME / 2;
+	//Consistency check
+	if(!(flags & 2) || width < 300) {
+		width = 800;
+	}
+	
+	if(!(flags & 1) || height < 200) {
+		height = 600;
+	}
+	
+	if(!(flags & 4))
+		musicVolume = MIX_MAX_VOLUME / 2;
+	
+	if(!(flags & 16))
+		effectsVolume = MIX_MAX_VOLUME / 2;
 
 	input.close();
 }
