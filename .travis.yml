@@ -1,14 +1,22 @@
 language: cpp
 compiler: gcc
+dist: trusty
 sudo: required
-before_install:
-    - sudo add-apt-repository -y 'ppa:zoogie/sdl2-snapshots' 
+
+before_install: 
     - sudo apt-get update -qq
-    - sudo apt-get install -qq libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev libsqlite3-dev libtinyxml2-dev
+    - sudo apt-get install -qq libsdl2-dev \
+	libsdl2-image-dev \
+	libsdl2-mixer-dev \
+	libsdl2-net-dev \
+	libsdl2-ttf-dev \
+	libsqlite3-dev \
+	libtinyxml2-dev
+	
 install:
-    - wget http://www.ferzkopp.net/Software/SDL2_gfx/SDL2_gfx-1.0.1.tar.gz
-    - tar -xzf SDL2_gfx-1.0.1.tar.gz
-    - pushd SDL2_gfx-1.0.1 && ./configure && make && sudo make install && popd
+    - wget http://www.ferzkopp.net/Software/SDL2_gfx/SDL2_gfx-1.0.3.tar.gz
+    - tar -xzf SDL2_gfx-1.0.3.tar.gz
+    - pushd SDL2_gfx-1.0.3 && ./configure && make && sudo make install && popd
     - git clone https://github.com/gbaudic/guisan.git guisan
     - pushd guisan && scons && sudo scons install && popd
 
