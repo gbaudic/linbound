@@ -24,4 +24,4 @@ install:
     - git clone https://github.com/gbaudic/guisan.git guisan
     - pushd guisan && scons && sudo scons install && popd
 
-script: ./configure && make
+script: autoreconf && ./configure && make
