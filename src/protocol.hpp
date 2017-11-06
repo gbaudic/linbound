@@ -31,6 +31,7 @@ const Uint8 STATUS_PING = 8;
 const Uint8 STATUS_PONG = 9;
 
 const Uint8 LOGIN_MSG = 10; //! Server login
+const Uint8 LOGOUT_REPLY = 254;
 const Uint8 LOGOUT_MSG = 255;
 const Uint8 PWD_MSG = 11; //! Password change
 const Uint8 CREATE_MSG = 12; //! Account creation
@@ -55,10 +56,16 @@ const Uint8 MOBILE_INFO = 240; //! Choice of mobile(s) for the battle
 const Uint8 KICK_MSG = 95; //! Exclude a user from a room
 const Uint8 MUTE_MSG = 99; //! Silence a user
 const Uint8 CHAT_MSG = 100; //! Chat message (add the message type to this value to get the final packet type)
+const Uint8 TEAM_CHAT_MSG = 101;
+const Uint8 ROOM_CHAT_MSG = 102;
+const Uint8 ALL_CHAT_MSG = 103;
 
 const Uint8 WEATHER_MSG = 110; //! Hurricane, thunder, mirror, force
 const Uint8 WIND_MSG = 111; //! Wind change
 const Uint8 EVENT_MSG = 115; //! Game start, double death, sudden death type...
+const Uint8 TURN_MSG = 114; //! Your turn to play
+const Uint8 REWARD_MSG = 116;
+const Uint8 PENALTY_MSG = 117;
 const Uint8 SHOT_MSG = 120; //! Shot coordinates: angle, strength, weapon and item used
 const Uint8 DMG_MSG = 125; //! Result of a shot: impact on players, on the map...
 const Uint8 ITEMS_MSG = 135; //! Item choice when playing (for server consistency checks)

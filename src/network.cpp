@@ -16,6 +16,8 @@
 #include <libintl.h>
 #include <locale.h>
 
+#include <cstring>
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_net.h>
 
@@ -42,4 +44,22 @@ void LB_discoverServers(){
 	//Send a broadcast message, wait for replies
 	
 	//TODO: return a list
+}
+
+/**
+ * Prepares a packet containing login information
+ * \param login login name
+ * \param password clear-text password
+ */
+UDPpacket* LB_packLoginInfo(std::string login, std::string password) {
+	int length = 2 + (login.length() +1) + (password.length() +1);
+	
+	UDPpacket* packet = SDLNet_AllocPacket(length);
+	Uint8* data = packet->data;
+	data[0] = LOGIN_MSG;
+	data[1] = 0;
+	strcpy(data[2], login.c_str());
+	strcpy(data[2+login.length()+1], password.c_str());
+	
+	return packet;
 }
