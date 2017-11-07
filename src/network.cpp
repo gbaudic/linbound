@@ -52,7 +52,7 @@ void LB_discoverServers(){
  * \param password clear-text password
  */
 UDPpacket* LB_packLoginInfo(std::string login, std::string password) {
-	int length = 2 + (login.length() +1) + (password.length() +1);
+	int length = 2 + (login.length() +1) + (password.length() +1) + 2;
 	
 	UDPpacket* packet = SDLNet_AllocPacket(length);
 	Uint8* data = packet->data;
@@ -60,6 +60,62 @@ UDPpacket* LB_packLoginInfo(std::string login, std::string password) {
 	data[1] = 0;
 	strcpy(data[2], login.c_str());
 	strcpy(data[2+login.length()+1], password.c_str());
+	data[length-2] = LB_PROTOCOL_VERSION;
+	data[length-1] = 0;
+	packet->length = length;
+	
+	return packet;
+}
+
+/**
+ * Prepares a packet containing logout information
+ * \param login login name
+ */
+UDPpacket* LB_packLogoutInfo(std::string login) {
+	int length = 2 + (login.length() +1);
+	
+	UDPpacket* packet = SDLNet_AllocPacket(length);
+	Uint8* data = packet->data;
+	data[0] = LOGOUT_MSG;
+	data[1] = 0;
+	strcpy(data[2], login.c_str());
+	packet->length = length;
+	
+	return packet;
+}
+
+/**
+ * Prepare a packet containing a chat message
+ * \param receiver in-game name of receiver, or "sr", "te", "ro" for specific destinations
+ * \param message message to send
+ */
+UDPpacket* LB_packChatMessage(std::string receiver, std::string message) {
+	if(message.empty())
+		return NULL;
+	
+	int length = 2 + (message.length() + 1);
+	Uint8 code = CHAT_MSG;
+	
+	// Handle specific destinations 
+	if(receiver == "sr") code = ALL_CHAT_MSG;
+	if(receiver == "te") code = TEAM_CHAT_MSG;
+	if(receiver == "ro") code = ROOM_CHAT_MSG;
+	
+	if(code == CHAT_MSG) {
+		length += receiver.length() + 1;
+	}
+	
+	UDPpacket* packet = SDLNet_AllocPacket(length);
+	Uint8* data = packet->data;
+	data[0] = code;
+	data[1] = 0;
+	if(code == CHAT_MSG) {
+		strcpy(data[2], receiver.c_str());
+		strcpy(data[2+receiver.length()+1],message.c_str());
+	} else {
+		strcpy(data[2], message.c_str()); //Receiver not needed
+	}
+	packet->length = length;
 	
 	return packet;
 }
