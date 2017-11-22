@@ -1,3 +1,3 @@
 [submodule "guisan"]
 	path = guisan
-	url = ../guisan
+	url = https://github.com/gbaudic/guisan
