@@ -1,0 +1,3 @@
+[submodule "guisan"]
+	path = guisan
+	url = ../guisan
