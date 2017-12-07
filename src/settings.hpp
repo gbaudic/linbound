@@ -22,7 +22,7 @@
 #include <guisan/sdl.hpp>
 
 /**
- *  Singleton to encapsulate game settings
+ *  \brief Singleton to encapsulate game settings
  */
 class Settings {
 public:
@@ -42,7 +42,7 @@ public:
 private:
 	Uint8 musicVolume;
 	Uint8 effectsVolume;
-	Uint16 height, width; //window size
+	Uint16 height, width; //! window size
 	bool isServer;
 	bool isServerSet; //ensure boolean above is only touched once
 	static Settings* instance;
@@ -54,16 +54,16 @@ private:
 };
 
 /**
- *  Subwindow to control settings from main menu
+ *  \brief Subwindow to control settings from main menu
  */
 class SettingsWindow : public gcn::ActionListener {
-	public:
+public:
 	SettingsWindow();
 	~SettingsWindow();
 	void action(const gcn::ActionEvent& actionEvent);
 	void setVisible(bool visible);
 	
-	private:
+private:
 	gcn::Window settings;
 	gcn::Button btn_ok, btn_cancel;
 	gcn::Label lbl_music, lbl_effects;

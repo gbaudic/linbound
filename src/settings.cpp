@@ -88,7 +88,7 @@ void Settings::setServer( bool isServer) {
 }
 
 /**
- * Initialize settings from external config file
+ * \brief Initialize settings from external config file
  */
 void Settings::init(){
 	//Try to read the config file
@@ -148,7 +148,7 @@ void Settings::init(){
 }
 
 /**
- * Write setting changes to disk
+ * \@brief Write setting changes to disk
  */
 void Settings::save() {
 	
@@ -162,6 +162,9 @@ void Settings::save() {
 	output.close();
 }
 
+/**
+ * \brief Constructor
+ */
 SettingsWindow::SettingsWindow() : settings(gettext("Settings")),
 btn_ok(gettext("OK")), btn_cancel(gettext("Cancel")),
 lbl_music(gettext("Music volume")), lbl_effects(gettext("Effects volume")),
@@ -189,16 +192,32 @@ sl_music(0, MIX_MAX_VOLUME), sl_effects(0, MIX_MAX_VOLUME)
 	settings.setVisible(true);
 }
 
+/**
+ * \brief Destructor
+ */
 SettingsWindow::~SettingsWindow() {
 
 }
 
+/**
+ * \brief Handle button clicks
+ */
 void SettingsWindow::action(const gcn::ActionEvent& actionEvent) {
-
+	if(actionEvent.getId() == "cancel") {
+		setVisible(false);
+	} else if(actionEvent.getId() == "ok") {
+		// Save and hide
+		Settings *params = Settings::getInstance();
+		params->setEffectsVolume((Uint8) sl_effects.getValue());
+		params->setMusicVolume((Uint8) sl_music.getValue());
+        params->save();
+		setVisible(false);
+	}
 }
 
 /**
- * Shows or hides the settings window
+ * \brief Shows or hides the settings window
+ * \param visible new visibility
  */
 void SettingsWindow::setVisible(bool visible) {
 	settings.setVisible(visible);
