@@ -62,7 +62,7 @@ UDPpacket* LB_packLoginInfo(std::string login, std::string password) {
 	strcpy(data[2+login.length()+1], password.c_str());
 	data[length-2] = LB_PROTOCOL_VERSION;
 	data[length-1] = 0;
-	packet->length = length;
+	packet->len = length;
 	
 	return packet;
 }
@@ -79,7 +79,7 @@ UDPpacket* LB_packLogoutInfo(std::string login) {
 	data[0] = LOGOUT_MSG;
 	data[1] = 0;
 	strcpy(data[2], login.c_str());
-	packet->length = length;
+	packet->len = length;
 	
 	return packet;
 }
@@ -115,7 +115,7 @@ UDPpacket* LB_packChatMessage(std::string receiver, std::string message) {
 	} else {
 		strcpy(data[2], message.c_str()); //Receiver not needed
 	}
-	packet->length = length;
+	packet->len = length;
 	
 	return packet;
 }

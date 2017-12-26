@@ -196,11 +196,16 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName) : chatWindow(), tf_msg(), s
 	sa_scroll.setHeight(250);
 
 	btn_close.adjustSize();
+	btn_close.setActionEventId("close");
+	btn_close.addActionListener(this);
 	btn_send.adjustSize(); //precaution for i18n
+	btn_send.setActionEventId("send");
+	btn_send.addActionListener(this);
 
 	tf_msg.setWidth(200 - 3*2 - btn_send.getWidth()); //avoid overlap between textfield and button
 	tf_msg.setBackgroundColor(bckColor);
 	tf_msg.setForegroundColor(textColor);
+	tf_msg.addActionListener(this);
 
 	//Add widgets
 	chatWindow.add(&btn_close, 200 - 2 - btn_close.getWidth(), 2);
@@ -223,6 +228,18 @@ LB_ChatWindow::LB_ChatWindow(std::string friendName, std::string message) : LB_C
  */
 void LB_ChatWindow::setVisible(bool visible) {
 	chatWindow.setVisible(visible);
+}
+
+void LB_ChatWindow::action(const gcn::ActionEvent &actionEvent) {
+	if(actionEvent.getId() == "close") {
+		setVisible(false);
+	} else if(actionEvent.getId() == "send" || actionEvent.getSource() == &tf_msg) {
+		string message = tf_msg.getText();
+		if(!message.empty()) {
+		//TODO: forward message to the connection mgr
+			tf_msg.setText("");
+		}
+	}
 }
 
 /**
@@ -290,7 +307,9 @@ LoginWindow::LoginWindow() : loginWindow(), lbl_status(""), tf_login(), tf_passw
 	lbl_status.setCaption(gettext("Login required."));
 
 	btn_login.adjustSize();
+	btn_login.setActionEventId("login");
 	btn_cancel.adjustSize();
+	btn_cancel.setActionEventId("cancel");
 	tf_password.setWidth(tf_login.getWidth());
 
 	loginWindow.add(&lbl_status, 2, 20);

@@ -10,24 +10,27 @@
 #include "message.hpp"
 using namespace std;
 
+/**
+ * @brief Constructor
+ */
 LB_Message::LB_Message(MessageType type, TTF_Font *font, string message, string author, string guild)
 {
-    this->type = type;
-    this->message = message;
-    this->author = author;
-    this->guild = guild;
-    this->isDisplayedInChannel = true;
-    this->creationTime = SDL_GetTicks();
+    _type = type;
+    _message = message;
+    _author = author;
+    _guild = guild;
+    _isDisplayedInChannel = true;
+    _creationTime = SDL_GetTicks();
 
     //Do some rendering to fill the surfaces : one with colors, the other in white
     SDL_Color col;
     col.r = 0xff; col.g = 0xff; col.b = 0xff;
-    string fullMsg = author + "]" + message;
+    string fullMsg = _author + "]" + _message;
     if(type >= USER_MSG){
     	inChannelText = TTF_RenderUTF8_Solid(font, fullMsg.c_str(), col);
     }
 
-    switch(type){
+    switch(_type){
     //TODO: - check color availability on channel 8-bit surface
     case SERVER_MSG:
     	col.b = 0; //yellow
@@ -70,7 +73,7 @@ LB_Message::~LB_Message() {
 		SDL_FreeSurface(inGameText);
 	}
 
-	if(type >= USER_MSG){
+	if(_type >= USER_MSG){
 		SDL_FreeSurface(inChannelText);
 	}
 }
@@ -79,18 +82,16 @@ LB_Message::~LB_Message() {
 * Hides a message, even if its time has not come yet
 */
 void LB_Message::hideMessage() {
-    isDisplayedInChannel = false;
+    _isDisplayedInChannel = false;
 }
 
 /**
  * Hides a message, but checks if its time has come first
  */
-int LB_Message::updateMessageStatus() {
-    if(isDisplayedInChannel && SDL_GetTicks() > LB_Message::TIME_TO_LIVE + creationTime) {
-        isDisplayedInChannel = false;
-        return 1;
+void LB_Message::updateMessageStatus() {
+    if(_isDisplayedInChannel && SDL_GetTicks() > LB_Message::TIME_TO_LIVE + _creationTime) {
+        _isDisplayedInChannel = false;
     }
-    return 0;
 }
 
 void LB_Message::exitGame() {
@@ -98,11 +99,11 @@ void LB_Message::exitGame() {
 }
 
 bool LB_Message::isDisplayed() const {
-    return isDisplayedInChannel;
+    return _isDisplayedInChannel;
 }
 
 MessageType LB_Message::getMessageType() const {
-	return type;
+	return _type;
 }
 
 /**
@@ -116,7 +117,7 @@ int LB_Message::writeToChannel(SDL_Surface *channel, Sint16 x, Sint16 y, bool in
 	SDL_Rect r;
 	r.x = x ; r.y = y;
 
-	if(type >= USER_MSG && !inGame){
+	if(_type >= USER_MSG && !inGame){
 		SDL_BlitSurface(inChannelText, NULL, channel, &r);
 		return 1;
 	}

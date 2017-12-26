@@ -22,9 +22,12 @@
 #include <guisan/sdl.hpp>
 #include "room.hpp"
 
-const Uint16 BALLOON_RADIUS = 5; //! radius for rounded corners
+const Uint16 BALLOON_RADIUS = 5; //! radius for rounded corners, in pixels
 const Uint32 BALLOON_TIMEOUT = 5000; //! time in milliseconds
 
+/**
+ * @brief An improved button to represent a room
+ */
 class LB_RoomButton : public gcn::ImageButton {
 public:
 	LB_RoomButton(LB_Room* room);
@@ -37,6 +40,9 @@ private:
 	gcn::Image* mStatusImages;
 };
 
+/**
+ * @brief A balloon to hold text for a user message
+ */
 class LB_MessageBalloon {
 public:
 	LB_MessageBalloon(std::string text);
@@ -54,12 +60,14 @@ private:
 /**
  * A subwindow to conduct a chat with one of your in-game friends
  */
-class LB_ChatWindow {
+class LB_ChatWindow : public gcn::ActionListener {
 public:
 	LB_ChatWindow(std::string friendName);
 	LB_ChatWindow(std::string friendName, std::string message);
+	~LB_ChatWindow();
 	void setVisible(bool visible);
 	void addMessage(std::string author, std::string message);
+	void action(const gcn::ActionEvent &actionEvent);
 	std::string getRecipientName();
 
 private:
@@ -113,12 +121,12 @@ private:
  *  A subwindow to create a new room
  */
 class CreateRoomWindow {
-	public:
+public:
 	CreateRoomWindow();
 	~CreateRoomWindow();
 	void setVisible(bool visible);
 	
-	private:
+private:
 	gcn::Window createRoomWindow;
 	gcn::Label lbl_name, lbl_password, lbl_sdType, lbl_sdTurns;
 	gcn::TextField tf_name, tf_password;
@@ -126,6 +134,6 @@ class CreateRoomWindow {
 	gcn::RadioButton rb_40, rb_56, rb_72; //nb of turns
 	gcn::Button btn_ok, btn_cancel;
 	
-}
+};
 
 #endif

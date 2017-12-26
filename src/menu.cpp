@@ -71,9 +71,10 @@ void LB_Menu::processEvent(SDL_Event event) {
 	}
 }
 
-LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer), win_settings(), win_credits() {
+LB_Menu::LB_Menu(SDL_Renderer* renderer) : LB_Context(renderer, LB_Context::Context::MAIN_MENU),
+		win_settings(), win_credits() {
 	SDL_Surface* bck = IMG_Load("./res/menu/LB_menu.png");
-	background = SDL_CreateTextureFromSurface(this->renderer, bck);
+	background = SDL_CreateTextureFromSurface(_renderer, bck);
 	SDL_FreeSurface(bck);
 	
 	mode = 0;
@@ -188,7 +189,7 @@ LB_Menu::~LB_Menu() {
 }
 
 void LB_Menu::drawBackground() {
-	SDL_RenderCopy(renderer, background, NULL, NULL);
+	SDL_RenderCopy(_renderer, background, NULL, NULL);
 }
 
 void LB_Menu::drawMiddleground() {

@@ -17,7 +17,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-enum MessageType { SERVER_MSG, BUGLE_MSG, REWARD_MSG, PENALTY_MSG, USER_MSG, POWER_USER_MSG, ADMIN_USER_MSG };
+enum MessageType {
+	SERVER_MSG, //! server message
+	BUGLE_MSG, //! user message to everyone
+	REWARD_MSG, //! user reward
+	PENALTY_MSG, //! user penalty
+	USER_MSG, //! chat message
+	POWER_USER_MSG, //! chat message from a power user
+	ADMIN_USER_MSG //! chat message from a game admin
+};
 
 /**
  *  \struct Achievement
@@ -31,31 +39,31 @@ struct Achievement {
 };
 
 class LB_Message {
-    public:
+public:
 
     static const Uint32 TIME_TO_LIVE = 5000; //! Maximum time to display in milliseconds
 
-    SDL_Surface *inGameText; //Colored text
-    SDL_Surface *inChannelText; //White text
+    SDL_Surface *inGameText; //! Colored text
+    SDL_Surface *inChannelText; //! White text
 
     LB_Message(MessageType type, TTF_Font *f, std::string message, std::string author = "", std::string guild = "");
     ~LB_Message();
 
     void hideMessage();
-    int updateMessageStatus();
+    void updateMessageStatus();
     void exitGame();
     bool isDisplayed() const;
     int writeToChannel(SDL_Surface *channel, Sint16 x, Sint16 y, bool inGame = false);
     MessageType getMessageType() const;
 
-    private:
-    Uint32 creationTime;
-    MessageType type;
-    bool isDisplayedInChannel;
+private:
+    Uint32 _creationTime;
+    MessageType _type;
+    bool _isDisplayedInChannel;
 
-    std::string guild;
-    std::string author;
-    std::string message;
+    std::string _guild;
+    std::string _author;
+    std::string _message;
 };
 
 #endif

@@ -24,24 +24,17 @@
 
 using namespace gcn;
 
-//Settings view
 
-//Server list
-
-//Room list
-
-//Room lobby view
-
-//Room game view
-
-//Avatar item shop
-
-
-LB_Context::LB_Context(SDL_Renderer* renderer){
-	this->renderer = renderer;
+LB_Context::LB_Context(SDL_Renderer* renderer,
+		LB_Context::Context context){
+	_renderer = renderer;
+	_context = context;
 }
 
-LB_Context::~LB_Context() {};
+LB_Context::~LB_Context() {
+}
 
 
-
+LB_Context::Context LB_Context::getContext() const {
+	return _context;
+}

@@ -20,15 +20,26 @@ extern gcn::Gui* gui;
 extern gcn::Container* top;
 
 class LB_Context {
-	public:
-	LB_Context(SDL_Renderer* renderer);
+public:
+	enum Context {
+		MAIN_MENU,
+		SERVER_LIST,
+		ROOM_LIST,
+		ROOM_LOBBY,
+		ROOM,
+		SHOP
+	};
+
+	LB_Context(SDL_Renderer* renderer, Context context);
 	virtual ~LB_Context() = 0;
 	virtual void drawBackground() = 0;
 	virtual void drawMiddleground() = 0;
 	virtual void processEvent(SDL_Event event) = 0;
+	Context getContext() const;
 	
-	protected:
-	SDL_Renderer* renderer; //reference, this object is created and managed outside the class
+protected:
+	SDL_Renderer* _renderer; //reference, this object is created and managed outside the class
+	Context _context;
 	
 };
 
