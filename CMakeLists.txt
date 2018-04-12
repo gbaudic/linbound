@@ -1,0 +1,33 @@
+project(linbound)
+
+cmake_minimum_required(VERSION 3.2)
+
+set(CMAKE_CXX_STANDARD 11)
+
+# The version number.
+set (Linbound_VERSION_MAJOR 1)
+set (Linbound_VERSION_MINOR 0)
+set (Linbound_VERSION_RELEASE 0)
+ 
+# configure a header file to pass some of the CMake settings
+# to the source code
+configure_file (
+  "${PROJECT_SOURCE_DIR}/config.h.in"
+  "${PROJECT_BINARY_DIR}/config.hpp"
+  )
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+
+INCLUDE(FindPkgConfig)
+
+PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
+PKG_SEARCH_MODULE(SDL2_IMAGE REQUIRED SDL2_image>=2.0.0)
+PKG_SEARCH_MODULE(SDL2_TTF REQUIRED SDL2_ttf)
+PKG_SEARCH_MODULE(SDL2_GFX REQUIRED SDL2_gfx)
+PKG_SEARCH_MODULE(SDL2_MIXER REQUIRED SDL2_mixer)
+PKG_SEARCH_MODULE(SDL2_NET REQUIRED SDL2_net)
+PKG_SEARCH_MODULE(GUISAN REQUIRED guisan>=0.9.0)
+#todo sqlite tinyxml
+
+INCLUDE_DIRECTORIES(${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES})
