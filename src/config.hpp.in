@@ -1,0 +1,8 @@
+#ifndef _H_CONFIG_
+#define _H_CONFIG_
+
+const int MAJOR_VERSION = @Linbound_VERSION_MAJOR@;
+const int MINOR_VERSION = @Linbound_VERSION_MINOR@;
+const int PATCH_VERSION = @Linbound_VERSION_RELEASE@;
+
+#endif

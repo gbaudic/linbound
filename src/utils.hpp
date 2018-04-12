@@ -18,9 +18,7 @@
 
 #include <string>
  
-const int MAJOR_VERSION = 0;
-const int MINOR_VERSION = 1;
-const int PATCH_VERSION = 0;
+#include "config.hpp"
  
 Sint16 normalizeAngle(Sint16 angle);
 double getDistance(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2);
